@@ -1,10 +1,10 @@
 package comp
 {
 	import flash.display.DisplayObject;
-	public class DisplayComp
+	public class Comp_FlashDisplay
 	{
 		public var display:DisplayObject = null;
-		public function DisplayComp(displayObj:DisplayObject)
+		public function Comp_FlashDisplay(displayObj:DisplayObject)
 		{
 			display = displayObj;
 		}
