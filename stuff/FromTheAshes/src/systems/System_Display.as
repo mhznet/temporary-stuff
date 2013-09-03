@@ -6,41 +6,41 @@ package systems
 	import ash.core.Engine;
 	import ash.core.NodeList;
 	import ash.core.System;
-	import nodes.Node_FlashDisplay;
-	import comp.Comp_FlashDisplay;
+	import nodes.Node_Display;
+	import comp.Comp_Display;
 	import comp.Comp_Position;
 
-	public class System_FlashDisplay extends System
+	public class System_Display extends System
 	{
 		public var displayContainer 	:DisplayObjectContainer;
 		private var displayNodes 		:NodeList;
-		public function System_FlashDisplay(dispContainer:DisplayObjectContainer)
+		public function System_Display(dispContainer:DisplayObjectContainer)
 		{
 			displayContainer = dispContainer;
 		}
 		override public function addToEngine(engine:Engine):void
 		{
-			displayNodes = engine.getNodeList(Node_FlashDisplay);
-			for( var node : Node_FlashDisplay = displayNodes.head; node; node = node.next )
+			displayNodes = engine.getNodeList(Node_Display);
+			for( var node : Node_Display = displayNodes.head; node; node = node.next )
 			{
 				addToDisplay(node);
 			}
 			displayNodes.nodeAdded.add(addToDisplay);
 			displayNodes.nodeRemoved.add(removeFromDisplay);
 		}
-		private function addToDisplay(node:Node_FlashDisplay):void
+		private function addToDisplay(node:Node_Display):void
 		{
 			displayContainer.addChild(node.displayObject.display);
 		}
-		private function removeFromDisplay(node:Node_FlashDisplay):void
+		private function removeFromDisplay(node:Node_Display):void
 		{
 			displayContainer.removeChild(node.displayObject.display);
 		}
 		override public function update( time : Number ) : void
 		{
-			var node:Node_FlashDisplay;
+			var node:Node_Display;
 			var position:Comp_Position;
-			var display:Comp_FlashDisplay;
+			var display:Comp_Display;
 			var displayObject:DisplayObject;
 			for( node = displayNodes.head; node; node = node.next )
 			{

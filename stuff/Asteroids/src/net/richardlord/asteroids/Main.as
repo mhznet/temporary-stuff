@@ -2,23 +2,30 @@ package net.richardlord.asteroids
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	
-	[SWF(width='600', height='450', frameRate='60', backgroundColor='#000000')]
-
+	[SWF(width='320', height='240', frameRate='60', backgroundColor='#009eef')]
 	public class Main extends Sprite
 	{
-		private var asteroids : Asteroids;
+		private var _screenManager:ScreenManager;
+		
 		
 		public function Main()
 		{
-			addEventListener( Event.ENTER_FRAME, init );
+			addEventListener(Event.ENTER_FRAME, init);
 		}
 		
-		private function init( event : Event ) : void
+		private function init(event:Event):void
 		{
 			removeEventListener( Event.ENTER_FRAME, init );
-			asteroids = new Asteroids( this, stage.stageWidth, stage.stageHeight );
-			asteroids.start();
+			
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			// starts the screen manager
+			_screenManager = new ScreenManager(this);
+			_screenManager.start();
 		}
 	}
 }

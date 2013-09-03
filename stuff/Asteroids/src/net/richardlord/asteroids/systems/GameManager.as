@@ -1,15 +1,17 @@
 package net.richardlord.asteroids.systems
 {
-	import ash.core.Engine;
-	import ash.core.NodeList;
-	import ash.core.System;
-	import flash.geom.Point;
+	import net.richardlord.ash.core.Game;
+	import net.richardlord.ash.core.NodeList;
+	import net.richardlord.ash.core.System;
+	import net.richardlord.asteroids.components.GameState;
 	import net.richardlord.asteroids.EntityCreator;
 	import net.richardlord.asteroids.GameConfig;
 	import net.richardlord.asteroids.nodes.AsteroidCollisionNode;
 	import net.richardlord.asteroids.nodes.BulletCollisionNode;
 	import net.richardlord.asteroids.nodes.GameNode;
-	import net.richardlord.asteroids.nodes.SpaceshipNode;
+	import net.richardlord.asteroids.nodes.SpaceshipCollisionNode;
+
+	import flash.geom.Point;
 
 	public class GameManager extends System
 	{
@@ -27,18 +29,18 @@ package net.richardlord.asteroids.systems
 			this.config = config;
 		}
 
-		override public function addToEngine( engine : Engine ) : void
+		override public function addToGame( game : Game ) : void
 		{
-			gameNodes = engine.getNodeList( GameNode );
-			spaceships = engine.getNodeList( SpaceshipNode );
-			asteroids = engine.getNodeList( AsteroidCollisionNode );
-			bullets = engine.getNodeList( BulletCollisionNode );
+			gameNodes = game.getNodeList( GameNode );
+			spaceships = game.getNodeList( SpaceshipCollisionNode );
+			asteroids = game.getNodeList( AsteroidCollisionNode );
+			bullets = game.getNodeList( BulletCollisionNode );
 		}
 		
 		override public function update( time : Number ) : void
 		{
-			var node : GameNode = gameNodes.head;
-			if( node && node.state.playing )
+			var node : GameNode;
+			for( node = gameNodes.head; node; node = node.next )
 			{
 				if( spaceships.empty )
 				{
@@ -48,7 +50,7 @@ package net.richardlord.asteroids.systems
 						var clearToAddSpaceship : Boolean = true;
 						for( var asteroid : AsteroidCollisionNode = asteroids.head; asteroid; asteroid = asteroid.next )
 						{
-							if( Point.distance( asteroid.position.position, newSpaceshipPosition ) <= asteroid.collision.radius + 50 )
+							if( Point.distance( asteroid.position.position, newSpaceshipPosition ) <= asteroid.position.collisionRadius + 50 )
 							{
 								clearToAddSpaceship = false;
 								break;
@@ -57,19 +59,20 @@ package net.richardlord.asteroids.systems
 						if( clearToAddSpaceship )
 						{
 							creator.createSpaceship();
+							node.state.lives--;
 						}
 					}
 					else
 					{
-						node.state.playing = false;
-						creator.createWaitForClick();
+						// game over
+						node.state.status = GameState.STATUS_GAME_OVER;
 					}
 				}
-				
+			
 				if( asteroids.empty && bullets.empty && !spaceships.empty )
 				{
 					// next level
-					var spaceship : SpaceshipNode = spaceships.head;
+					var spaceship : SpaceshipCollisionNode = spaceships.head;
 					node.state.level++;
 					var asteroidCount : int = 2 + node.state.level;
 					for( var i:int = 0; i < asteroidCount; ++i )
@@ -86,7 +89,7 @@ package net.richardlord.asteroids.systems
 			}
 		}
 
-		override public function removeFromEngine( engine : Engine ) : void
+		override public function removeFromGame( game : Game ) : void
 		{
 			gameNodes = null;
 			spaceships = null;

@@ -1,10 +1,9 @@
 package net.richardlord.asteroids.nodes
 {
-	import ash.core.Node;
+	import net.richardlord.ash.core.Node;
 	import net.richardlord.asteroids.components.Motion;
 	import net.richardlord.asteroids.components.MotionControls;
 	import net.richardlord.asteroids.components.Position;
-
 
 	public class MotionControlNode extends Node
 	{

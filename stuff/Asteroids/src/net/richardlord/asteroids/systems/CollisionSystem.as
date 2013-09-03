@@ -1,22 +1,19 @@
 package net.richardlord.asteroids.systems
 {
-	import ash.core.Engine;
-	import ash.core.NodeList;
-	import ash.core.System;
-
+	import flash.geom.Point;
+	import net.richardlord.ash.core.Game;
+	import net.richardlord.ash.core.NodeList;
+	import net.richardlord.ash.core.System;
 	import net.richardlord.asteroids.EntityCreator;
 	import net.richardlord.asteroids.nodes.AsteroidCollisionNode;
 	import net.richardlord.asteroids.nodes.BulletCollisionNode;
-	import net.richardlord.asteroids.nodes.GameNode;
 	import net.richardlord.asteroids.nodes.SpaceshipCollisionNode;
 
-	import flash.geom.Point;
 
 	public class CollisionSystem extends System
 	{
 		private var creator : EntityCreator;
 		
-		private var games : NodeList;
 		private var spaceships : NodeList;
 		private var asteroids : NodeList;
 		private var bullets : NodeList;
@@ -26,12 +23,11 @@ package net.richardlord.asteroids.systems
 			this.creator = creator;
 		}
 
-		override public function addToEngine( engine : Engine ) : void
+		override public function addToGame( game : Game ) : void
 		{
-			games = engine.getNodeList( GameNode );
-			spaceships = engine.getNodeList( SpaceshipCollisionNode );
-			asteroids = engine.getNodeList( AsteroidCollisionNode );
-			bullets = engine.getNodeList( BulletCollisionNode );
+			spaceships = game.getNodeList( SpaceshipCollisionNode );
+			asteroids = game.getNodeList( AsteroidCollisionNode );
+			bullets = game.getNodeList( BulletCollisionNode );
 		}
 		
 		override public function update( time : Number ) : void
@@ -44,20 +40,15 @@ package net.richardlord.asteroids.systems
 			{
 				for ( asteroid = asteroids.head; asteroid; asteroid = asteroid.next )
 				{
-					if ( Point.distance( asteroid.position.position, bullet.position.position ) <= asteroid.collision.radius )
+					if ( Point.distance( asteroid.position.position, bullet.position.position ) <= asteroid.position.collisionRadius )
 					{
 						creator.destroyEntity( bullet.entity );
-						if ( asteroid.collision.radius > 10 )
+						if ( asteroid.position.collisionRadius > 10 )
 						{
-							creator.createAsteroid( asteroid.collision.radius - 10, asteroid.position.position.x + Math.random() * 10 - 5, asteroid.position.position.y + Math.random() * 10 - 5 );
-							creator.createAsteroid( asteroid.collision.radius - 10, asteroid.position.position.x + Math.random() * 10 - 5, asteroid.position.position.y + Math.random() * 10 - 5 );
+							creator.createAsteroid( asteroid.position.collisionRadius - 10, asteroid.position.position.x + Math.random() * 10 - 5, asteroid.position.position.y + Math.random() * 10 - 5 );
+							creator.createAsteroid( asteroid.position.collisionRadius - 10, asteroid.position.position.x + Math.random() * 10 - 5, asteroid.position.position.y + Math.random() * 10 - 5 );
 						}
-						asteroid.asteroid.fsm.changeState( "destroyed" );
-						//asteroid.audio.play( ExplodeAsteroid );
-						if( games.head )
-						{
-							games.head.state.hits++;
-						}
+						creator.destroyEntity( asteroid.entity );
 						break;
 					}
 				}
@@ -67,21 +58,16 @@ package net.richardlord.asteroids.systems
 			{
 				for ( asteroid = asteroids.head; asteroid; asteroid = asteroid.next )
 				{
-					if ( Point.distance( asteroid.position.position, spaceship.position.position ) <= asteroid.collision.radius + spaceship.collision.radius )
+					if ( Point.distance( asteroid.position.position, spaceship.position.position ) <= asteroid.position.collisionRadius + spaceship.position.collisionRadius )
 					{
-						spaceship.spaceship.fsm.changeState( "destroyed" );
-						//spaceship.audio.play( ExplodeShip );
-						if( games.head )
-						{
-							games.head.state.lives--;
-						}
+						creator.destroyEntity( spaceship.entity );
 						break;
 					}
 				}
 			}
 		}
 
-		override public function removeFromEngine( engine : Engine ) : void
+		override public function removeFromGame( game : Game ) : void
 		{
 			spaceships = null;
 			asteroids = null;

@@ -29,6 +29,7 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="${HOME}/Ash/swc"/>
+      <libraryPathEntry kind="1" linkType="1" path="${HOME}/Starling-Framework/starling/bin"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

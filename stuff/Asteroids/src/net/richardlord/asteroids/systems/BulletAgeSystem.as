@@ -1,10 +1,9 @@
 package net.richardlord.asteroids.systems
 {
-	import ash.tools.ListIteratingSystem;
+	import net.richardlord.ash.tools.ListIteratingSystem;
 	import net.richardlord.asteroids.EntityCreator;
 	import net.richardlord.asteroids.components.Bullet;
 	import net.richardlord.asteroids.nodes.BulletAgeNode;
-
 
 	public class BulletAgeSystem extends ListIteratingSystem
 	{

@@ -1,13 +1,12 @@
 package net.richardlord.asteroids.systems
 {
-	import ash.tools.ListIteratingSystem;
+	import net.richardlord.ash.tools.ListIteratingSystem;
 	import net.richardlord.asteroids.EntityCreator;
 	import net.richardlord.asteroids.components.Gun;
 	import net.richardlord.asteroids.components.GunControls;
 	import net.richardlord.asteroids.components.Position;
 	import net.richardlord.asteroids.nodes.GunControlNode;
 	import net.richardlord.input.KeyPoll;
-
 
 	public class GunControlSystem extends ListIteratingSystem
 	{
@@ -32,7 +31,6 @@ package net.richardlord.asteroids.systems
 			if ( gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval )
 			{
 				creator.createUserBullet( gun, position );
-				//node.audio.play( ShootGun );
 				gun.timeSinceLastShot = 0;
 			}
 		}

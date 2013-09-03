@@ -1,9 +1,8 @@
 package net.richardlord.asteroids.nodes
 {
-	import ash.core.Node;
+	import net.richardlord.ash.core.Node;
 	import net.richardlord.asteroids.components.Display;
 	import net.richardlord.asteroids.components.Position;
-
 
 	public class RenderNode extends Node
 	{

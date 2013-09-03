@@ -1,12 +1,11 @@
 package net.richardlord.asteroids.systems
 {
-	import ash.tools.ListIteratingSystem;
+	import net.richardlord.ash.tools.ListIteratingSystem;
 	import net.richardlord.asteroids.components.Motion;
 	import net.richardlord.asteroids.components.MotionControls;
 	import net.richardlord.asteroids.components.Position;
 	import net.richardlord.asteroids.nodes.MotionControlNode;
 	import net.richardlord.input.KeyPoll;
-
 
 	public class MotionControlSystem extends ListIteratingSystem
 	{
@@ -26,12 +25,21 @@ package net.richardlord.asteroids.systems
 
 			if ( keyPoll.isDown( control.left ) )
 			{
-				position.rotation -= control.rotationRate * time;
+				var rotationLeft:Number = -control.rotationRate * time;
+				if (control.invertControl)
+				{
+					rotationLeft = -rotationLeft;
+				}
+				position.rotation += rotationLeft;
 			}
-
-			if ( keyPoll.isDown( control.right ) )
+			else if ( keyPoll.isDown( control.right ) )
 			{
-				position.rotation += control.rotationRate * time;
+				var rotationRight:Number = control.rotationRate * time;
+				if (control.invertControl)
+				{
+					rotationRight = -rotationRight;
+				}
+				position.rotation += rotationRight;
 			}
 
 			if ( keyPoll.isDown( control.accelerate ) )
