@@ -15,6 +15,7 @@ package
 	import systems.System_NPCMovement;
 	import systems.System_PlayerControl;
 	import systems.System_Priorities;
+	import systems.System_PlayerFlipper;
 	
 	public final class FromTheAshes extends Sprite
 	{
@@ -41,8 +42,9 @@ package
 			ashEngine = new Engine();
 			ashCreator = new EntityCreator(ashEngine);
 			ashEngine.addSystem(new System_PlayerControl(this.keyPoll)	, System_Priorities.move);
-			ashEngine.addSystem(new System_Display(Starling.current.nativeStage), System_Priorities.render);
+			ashEngine.addSystem(new System_Display(this), System_Priorities.render);
 			ashEngine.addSystem(new System_NPCMovement(), System_Priorities.move);
+			ashEngine.addSystem(new System_PlayerFlipper(this.keyPoll), System_Priorities.move);
 		}
 		public function start() : void
 		{

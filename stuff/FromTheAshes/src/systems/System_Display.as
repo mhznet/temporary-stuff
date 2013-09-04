@@ -1,14 +1,16 @@
 package systems
 {
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	
 	import ash.core.Engine;
 	import ash.core.NodeList;
 	import ash.core.System;
-	import nodes.Node_Display;
+	
 	import comp.Comp_Display;
 	import comp.Comp_Position;
+	
+	import nodes.Node_Display;
+	
+	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 
 	public class System_Display extends System
 	{

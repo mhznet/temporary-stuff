@@ -1,6 +1,7 @@
 package comp
 {
-	import flash.display.DisplayObject;
+	import starling.display.DisplayObject;
+
 	public class Comp_Display
 	{
 		public var display:DisplayObject = null;
