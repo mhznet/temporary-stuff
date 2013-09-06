@@ -1,7 +1,15 @@
 package entities
 {
 	import ash.core.Engine;
+	import ash.core.Entity;
 	
+	import comp.Comp_Display;
+	import comp.Comp_DoesDamage;
+	import comp.Comp_Health;
+	import comp.Comp_Position;
+	
+	import starling.display.MovieClip;
+	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 
 	public class EntityCreator_Obstacles
@@ -13,6 +21,19 @@ package entities
 		{
 			engine = ashEngine;
 			atlas = atlasValue;
+			createObstacle();
+		}
+		private function createObstacle():void
+		{
+				var textureVector:Vector.<Texture> = new Vector.<Texture>();
+				textureVector.push(atlas.getTexture(GameConstants.ATLAS_DOWN));
+				var movieClip:MovieClip = new MovieClip(textureVector);
+				var obstacle:Entity = new Entity(GameConstants.OBSTACLE);
+				obstacle.add(new Comp_Position(50,0));
+				obstacle.add(new Comp_Display(movieClip));
+				obstacle.add(new Comp_Health(1));
+				obstacle.add(new Comp_DoesDamage(1));
+				engine.addEntity(obstacle);
 		}
 		public function destroy():void{}
 	}

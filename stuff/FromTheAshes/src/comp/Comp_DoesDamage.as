@@ -2,10 +2,10 @@ package comp
 {
 	public class Comp_DoesDamage
 	{
-		public var doesDamage:Boolean;
-		public function Comp_DoesDamage(value:Boolean)
+		public var damage:int;
+		public function Comp_DoesDamage(value:int)
 		{
-			doesDamage = value;
+			damage = value;
 		}
 	}
 }

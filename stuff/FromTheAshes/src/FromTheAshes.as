@@ -1,12 +1,8 @@
 package
 {
 	import ash.core.Engine;
+	import ash.core.System;
 	import ash.integration.starling.StarlingFrameTickProvider;
-	
-	import entities.EntityCreator_BackGround;
-	import entities.EntityCreator_NPCs;
-	import entities.EntityCreator_Obstacles;
-	import entities.EntityCreator_Player;
 	
 	import input.KeyPoll;
 	
@@ -14,6 +10,7 @@ package
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
+	import systems.System_Damage;
 	import systems.System_Display;
 	import systems.System_NPCMovement;
 	import systems.System_PlayerControl;
@@ -48,6 +45,7 @@ package
 			ashEngine.addSystem(new System_Display(this), System_Priorities.render);
 			ashEngine.addSystem(new System_NPCMovement(), System_Priorities.move);
 			ashEngine.addSystem(new System_PlayerFlipper(this.keyPoll), System_Priorities.move);
+			ashEngine.addSystem(new System_Damage, System_Priorities.move);
 		}
 		public function start() : void
 		{

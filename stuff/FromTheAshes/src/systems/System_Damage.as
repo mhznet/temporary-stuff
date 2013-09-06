@@ -1,22 +1,96 @@
 package systems
 {
-	import ash.tools.ListIteratingSystem;
+	import ash.core.Engine;
+	import ash.core.Entity;
+	import ash.core.NodeList;
+	import ash.core.System;
 	
-	import nodes.Node_Damage;
+	import comp.Comp_Display;
+	import comp.Comp_DoesDamage;
+	import comp.Comp_Health;
+	import comp.Comp_Position;
 	
-	public class System_Damage extends ListIteratingSystem
+	public class System_Damage extends System
 	{
-		public function System_Damage()
+		private var ashEngine	:Engine;
+		private var playerList	:NodeList;
+		private var npcList		:NodeList;
+		private var obstacleList:NodeList;
+		public function System_Damage(engine:Engine)
 		{
-			super(Node_Damage, updateNode);
+			ashEngine = engine;
 		}
-		private function updateNode(node:Node_Damage, timer:Number):void
+		override public function addToEngine(engine:Engine):void
 		{
-			//if hitou, diminui vida, se nao tem mais vida, destroy a entidade
-			node.entity
-			node.position
-			node.doesDamage
-			node.health
+		}
+		override public function update(timer:Number):void
+		{
+			var prevEntity	:Entity = node.previous;
+			var nextEntity	:Entity = node.next;
+			var actualEntity:Entity = node.entity;
+			if (nextEntity || prevEntity)
+				trace ("Ae ae ae ae ae ae");
+			else
+				trace ("=(");
+			if (node.entity.name == GameConstants.LUIGI)
+			{
+				if (actualEntity)
+				{
+					var actualPos		:Comp_Position = actualEntity.get(Comp_Position);
+					var actualDisplay	:Comp_Display = actualEntity.get(Comp_Display);
+					var actualHealth	:Comp_Health;
+					var nextPos			:Comp_Position;
+					var nextDisplay		:Comp_Display;
+					var prevPos			:Comp_Position;
+					var prevDisplay		:Comp_Display;
+					if (prevEntity != null) 
+					{
+						prevPos = prevEntity.get(Comp_Position);
+						prevDisplay = prevEntity.get(Comp_Display);
+						if (prevPos != null && prevDisplay != null)
+						{
+							if (checkPixelHit(actualPos,actualDisplay,prevPos,prevDisplay))
+							{
+								actualHealth = actualEntity.get(Comp_Health);
+								var prevDamage	:Comp_DoesDamage = nextEntity.get(Comp_DoesDamage);
+								actualHealth.health -= prevDamage.damage;
+								if (actualHealth.health <= 0)
+								{
+									actualEntity.remove(Comp_Display);
+								}
+							}
+						}
+					}
+					if (nextEntity != null) 
+					{
+						nextPos = nextEntity.get(Comp_Position);
+						nextDisplay = nextEntity.get(Comp_Display);
+						if (nextPos != null && nextDisplay != null)
+						{
+							if (checkPixelHit(actualPos,actualDisplay,prevPos,prevDisplay))
+							{
+								actualHealth = actualEntity.get(Comp_Health);
+								var nextDamage	:Comp_DoesDamage = nextEntity.get(Comp_DoesDamage);
+								actualHealth.health -= nextDamage.damage;
+								if (actualHealth.health <= 0)
+								{
+									actualEntity.remove(Comp_Display);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		private function checkPixelHit(posA:Comp_Position,disA:Comp_Display,posB:Comp_Position,disB:Comp_Display):Boolean
+		{
+			var isHitting:Boolean = false;
+			var left_A		:Number = posA.X - 5;
+			var rigth_A		:Number = posA.X + 5 + disA.display.width;
+			var left_B		:Number = posB.X;
+			var rigth_B		:Number = posB.X + disB.display.width;
+			if (rigth_A > left_B || left_A < rigth_B) isHitting = true;
+			return isHitting;
 		}
 	}
 }

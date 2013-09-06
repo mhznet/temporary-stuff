@@ -6,6 +6,7 @@ package entities
 	import ash.core.Entity;
 	
 	import comp.Comp_Display;
+	import comp.Comp_Health;
 	import comp.Comp_PlayerControl;
 	import comp.Comp_PlayerFlipper;
 	import comp.Comp_Position;
@@ -37,6 +38,7 @@ package entities
 			player.add(new Comp_Speed(10,0));
 			player.add(new Comp_PlayerControl(Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN, Keyboard.SPACE));
 			player.add(new Comp_Display(movieClip));
+			player.add(new Comp_Health(1));
 			player.add(new Comp_PlayerFlipper());
 			engine.addEntity(player);
 		}

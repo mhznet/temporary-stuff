@@ -21,6 +21,7 @@ package entities
 		{
 			ashEngine = engine;
 			atlas = atlasValue;
+			//createNPCs();
 		}
 		private function createNPCs():void
 		{

@@ -8,6 +8,8 @@ package
 		public static const ATLAS_WALK1	:String = "walk1";
 		public static const ATLAS_WALK2	:String = "walk2";
 		public static const LUIGI		:String = "LUIGI";
+		public static const OBSTACLE	:String = "OBSTACLE";
+		public static const NPC			:String = "NPC";
 		public static const NPC_NUMBER	:int = 7;
 		public static const HOLE_NUMBER	:int = 7;
 		public function GameConstants(){}
