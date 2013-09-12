@@ -3,9 +3,11 @@ package entities
 	import ash.core.Engine;
 	import ash.core.Entity;
 	
+	import comp.Comp_Collision;
 	import comp.Comp_Display;
-	import comp.Comp_DoesDamage;
+	import comp.Comp_Damage;
 	import comp.Comp_Health;
+	import comp.entity.Comp_Obstacle;
 	import comp.Comp_Position;
 	
 	import starling.display.MovieClip;
@@ -31,8 +33,8 @@ package entities
 				var obstacle:Entity = new Entity(GameConstants.OBSTACLE);
 				obstacle.add(new Comp_Position(50,0));
 				obstacle.add(new Comp_Display(movieClip));
-				obstacle.add(new Comp_Health(1));
-				obstacle.add(new Comp_DoesDamage(1));
+				obstacle.add(new Comp_Obstacle());
+				obstacle.add(new Comp_Collision());
 				engine.addEntity(obstacle);
 		}
 		public function destroy():void{}

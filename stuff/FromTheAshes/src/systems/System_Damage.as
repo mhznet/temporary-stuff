@@ -1,21 +1,20 @@
 package systems
 {
 	import ash.core.Engine;
-	import ash.core.Entity;
+	import ash.core.Node;
 	import ash.core.NodeList;
 	import ash.core.System;
 	
 	import comp.Comp_Display;
-	import comp.Comp_DoesDamage;
-	import comp.Comp_Health;
 	import comp.Comp_Position;
+	
+	import nodes.Node_Damage;
+	import nodes.Node_NPCMovement;
+	import nodes.Node_PlayerControl;
 	
 	public class System_Damage extends System
 	{
 		private var ashEngine	:Engine;
-		private var playerList	:NodeList;
-		private var npcList		:NodeList;
-		private var obstacleList:NodeList;
 		public function System_Damage(engine:Engine)
 		{
 			ashEngine = engine;
@@ -25,7 +24,14 @@ package systems
 		}
 		override public function update(timer:Number):void
 		{
-			var prevEntity	:Entity = node.previous;
+			var list_Player		:NodeList = ashEngine.getNodeList(Node_PlayerControl);
+			var list_NPC		:NodeList = ashEngine.getNodeList(Node_NPCMovement);
+			var list_Damage		:NodeList = ashEngine.getNodeList(Node_Damage);
+			for(var node_Damage:Node_Damage = list_Damage.head; node_Damage; node_Damage = node_Damage.next ) 
+			{
+				
+			}
+			/*var prevEntity	:Entity = node.previous;
 			var nextEntity	:Entity = node.next;
 			var actualEntity:Entity = node.entity;
 			if (nextEntity || prevEntity)
@@ -80,7 +86,7 @@ package systems
 						}
 					}
 				}
-			}
+			}*/
 		}
 		private function checkPixelHit(posA:Comp_Position,disA:Comp_Display,posB:Comp_Position,disB:Comp_Display):Boolean
 		{

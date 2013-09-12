@@ -2,7 +2,7 @@ package systems
 {
 	import ash.tools.ListIteratingSystem;
 	
-	import comp.Comp_PlayerControl;
+	import comp.entity.Comp_Player;
 	import comp.Comp_Position;
 	import comp.Comp_Speed;
 	
@@ -20,7 +20,7 @@ package systems
 		}
 		private function nodeUpdate(node:Node_PlayerControl, time:Number):void
 		{
-			var controlComp	:Comp_PlayerControl = node.control;
+			var controlComp	:Comp_Player = node.control;
 			var posComp		:Comp_Position = node.position;
 			var speed		:Comp_Speed	= node.speed;
 			if (keyPoll.isDown(controlComp.left))
