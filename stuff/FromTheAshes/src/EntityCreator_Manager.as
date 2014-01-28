@@ -20,8 +20,8 @@ package
 		private var atlas 				:TextureAtlas;
 		private var playerCreator		:EntityCreator_Player;
 		private var obstaclesCreator	:EntityCreator_Obstacles;
-		private var backGroundCreator	:EntityCreator_BackGround;
-		private var npcCreator			:EntityCreator_NPCs;
+		/*private var backGroundCreator	:EntityCreator_BackGround;
+		private var npcCreator			:EntityCreator_NPCs;*/
 		public function EntityCreator_Manager(engine:Engine)
 		{
 			ashEngine = engine;
@@ -43,7 +43,7 @@ package
 		}
 		private function createBackGround():void
 		{
-			backGroundCreator = new EntityCreator_BackGround(ashEngine, atlas);
+			//backGroundCreator = new EntityCreator_BackGround(ashEngine, atlas);
 		}
 		private function createPlayer():void
 		{
@@ -51,7 +51,7 @@ package
 		}
 		private function createNPCs():void
 		{
-			npcCreator = new EntityCreator_NPCs(ashEngine, atlas);
+			//npcCreator = new EntityCreator_NPCs(ashEngine, atlas);
 		}
 		private function createObstacles():void
 		{
@@ -60,9 +60,9 @@ package
 		public function destroy():void
 		{
 			if (obstaclesCreator) obstaclesCreator.destroy();
-			if (npcCreator) npcCreator.destroy();
+			//if (npcCreator) npcCreator.destroy();
 			if (playerCreator) playerCreator.destroy();
-			if (backGroundCreator) backGroundCreator.destroy();
+			//if (backGroundCreator) backGroundCreator.destroy();
 		}
 	}
 }

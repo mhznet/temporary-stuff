@@ -25,12 +25,12 @@ package systems
 		override public function update(timer:Number):void
 		{
 			var list_Player		:NodeList = ashEngine.getNodeList(Node_PlayerControl);
-			var list_NPC		:NodeList = ashEngine.getNodeList(Node_NPCMovement);
-			var list_Damage		:NodeList = ashEngine.getNodeList(Node_Damage);
-			for(var node_Damage:Node_Damage = list_Damage.head; node_Damage; node_Damage = node_Damage.next ) 
+			/*var list_NPC		:NodeList = ashEngine.getNodeList(Node_NPCMovement);
+			var list_Damage		:NodeList = ashEngine.getNodeList(Node_Damage);*/
+			/*for(var node_Damage:Node_Damage = list_Damage.head; node_Damage; node_Damage = node_Damage.next ) 
 			{
 				
-			}
+			}*/
 			/*var prevEntity	:Entity = node.previous;
 			var nextEntity	:Entity = node.next;
 			var actualEntity:Entity = node.entity;

@@ -43,9 +43,9 @@ package
 			ashEntitiesCreator = new EntityCreator_Manager(ashEngine);
 			ashEngine.addSystem(new System_PlayerControl(this.keyPoll)	, System_Priorities.move);
 			ashEngine.addSystem(new System_Display(this), System_Priorities.render);
-			ashEngine.addSystem(new System_NPCMovement(), System_Priorities.move);
+			//ashEngine.addSystem(new System_NPCMovement(), System_Priorities.move);
 			ashEngine.addSystem(new System_PlayerFlipper(this.keyPoll), System_Priorities.move);
-			ashEngine.addSystem(new System_Damage(ashEngine), System_Priorities.move);
+			//ashEngine.addSystem(new System_Damage(ashEngine), System_Priorities.move);
 		}
 		public function start() : void
 		{
