@@ -2,17 +2,20 @@ package entities
 {
 	import flash.ui.Keyboard;
 	
+	import mx.core.mx_internal;
+	
 	import ash.core.Engine;
 	import ash.core.Entity;
+	import ash.integration.robotlegs.AshExtension;
 	
 	import comp.Comp_Collision;
 	import comp.Comp_Damage;
 	import comp.Comp_Display;
 	import comp.Comp_Health;
-	import comp.entity.Comp_Player;
 	import comp.Comp_PlayerFlipper;
 	import comp.Comp_Position;
 	import comp.Comp_Speed;
+	import comp.entity.Comp_Player;
 	
 	import starling.display.MovieClip;
 	import starling.textures.Texture;

@@ -9,6 +9,7 @@ package systems
 	
 	import nodes.Node_Display;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 
@@ -32,6 +33,7 @@ package systems
 		}
 		private function addToDisplay(node:Node_Display):void
 		{
+			//starling.core.Starling.juggler.add(node.displayObject.display);
 			displayContainer.addChild(node.displayObject.display);
 		}
 		private function removeFromDisplay(node:Node_Display):void

@@ -39,7 +39,7 @@ package
 			createBackGround();
 			createPlayer();
 			createNPCs();
-			createObstacles();
+			//createObstacles();
 		}
 		private function createBackGround():void
 		{

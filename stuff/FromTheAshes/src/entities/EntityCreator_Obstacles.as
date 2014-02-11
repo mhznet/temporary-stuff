@@ -23,7 +23,7 @@ package entities
 		{
 			engine = ashEngine;
 			atlas = atlasValue;
-			createObstacle();
+			//createObstacle();
 		}
 		private function createObstacle():void
 		{
