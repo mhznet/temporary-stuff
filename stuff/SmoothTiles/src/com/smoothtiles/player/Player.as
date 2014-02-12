@@ -1,20 +1,19 @@
 package com.smoothtiles.player
 {
-	import com.smoothtiles.input.Keyboard;
+	import com.smoothtiles.abstracttile.BaseTile;
 	
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	
-	public class Player extends Sprite
+	public class Player extends BaseTile
 	{
 		public var asset		:Sprite;
-		public var speed		:Number;
-		public function Player(pSpeed:Number)
+		public function Player()
 		{
 			super();
-			this.speed = pSpeed;
 			createPlayer();
 			this.addChild(asset);
+			this.name = "PLAYER";
 		}
 		private function createPlayer():void
 		{
@@ -29,27 +28,6 @@ package com.smoothtiles.player
 			regAsset.graphics.endFill();
 			asset.addChild(playerAsset);
 			asset.addChild(regAsset);
-		}
-		
-		public function update():void
-		{
-			var input:Keyboard = Keyboard.getInstance();
-			if (input.LEFT)
-			{
-				x-=speed;
-			}
-			if (input.RIGHT)
-			{
-				x+=speed;
-			}
-			if (input.UP)
-			{
-				y-=speed;
-			}
-			if (input.DOWN)
-			{
-				y+=speed;
-			}
 		}
 	}
 }

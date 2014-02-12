@@ -13,21 +13,27 @@ package com.smoothtiles
 	{
 		private var input	:Keyboard;
 		private var grid	:GridBuilder;
-		private var player	:Player
+		private var container:Sprite;
+		private var player	:Player;
+		private var player2	:Player;
+		public var speed	:Number = 10;
 		public function SmoothTiles()
 		{
+			container = new Sprite();
 			createStuff();
 			addEvents();
+			this.addChild(container);
 		}
 		private function createStuff():void
 		{
 			input = Keyboard.getInstance();
 			grid = new GridBuilder();
-			this.addChild(grid.grid);
-			player = new Player(10);
-			player.x = 300;
-			player.y = 450;
-			this.addChild(player);
+			container.addChild(grid.grid);
+			player = new Player();
+			player.x = 500;
+			player.y = 300;
+			container.addChild(player);
+			trace("Index:",grid.getTileIndexByPos(player.x, player.y));
 		}
 		private function addEvents():void
 		{
@@ -37,7 +43,34 @@ package com.smoothtiles
 		}
 		protected function updateTiles(event:Event):void
 		{
-			player.update();
+			if (input.LEFT)
+			{
+				if (player.getLeftBorder() <= grid.tile_LEFT.getRightBorder() - speed && grid.tile_LEFT.getWalkable())
+				{
+					player.x-=speed;
+				}
+			}
+			if (input.RIGHT)
+			{
+				if (player.getRightBorder() >= grid.tile_RIGHT.getLeftBorder() + speed && grid.tile_RIGHT.getWalkable())
+				{
+					player.x+=speed;
+				}
+			}
+			if (input.UP)
+			{
+				if (player.getUpperBorder() >= grid.tile_UPPER.getBottomBorder() - speed && grid.tile_UPPER.getWalkable())
+				{
+					player.y-=speed;
+				}
+			}
+			if (input.DOWN)
+			{
+				if (player.getBottomBorder() >= grid.tile_LOWER.getUpperBorder() + speed && grid.tile_LOWER.getWalkable())
+				{
+					player.y+=speed;
+				}
+			}
 		}
 	}
 }
