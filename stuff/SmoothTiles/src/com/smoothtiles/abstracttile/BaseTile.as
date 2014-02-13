@@ -1,6 +1,7 @@
 package com.smoothtiles.abstracttile
 {
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	
 	public class BaseTile extends Sprite
 	{
@@ -10,19 +11,23 @@ package com.smoothtiles.abstracttile
 		}
 		public function getBottomBorder():Number
 		{
-			return y + height * 0.5;
+			return y + height;
 		}
 		public function getUpperBorder():Number
 		{
-			return y - height * 0.5;
+			return y;
 		}
 		public function getLeftBorder():Number
 		{
-			return x - width * 0.5;
+			return x;
 		}
 		public function getRightBorder():Number
 		{
-			return x + width * 0.5;
+			return x + width;
+		}
+		public function getMiddlePoint():Point
+		{
+			return new Point(x + width * 0.5, y + height * 0.5);
 		}
 	}
 }

@@ -21,7 +21,7 @@ package com.smoothtiles.player
 			var regAsset :Shape = new Shape();
 			var playerAsset :Shape = new Shape();
 			playerAsset.graphics.beginFill(0x000000);
-			playerAsset.graphics.drawRect(-15, -15, 30, 30);
+			playerAsset.graphics.drawRect(0, 0, 30, 30);
 			playerAsset.graphics.endFill();
 			regAsset.graphics.beginFill(0xFFFFFF);
 			regAsset.graphics.drawRect(0, 0, 1, 1);
@@ -32,11 +32,11 @@ package com.smoothtiles.player
 		
 		public function setX(value:Number, increment:Boolean = true):void
 		{
-			increment ? this.x +=value : this.x = value + this.width * 0.85;
+			increment ? this.x +=value : this.x = value /*+ this.width * 0.85*/;
 		}
 		public function setY(value:Number, increment:Boolean = true):void
 		{
-			increment ? this.y+=value : this.y = value + this.height * 0.85;
+			increment ? this.y+=value : this.y = value /*+ this.height * 0.85*/;
 		}
 	}
 }

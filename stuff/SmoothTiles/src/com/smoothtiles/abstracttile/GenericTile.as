@@ -14,6 +14,8 @@ package com.smoothtiles.abstracttile
 		public const TYPE_3RD_SLOPE	:String = ">>>";
 		
 		public var asset	:Sprite;
+		public var rectBorder:Shape;
+		public var rect		:Shape;
 		public var type		:String;
 		public var reverseX	:Boolean;
 		public var reverseY	:Boolean;
@@ -39,27 +41,27 @@ package com.smoothtiles.abstracttile
 			show 		= visible;
 			size 		= t_size;
 			border 		= size * 0.05;
-			updateAsset();
+			asset 		= new Sprite();
+			createAsset();
 		}
-		public function getWalkable():Boolean
+		
+		private function createAsset():void
 		{
-			return true;/* type == TYPE_CLEAR;*/
-		}
-		public function updateAsset():void
-		{
-			asset = new Sprite();
-			var rect		:Shape = new Shape();
-			var rectBorder	:Shape = new Shape();
+			var func:Function;
+			drawBorder();
 			switch(type)
 			{
 				case TYPE_CLEAR:
 					colour = 0x99CC33;
+					func = drawRect;
 					break;
 				case TYPE_OBSTACLE:
 					colour = 0x990000;
+					func = drawRect;
 					break;
 				case TYPE_1ST_SLOPE:
 					colour = 0x0099FF;
+					func = drawSlope;
 					break;
 				case TYPE_2ND_SLOPE:
 					colour = 0x0066FF;
@@ -68,14 +70,44 @@ package com.smoothtiles.abstracttile
 					colour = 0x0000FF;
 					break;
 			}
+			func();
+			drawTextFields();
+			addChild(asset);
+		}
+		private function drawBorder():void
+		{
+			rectBorder = new Shape();
 			rectBorder.graphics.beginFill(0xFFFFFF);
-			rectBorder.graphics.drawRect(-(size + border) * 0.5, -(size + border) * 0.5, size + border, size + border);
+			rectBorder.graphics.drawRect(0, 0, size, size);
 			rectBorder.graphics.endFill();
 			asset.addChild(rectBorder);
+		}
+		public function drawSlope():void
+		{
+			var triangleShape		:Shape = new Shape();
+			triangleShape.graphics.beginFill(colour);
+			triangleShape.graphics.moveTo(border, border);
+			triangleShape.graphics.lineTo(size,border);
+			triangleShape.graphics.lineTo(size, size);
+			
+			var triangleShape2		:Shape = new Shape();
+			triangleShape2.graphics.beginFill(0x99CC33);
+			triangleShape2.graphics.moveTo(size, size);
+			triangleShape2.graphics.lineTo(border, size - border);
+			triangleShape2.graphics.lineTo(border, border);
+			asset.addChild(triangleShape);
+			asset.addChild(triangleShape2);
+		}
+		public function drawRect():void
+		{
+			rect = new Shape();
 			rect.graphics.beginFill(colour);
-			rect.graphics.drawRect(border - (size + border) * 0.5, border -(size + border) * 0.5, size - border, size - border);
+			rect.graphics.drawRect(border, border, size - border * 1.5, size - border * 1.5);
 			rect.graphics.endFill();
 			asset.addChild(rect);
+		}
+		public function drawTextFields():void
+		{
 			textField = new TextField();
 			secondTF = new TextField();
 			var format:TextFormat = new TextFormat();
@@ -86,20 +118,27 @@ package com.smoothtiles.abstracttile
 			textField.text = id +"/" + row + "/" + column;
 			textField.selectable = false;
 			secondTF.selectable = false;
-			textField.width = rectBorder.width;
-			secondTF.width = rectBorder.width;
-			textField.x = -rectBorder.width * 0.5;
+			textField.width = rectBorder.width - border;
+			secondTF.width = rectBorder.width - border;
+			textField.height = 25;
+			secondTF.height = 25;
+			/*trace ("TF",textField.width,textField.height);
+			trace ("STF:",secondTF.width,secondTF.height);*/
+			textField.x = 0;
 			secondTF.x = textField.x;
-			textField.y = -25;
-			secondTF.y = 0;
+			textField.y = 0;
+			secondTF.y = 25;
 			asset.addChild(textField);
 			asset.addChild(secondTF);
-			addChild(asset);
 		}
-		
+		public function isType(oType:String):Boolean
+		{
+			return this.type == oType;
+		}
 		public function updateSecondTF(text:String):void
 		{
 			secondTF.text = text;
 		}
+		
 	}
 }
