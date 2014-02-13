@@ -29,5 +29,14 @@ package com.smoothtiles.player
 			asset.addChild(playerAsset);
 			asset.addChild(regAsset);
 		}
+		
+		public function setX(value:Number, increment:Boolean = true):void
+		{
+			increment ? this.x +=value : this.x = value + this.width * 0.85;
+		}
+		public function setY(value:Number, increment:Boolean = true):void
+		{
+			increment ? this.y+=value : this.y = value + this.height * 0.85;
+		}
 	}
 }

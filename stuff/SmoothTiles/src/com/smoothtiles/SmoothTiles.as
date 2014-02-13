@@ -7,6 +7,7 @@ package com.smoothtiles
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.geom.Point;
 	
 	[SWF(width="704",height="704",frameRate="24",backgroundColor="#BBBBBB")]
 	public class SmoothTiles extends Sprite
@@ -17,6 +18,8 @@ package com.smoothtiles
 		private var player	:Player;
 		private var player2	:Player;
 		public var speed	:Number = 10;
+		public var currentRow	:int = 5;
+		public var currentColumn:int = 3;
 		public function SmoothTiles()
 		{
 			container = new Sprite();
@@ -30,10 +33,11 @@ package com.smoothtiles
 			grid = new GridBuilder();
 			container.addChild(grid.grid);
 			player = new Player();
-			player.x = 500;
-			player.y = 300;
+			var point:Point = grid.getTilePoint(currentRow,currentColumn);
+			grid.updateRelativeTiles(currentRow,currentColumn);
+			player.setX(point.x, false);
+			player.setY(point.y, false);
 			container.addChild(player);
-			trace("Index:",grid.getTileIndexByPos(player.x, player.y));
 		}
 		private function addEvents():void
 		{
@@ -43,33 +47,22 @@ package com.smoothtiles
 		}
 		protected function updateTiles(event:Event):void
 		{
+			//Atualizar as currentRow e currentColumn, comparando o ponto esquerdo/direito/cima/baixo do player com o hit dos tiles ao seu redor.
 			if (input.LEFT)
 			{
-				if (player.getLeftBorder() <= grid.tile_LEFT.getRightBorder() - speed && grid.tile_LEFT.getWalkable())
-				{
-					player.x-=speed;
-				}
+				player.setX(-speed);
 			}
 			if (input.RIGHT)
 			{
-				if (player.getRightBorder() >= grid.tile_RIGHT.getLeftBorder() + speed && grid.tile_RIGHT.getWalkable())
-				{
-					player.x+=speed;
-				}
+				player.setX(+speed);
 			}
 			if (input.UP)
 			{
-				if (player.getUpperBorder() >= grid.tile_UPPER.getBottomBorder() - speed && grid.tile_UPPER.getWalkable())
-				{
-					player.y-=speed;
-				}
+				player.setY(-speed);
 			}
 			if (input.DOWN)
 			{
-				if (player.getBottomBorder() >= grid.tile_LOWER.getUpperBorder() + speed && grid.tile_LOWER.getWalkable())
-				{
-					player.y+=speed;
-				}
+				player.setY(+speed);
 			}
 		}
 	}

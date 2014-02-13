@@ -27,8 +27,6 @@ package com.smoothtiles.grid
 		public var tile_RIGHT		:GenericTile;
 		public var tile_PLAYER		:GenericTile;
 		
-		
-		public var playerIndex	:int;
 		public var grid			:Sprite;
 		public var activeTile	:Number;
 		public var tileSize		:Number = 50;
@@ -58,27 +56,10 @@ package com.smoothtiles.grid
 			grid.x = 27;
 			grid.y = 27;
 		}
-		public function getTileIndexByPos(m_x:Number,m_y:Number):Number
-		{
-			playerIndex = 300;
-			var point:Point = new Point(m_x, m_y);
-			for (var i:int = 0; i < vectorGeral.length; i++) 
-			{
-				var tile:GenericTile = vectorGeral[i]; 
-				if(tile.hitTestPoint(point.x, point.y,true))
-				{
-					playerIndex = i;
-					updateRelativeTiles();
-					break;
-				}
-			}
-			return playerIndex;
-		}
-		
-		public function updateRelativeTiles():void
+		public function updateRelativeTiles(row:int,column:int):void
 		{
 			if(tile_PLAYER) tile_PLAYER.updateSecondTF("");
-			tile_PLAYER = vectorGeral[playerIndex];
+			tile_PLAYER = gridArray[row][column];
 			tile_PLAYER.updateSecondTF(PLAYER);
 			
 			if(tile_LEFT) tile_LEFT.updateSecondTF("");
@@ -129,6 +110,11 @@ package com.smoothtiles.grid
 				tile_LOWER_RIGHT = gridArray[tile_PLAYER.row + 1][tile_PLAYER.column + 1];
 				tile_LOWER_RIGHT.updateSecondTF(LOWER_RIGHT);
 			}
+		}
+		
+		public function getTilePoint(row:int,column:int):Point
+		{
+			return new Point(gridArray[row][column].x, gridArray[row][column].y)
 		}
 		
 		public function buildFromVector(vec:Array):void
