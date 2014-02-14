@@ -20,6 +20,7 @@ package com.smoothtiles.abstracttile
 		public var reverseX	:Boolean;
 		public var reverseY	:Boolean;
 		public var show		:Boolean;
+		public var showTXT	:Boolean;
 		public var colour	:uint;
 		public var size		:Number;
 		public var border	:Number;
@@ -30,14 +31,12 @@ package com.smoothtiles.abstracttile
 		public var textField:TextField;
 		public var secondTF:TextField;
 		
-		public function GenericTile(m_id:int,columNum:int,rowNum:int,t_type:String, t_size:Number, revX:Boolean = false, revY:Boolean = false, visible:Boolean = false)
+		public function GenericTile(m_id:int,columNum:int,rowNum:int,t_type:String, t_size:Number, showText:Boolean = false, visible:Boolean = false)
 		{
 			id 			= m_id;
 			column 		= columNum;
 			row 		= rowNum;
 			type		= t_type;
-			reverseX 	= revX;
-			reverseY 	= revY;
 			show 		= visible;
 			size 		= t_size;
 			border 		= size * 0.05;
@@ -71,7 +70,7 @@ package com.smoothtiles.abstracttile
 					break;
 			}
 			func();
-			drawTextFields();
+			if (showTXT) drawTextFields();
 			addChild(asset);
 		}
 		private function drawBorder():void
@@ -120,14 +119,14 @@ package com.smoothtiles.abstracttile
 			secondTF.selectable = false;
 			textField.width = rectBorder.width - border;
 			secondTF.width = rectBorder.width - border;
-			textField.height = 25;
-			secondTF.height = 25;
+			textField.height = size * 0.5;
+			secondTF.height = size * 0.5;
 			/*trace ("TF",textField.width,textField.height);
 			trace ("STF:",secondTF.width,secondTF.height);*/
 			textField.x = 0;
 			secondTF.x = textField.x;
 			textField.y = 0;
-			secondTF.y = 25;
+			secondTF.y = size * 0.5;
 			asset.addChild(textField);
 			asset.addChild(secondTF);
 		}
@@ -137,7 +136,7 @@ package com.smoothtiles.abstracttile
 		}
 		public function updateSecondTF(text:String):void
 		{
-			secondTF.text = text;
+			if (secondTF)secondTF.text = text;
 		}
 		
 	}

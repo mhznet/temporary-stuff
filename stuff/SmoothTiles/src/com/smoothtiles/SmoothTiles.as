@@ -10,7 +10,7 @@ package com.smoothtiles
 	import flash.events.KeyboardEvent;
 	import flash.geom.Point;
 	
-	[SWF(width="704",height="704",frameRate="24",backgroundColor="#BBBBBB")]
+	[SWF(width="960",height="750",frameRate="24",backgroundColor="#BBBBBB")]
 	public class SmoothTiles extends Sprite
 	{
 		private var input	:Keyboard;
@@ -18,8 +18,12 @@ package com.smoothtiles
 		private var container:Sprite;
 		private var player	:Player;
 		public var speed	:Number = 10;
+		public var dist		:Number = 0;
 		public var currentRow	:int = 1;
 		public var currentColumn:int = 2;
+		public var update	:Function;
+		private var moveByTile	:Boolean = false;
+		
 		public function SmoothTiles()
 		{
 			container = new Sprite();
@@ -37,7 +41,6 @@ package com.smoothtiles
 			grid.updateCurrentRowAndColumn(currentRow,currentColumn);
 			player.setX(point.x, false);
 			player.setY(point.y, false);
-			trace (grid.gridArray[0][0].width,grid.gridArray[0][0].height,grid.gridArray[0][0].x, grid.gridArray[0][0].y);
 			grid.grid.addChild(player);
 		}
 		private function addEvents():void
@@ -67,33 +70,34 @@ package com.smoothtiles
 				inputDown(p_tile);
 			}
 		}
-		
-		private function inputLeft(p_tile:GenericTile):void
-		{
-			var lTile:GenericTile = grid.getTile(currentRow, currentColumn -1); 
-			if (lTile && p_tile.isType(p_tile.TYPE_CLEAR))
-			{
-				if (lTile.isType(lTile.TYPE_CLEAR) || player.getLeftBorder() - speed >= lTile.getRightBorder())
-				{
-					player.setX(-speed); 
-					if (player.getMiddlePoint().x - speed <= lTile.getRightBorder() )
-					{
-						currentColumn--;
-					}
-				}
-			}
-		}
-		
 		private function inputDown(p_tile:GenericTile):void
 		{
 			var downTile:GenericTile = grid.getTile(currentRow + 1, currentColumn);
 			if (downTile)
 			{
-				if (downTile.isType(downTile.TYPE_CLEAR) || player.getBottomBorder() + speed <= downTile.getUpperBorder())
+				if (!moveByTile)
 				{
-					player.setY(+speed);
-					if (player.getMiddlePoint().y + speed >= downTile.getUpperBorder())
+					if (downTile.isType(downTile.TYPE_CLEAR) || player.getBottomBorder() + speed <= downTile.getUpperBorder())
 					{
+						player.setY(+speed);
+						if (player.getMiddlePoint().y + speed >= downTile.getUpperBorder())
+						{
+							currentRow++;
+						}
+					}
+				}
+				else
+				{
+					if (downTile.isType(downTile.TYPE_CLEAR))
+					{
+						player.y += grid.tileSize;
+						currentRow++;
+					}
+					else if (downTile.isType(downTile.TYPE_1ST_SLOPE))
+					{
+						player.x -= grid.tileSize;
+						player.y += grid.tileSize;
+						currentColumn--;
 						currentRow++;
 					}
 				}
@@ -103,13 +107,31 @@ package com.smoothtiles
 		private function inputUp(p_tile:GenericTile):void
 		{
 			var upTile:GenericTile = grid.getTile(currentRow - 1, currentColumn);
-			if (upTile && p_tile.isType(p_tile.TYPE_CLEAR))
+			if (upTile)
 			{
-				if (upTile.isType(upTile.TYPE_CLEAR) || player.getUpperBorder() - speed >= upTile.getBottomBorder())
+				if (!moveByTile)
 				{
-					player.setY(-speed);
-					if (player.getMiddlePoint().y - speed <= upTile.getBottomBorder())
+					if (upTile.isType(upTile.TYPE_CLEAR) || player.getUpperBorder() - speed >= upTile.getBottomBorder())
 					{
+						player.setY(-speed);
+						if (player.getMiddlePoint().y - speed <= upTile.getBottomBorder())
+						{
+							currentRow--;
+						}
+					}
+				}
+				else
+				{
+					if (upTile.isType(upTile.TYPE_CLEAR))
+					{
+						player.y -= grid.tileSize;
+						currentRow--;
+					}
+					else if (upTile.isType(upTile.TYPE_1ST_SLOPE))
+					{
+						player.x -= grid.tileSize;
+						player.y -= grid.tileSize;
+						currentColumn--;
 						currentRow--;
 					}
 				}
@@ -119,41 +141,78 @@ package com.smoothtiles
 		private function inputRight(p_tile:GenericTile):void
 		{
 			var rTile:GenericTile = grid.getTile(currentRow, currentColumn +1);
-			if (rTile && p_tile.isType(p_tile.TYPE_CLEAR))
+			if (rTile)
 			{
-				if (rTile.isType(rTile.TYPE_CLEAR) || player.getRightBorder() + speed <= rTile.getLeftBorder())
+				if (!moveByTile)
 				{
-					player.setX(+speed);
-					if (player.getMiddlePoint().x + speed >= rTile.getLeftBorder())
-					{
-						currentColumn++;
-					}
-				}
-				else if (rTile.isType(rTile.TYPE_1ST_SLOPE))
-				{
-					if ((player.getRightBorder() + speed <= rTile.getMiddlePoint().x) || player.getUpperBorder() + speed <= rTile.getBottomBorder())
+					if (rTile.isType(rTile.TYPE_CLEAR) || player.getRightBorder() + speed <= rTile.getLeftBorder())
 					{
 						player.setX(+speed);
-						player.setY(+speed);
-						if (player.getLeftBorder() + speed >= rTile.getLeftBorder())
+						if (player.getMiddlePoint().x + speed >= rTile.getLeftBorder())
 						{
 							currentColumn++;
+						}
+					}
+					else if (rTile.isType(rTile.TYPE_1ST_SLOPE))
+					{
+						if ((player.getRightBorder() + speed <= rTile.getMiddlePoint().x) || player.getUpperBorder() + speed <= rTile.getBottomBorder())
+						{
+							player.setX(+speed);
+							player.setY(+speed);
+							/*if (player.getLeftBorder() + speed >= rTile.getLeftBorder())
+							{
+								currentColumn++;
+							}*/
 						}
 					}
 				}
 				else
 				{
-					if (p_tile.isType(p_tile.TYPE_1ST_SLOPE) && player.getUpperBorder() + speed <= p_tile.getMiddlePoint().y)
+					if (rTile.isType(rTile.TYPE_CLEAR))
 					{
-						player.setX(+speed);
-						player.setY(+speed);
+						player.x += grid.tileSize;
+						currentColumn++;
 					}
-					else if (player.getLeftBorder() + speed >= rTile.getLeftBorder())
+					else if (rTile.isType(rTile.TYPE_1ST_SLOPE))
 					{
-						/*{
-							currentColumn++;
-							currentRow++;
-						}*/
+						player.x += grid.tileSize;
+						player.y += grid.tileSize;
+						currentColumn++;
+						currentRow++;
+					}
+				}
+			}
+		}
+		
+		private function inputLeft(p_tile:GenericTile):void
+		{
+			var lTile:GenericTile = grid.getTile(currentRow, currentColumn -1); 
+			if (lTile)
+			{
+				if (!moveByTile)
+				{
+					if (lTile.isType(lTile.TYPE_CLEAR) || player.getLeftBorder() - speed >= lTile.getRightBorder())
+					{
+						player.setX(-speed); 
+						if (player.getMiddlePoint().x - speed <= lTile.getRightBorder() )
+						{
+							currentColumn--;
+						}
+					}
+				}
+				else
+				{
+					if (lTile.isType(lTile.TYPE_CLEAR))
+					{
+						player.x -= grid.tileSize;
+						currentColumn--;
+					}
+					else if (lTile.isType(lTile.TYPE_1ST_SLOPE))
+					{
+						player.x -= grid.tileSize;
+						player.y += grid.tileSize;
+						currentColumn--;
+						currentRow++;
 					}
 				}
 			}

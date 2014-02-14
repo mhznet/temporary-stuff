@@ -8,6 +8,7 @@ package com.smoothtiles.player
 	public class Player extends BaseTile
 	{
 		public var asset		:Sprite;
+		public var pSize		:Number = 30;
 		public function Player()
 		{
 			super();
@@ -21,7 +22,7 @@ package com.smoothtiles.player
 			var regAsset :Shape = new Shape();
 			var playerAsset :Shape = new Shape();
 			playerAsset.graphics.beginFill(0x000000);
-			playerAsset.graphics.drawRect(0, 0, 30, 30);
+			playerAsset.graphics.drawRect(0, 0, pSize, pSize);
 			playerAsset.graphics.endFill();
 			regAsset.graphics.beginFill(0xFFFFFF);
 			regAsset.graphics.drawRect(0, 0, 1, 1);
