@@ -9,21 +9,21 @@ package com.smoothtiles.abstracttile
 		{
 			super();
 		}
-		public function getBottomBorder():Number
+		public function getBottomRightPoint():Point
 		{
-			return y + height;
+			return new Point(x + width, y + height);
 		}
-		public function getUpperBorder():Number
+		public function getUpperRightPoint():Point
 		{
-			return y;
+			return new Point(x + width, y);
 		}
-		public function getLeftBorder():Number
+		public function getBottomLeftPoint():Point
 		{
-			return x;
+			return new Point(x, y + height);
 		}
-		public function getRightBorder():Number
+		public function getUpperLeftPoint():Point
 		{
-			return x + width;
+			return new Point(x, y);
 		}
 		public function getMiddlePoint():Point
 		{

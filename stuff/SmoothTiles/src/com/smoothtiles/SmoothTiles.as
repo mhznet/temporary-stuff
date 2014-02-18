@@ -77,10 +77,10 @@ package com.smoothtiles
 			{
 				if (!moveByTile)
 				{
-					if (downTile.isType(downTile.TYPE_CLEAR) || player.getBottomBorder() + speed <= downTile.getUpperBorder())
+					if (downTile.isType(downTile.TYPE_CLEAR) || player.getBottomLeftPoint().y + speed <= downTile.getUpperLeftPoint().y)
 					{
 						player.setY(+speed);
-						if (player.getMiddlePoint().y + speed >= downTile.getUpperBorder())
+						if (player.getMiddlePoint().y + speed >= downTile.getUpperLeftPoint().y)
 						{
 							currentRow++;
 						}
@@ -93,7 +93,7 @@ package com.smoothtiles
 						player.y += grid.tileSize;
 						currentRow++;
 					}
-					else if (downTile.isType(downTile.TYPE_1ST_SLOPE))
+					else if (downTile.isType(downTile.TYPE_U2R_SLOPE))
 					{
 						player.x -= grid.tileSize;
 						player.y += grid.tileSize;
@@ -111,10 +111,10 @@ package com.smoothtiles
 			{
 				if (!moveByTile)
 				{
-					if (upTile.isType(upTile.TYPE_CLEAR) || player.getUpperBorder() - speed >= upTile.getBottomBorder())
+					if (upTile.isType(upTile.TYPE_CLEAR) || player.getUpperLeftPoint().y - speed >= upTile.getBottomLeftPoint().y)
 					{
 						player.setY(-speed);
-						if (player.getMiddlePoint().y - speed <= upTile.getBottomBorder())
+						if (player.getMiddlePoint().y - speed <= upTile.getBottomLeftPoint().y)
 						{
 							currentRow--;
 						}
@@ -127,7 +127,7 @@ package com.smoothtiles
 						player.y -= grid.tileSize;
 						currentRow--;
 					}
-					else if (upTile.isType(upTile.TYPE_1ST_SLOPE))
+					else if (upTile.isType(upTile.TYPE_U2R_SLOPE))
 					{
 						player.x -= grid.tileSize;
 						player.y -= grid.tileSize;
@@ -145,25 +145,25 @@ package com.smoothtiles
 			{
 				if (!moveByTile)
 				{
-					if (rTile.isType(rTile.TYPE_CLEAR) || player.getRightBorder() + speed <= rTile.getLeftBorder())
+					if (rTile.isType(rTile.TYPE_CLEAR) || player.getUpperRightPoint().x + speed <= rTile.getUpperLeftPoint().x)
 					{
 						player.setX(+speed);
-						if (player.getMiddlePoint().x + speed >= rTile.getLeftBorder())
+						if (player.getMiddlePoint().x + speed >= rTile.getUpperLeftPoint().x)
 						{
 							currentColumn++;
 						}
 					}
-					else if (rTile.isType(rTile.TYPE_1ST_SLOPE))
+					else if (rTile.isType(rTile.TYPE_U2R_SLOPE))
 					{
-						if ((player.getRightBorder() + speed <= rTile.getMiddlePoint().x) || player.getUpperBorder() + speed <= rTile.getBottomBorder())
+						/*if ((player.getRightBorder() + speed <= rTile.getMiddlePoint().x) || player.getUpperBorder() + speed <= rTile.getBottomBorder())
 						{
 							player.setX(+speed);
 							player.setY(+speed);
-							/*if (player.getLeftBorder() + speed >= rTile.getLeftBorder())
+							if (player.getLeftBorder() + speed >= rTile.getLeftBorder())
 							{
 								currentColumn++;
-							}*/
-						}
+							}
+						}*/
 					}
 				}
 				else
@@ -173,7 +173,7 @@ package com.smoothtiles
 						player.x += grid.tileSize;
 						currentColumn++;
 					}
-					else if (rTile.isType(rTile.TYPE_1ST_SLOPE))
+					else if (rTile.isType(rTile.TYPE_U2R_SLOPE))
 					{
 						player.x += grid.tileSize;
 						player.y += grid.tileSize;
@@ -191,10 +191,10 @@ package com.smoothtiles
 			{
 				if (!moveByTile)
 				{
-					if (lTile.isType(lTile.TYPE_CLEAR) || player.getLeftBorder() - speed >= lTile.getRightBorder())
+					if (lTile.isType(lTile.TYPE_CLEAR) || player.getUpperLeftPoint().x - speed >= lTile.getUpperRightPoint().x)
 					{
 						player.setX(-speed); 
-						if (player.getMiddlePoint().x - speed <= lTile.getRightBorder() )
+						if (player.getMiddlePoint().x - speed <= lTile.getUpperRightPoint().x)
 						{
 							currentColumn--;
 						}
@@ -207,7 +207,7 @@ package com.smoothtiles
 						player.x -= grid.tileSize;
 						currentColumn--;
 					}
-					else if (lTile.isType(lTile.TYPE_1ST_SLOPE))
+					else if (lTile.isType(lTile.TYPE_U2R_SLOPE))
 					{
 						player.x -= grid.tileSize;
 						player.y += grid.tileSize;

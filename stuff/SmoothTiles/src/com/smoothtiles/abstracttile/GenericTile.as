@@ -2,16 +2,23 @@ package com.smoothtiles.abstracttile
 {
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 
 	public class GenericTile extends BaseTile
 	{
-		public const TYPE_CLEAR		:String = "C";
-		public const TYPE_OBSTACLE	:String = "O";
-		public const TYPE_1ST_SLOPE	:String = ">";
-		public const TYPE_2ND_SLOPE	:String = ">>";
-		public const TYPE_3RD_SLOPE	:String = ">>>";
+		public const TYPE_CLEAR		:String = "cc";
+		public const TYPE_OBSTACLE	:String = "oo";
+		
+		/**From upper left to bottom right, meaning that when collision happens the object will go "\" downward to the right **/
+		public const TYPE_U2R_SLOPE	:String = "V>";
+		/**From upper right to bottom left, meaning that when collision happens the object will go "/" downward to the left **/
+		public const TYPE_U2L_SLOPE	:String = "V<";
+		/**From lower right to upper left, meaning that when collision happens the object will go "\" upward to the left **/
+		public const TYPE_B2L_SLOPE	:String = "A>";
+		/**from lower left to upper right, meaning that when collision happens the object will go "/" upward to the right **/
+		public const TYPE_B2R_SLOPE	:String = "A<";
 		
 		public var asset	:Sprite;
 		public var rectBorder:Shape;
@@ -46,30 +53,57 @@ package com.smoothtiles.abstracttile
 		
 		private function createAsset():void
 		{
-			var func:Function;
+			var reversed	:Boolean = false;
+			var bottomHit	:Boolean = false;
+			var fullTile	:Boolean = true;
+			
 			drawBorder();
 			switch(type)
 			{
 				case TYPE_CLEAR:
 					colour = 0x99CC33;
-					func = drawRect;
+					fullTile = true;
 					break;
 				case TYPE_OBSTACLE:
 					colour = 0x990000;
-					func = drawRect;
+					fullTile = true;
 					break;
-				case TYPE_1ST_SLOPE:
+				case TYPE_U2R_SLOPE:
 					colour = 0x0099FF;
-					func = drawSlope;
+					fullTile = false;
+					// Up to lower right
+					// Not reversed
+					// Hit in the upper part
 					break;
-				case TYPE_2ND_SLOPE:
+				case TYPE_U2L_SLOPE:
 					colour = 0x0066FF;
+					fullTile = false;
+					reversed = true;
+					// Reversed!
+					// Up to lower left
+					// Hit in the upper part
 					break;
-				case TYPE_3RD_SLOPE:
+				case TYPE_B2R_SLOPE:
 					colour = 0x0000FF;
+					fullTile = false;
+					bottomHit = true;
+					reversed = true;
+					// Bottom to upper right
+					// Hit in the lower part
+					break;
+				case TYPE_B2L_SLOPE:
+					colour = 0x0000FF;
+					fullTile = false;
+					bottomHit = true;
+					reversed = false;
+					// Bottom to upper left
+					// Hit in the lower part
+					break;
+				default:
+					trace ("Suckit!");
 					break;
 			}
-			func();
+			drawAsset(fullTile,bottomHit,reversed);
 			if (showTXT) drawTextFields();
 			addChild(asset);
 		}
@@ -81,29 +115,61 @@ package com.smoothtiles.abstracttile
 			rectBorder.graphics.endFill();
 			asset.addChild(rectBorder);
 		}
-		public function drawSlope():void
+		public function drawAsset(fullTile:Boolean = true, bottom:Boolean = false, reversed:Boolean = false):void
 		{
-			var triangleShape		:Shape = new Shape();
-			triangleShape.graphics.beginFill(colour);
-			triangleShape.graphics.moveTo(border, border);
-			triangleShape.graphics.lineTo(size,border);
-			triangleShape.graphics.lineTo(size, size);
+			if (fullTile)
+			{
+				rect = new Shape();
+				rect.graphics.beginFill(colour);
+				rect.graphics.drawRect(border, border, size - border * 1.5, size - border * 1.5);
+				rect.graphics.endFill();
+				asset.addChild(rect);
+			}
+			else
+			{
+				var colour_1	:uint = colour;
+				var colour_2	:uint = 0x99CC33;
+				if (bottom)
+				{
+					colour_1 = 0x99CC33;
+					colour_2 = colour;
+				}
+				
+				var point_1		:Point = new Point(border, border);;
+				var point_2		:Point = new Point(size, border);
+				var point_3		:Point = new Point(size, size);
+				
+				var point_1_2	:Point = new Point(size, size);
+				var point_2_2	:Point = new Point(border, size - border);
+				var point_3_2	:Point = new Point(border, border);
+				
+				if (reversed)
+				{
+					point_1 = new Point(border, size);
+					point_2 = new Point(size, border);
+					point_3 = new Point(size, size);
+					
+					point_1_2 = new Point(border, size);
+					point_2_2 = new Point(border, border);
+					point_3_2 = new Point(size, border);
+				}
+
+				var triangleShape		:Shape = new Shape();
+				triangleShape.graphics.beginFill(colour_1);
+				triangleShape.graphics.moveTo(point_1.x, point_1.y);
+				triangleShape.graphics.lineTo(point_2.x,point_2.y);
+				triangleShape.graphics.lineTo(point_3.x, point_3.y);
+				
+				var triangleShape2		:Shape = new Shape();
+				triangleShape2.graphics.beginFill(colour_2);
+				triangleShape2.graphics.moveTo(point_1_2.x, point_1_2.y);
+				triangleShape2.graphics.lineTo(point_2_2.x, point_2_2.y);
+				triangleShape2.graphics.lineTo(point_3_2.x, point_3_2.y);
+				
+				asset.addChild(triangleShape);
+				asset.addChild(triangleShape2);
+			}
 			
-			var triangleShape2		:Shape = new Shape();
-			triangleShape2.graphics.beginFill(0x99CC33);
-			triangleShape2.graphics.moveTo(size, size);
-			triangleShape2.graphics.lineTo(border, size - border);
-			triangleShape2.graphics.lineTo(border, border);
-			asset.addChild(triangleShape);
-			asset.addChild(triangleShape2);
-		}
-		public function drawRect():void
-		{
-			rect = new Shape();
-			rect.graphics.beginFill(colour);
-			rect.graphics.drawRect(border, border, size - border * 1.5, size - border * 1.5);
-			rect.graphics.endFill();
-			asset.addChild(rect);
 		}
 		public function drawTextFields():void
 		{
