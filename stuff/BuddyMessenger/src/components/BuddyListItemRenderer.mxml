@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		 verticalAlign="middle"
+		 horizontalGap="4"
+		 horizontalScrollPolicy="off"
+		 verticalScrollPolicy="off">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.smartfoxserver.v2.entities.Buddy;
+			import com.smartfoxserver.v2.entities.SFSBuddy;
+			import com.smartfoxserver.v2.entities.variables.BuddyVariable;
+			import com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables;
+			
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+				var buddy:Buddy = data as SFSBuddy;
+				
+				lb_nick.text = "";
+				lb_years.text = "";
+				lb_mood.text = "";
+				im_icon.source = null;
+				
+				if (buddy != null)
+				{
+					// Set nickname
+					if (buddy.nickName != null && buddy.nickName != "")
+						lb_nick.text = buddy.nickName;
+					else
+						lb_nick.text = buddy.name;
+					
+					// Set age
+					var age:BuddyVariable = buddy.getVariable(BuddyMessenger.BUDDYVAR_AGE);
+					if (age != null && !age.isNull())
+						lb_years.text = "(age " + age.getIntValue().toString() + ")";
+					
+					// Set mood
+					var mood:BuddyVariable = buddy.getVariable(BuddyMessenger.BUDDYVAR_MOOD);
+					if (mood != null && !mood.isNull())
+						lb_mood.text = mood.getStringValue();
+					
+					// Set icon
+					if (buddy.isBlocked)
+					{
+						im_icon.source = BuddyMessenger.iconBlocked;
+						im_icon.toolTip = "Blocked";
+					}
+					else
+					{
+						if (!buddy.isOnline)
+						{
+							im_icon.source = BuddyMessenger.iconOffline;
+							im_icon.toolTip = "Offline";
+						}
+						else
+						{
+							var state:String = buddy.state;
+							
+							if (state == "Available")
+								im_icon.source = BuddyMessenger.iconAvailable;
+							else if (state == "Away")
+								im_icon.source = BuddyMessenger.iconAway;
+							else if (state == "Occupied")
+								im_icon.source = BuddyMessenger.iconOccupied;
+							
+							im_icon.toolTip = state;
+						}
+					}
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Image id="im_icon" width="16" height="16"/>
+	<mx:VBox width="100%" verticalGap="-4">
+		<mx:HBox width="100%" horizontalGap="0">
+			<mx:Label id="lb_nick" text="Label" fontWeight="bold"/>
+			<mx:Label id="lb_years" text="Label" fontWeight="normal"/>
+		</mx:HBox>
+		<mx:Label id="lb_mood" text="" fontStyle="italic" color="#606060" visible="{lb_mood.text != ''}" includeInLayout="{lb_mood.text != ''}"/>
+	</mx:VBox>
+	
+</mx:HBox>

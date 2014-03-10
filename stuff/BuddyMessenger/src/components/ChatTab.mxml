@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="refresh()">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.smartfoxserver.v2.entities.Buddy;
+			import com.smartfoxserver.v2.entities.SFSBuddy;
+			
+			import mx.core.Application;
+			
+			private var _buddy:Buddy;
+			
+			public function set buddy(value:Buddy):void
+			{
+				_buddy = value;
+				this.name = _buddy.name;
+			}
+			
+			public function getDisplayedName():String
+			{
+				if (_buddy.nickName != null && _buddy.nickName != "")
+					return _buddy.nickName;
+				else
+					return _buddy.name;
+			}
+			
+			public function refresh():void
+			{
+				// Set nickname
+				this.label = getDisplayedName();
+				
+				// Set icon
+				// (chat can't be opened if buddy is blocked, so no need to handle that state)
+				if (!_buddy.isOnline)
+				{
+					this.icon = BuddyMessenger.iconOffline;
+					this.toolTip = "Offline";
+				}
+				else
+				{
+					var state:String = _buddy.state;
+					
+					if (state == "Available")
+						this.icon = BuddyMessenger.iconAvailable;
+					else if (state == "Away")
+						this.icon = BuddyMessenger.iconAway;
+					else if (state == "Occupied")
+						this.icon = BuddyMessenger.iconOccupied;
+					
+					this.toolTip = state;
+				}
+				
+				// Enable/disable send button
+				bt_send.enabled = true/*_buddy.isOnline*/;
+			}
+			
+			public function displayMessage(message:String):void
+			{
+				ta_chat.htmlText += message;
+				
+				callLater(setChatVPosition, [ta_chat]);
+			}
+			
+			private function setChatVPosition(target:TextArea):void
+			{
+				target.verticalScrollPosition = target.maxVerticalScrollPosition;
+			}
+			
+			private function onSendMsgBtClick():void
+			{
+				if (ti_message.text != "")
+				{
+					Application.application.sendMessageToBuddy(ti_message.text, _buddy);
+					ti_message.text = "";
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:TextArea width="100%" id="ta_chat" height="100%"/>
+	<mx:HBox width="100%">
+		<mx:TextInput width="100%" id="ti_message"/>
+		<mx:Button id="bt_send" label="Send message" click="onSendMsgBtClick()"/>
+	</mx:HBox>
+	
+</mx:VBox>
