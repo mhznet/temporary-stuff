@@ -8,12 +8,12 @@
 <SmartFoxConfig>
 
 	<!-- Mandatory Settings -->
-	<ip>127.0.0.1</ip>
+	<ip>game01.hom.mundodositio.globo.com</ip>
 	<port>9933</port>
 	<zone>BasicExamples</zone>
 	<!-- End Mandatory Settings -->
 	
-	<debug>false</debug>
+	<debug>true</debug>
 	
 	<httpPort>8081</httpPort>
 	<useBlueBox>false</useBlueBox>

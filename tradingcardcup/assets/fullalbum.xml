@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<card id="1" name="Zidane" desc="Zinedine" nation="FRA" jersey="10" star="true"
+		 offense="90" defense="50" hability="90" speed="70" stamina="40" />
+	
+	<card id="2" name="Alex" desc="De Souza" nation="BRA" jersey="10" star="true"
+		 offense="80" defense="70" hability="100" speed="70" stamina="60" />
+	
+	<card id="3" name="Fedato" desc="Aroldo" nation="BRA" jersey="2" star="false"
+		 offense="30" defense="90" hability="60" speed="50" stamina="80"  />
+	
+	<card id="4" name="Figo" desc="Luis" nation="POR" jersey="7" star="false"
+		 offense="95" defense="10" hability="85" speed="70" stamina="20" />
+	
+	<card id="5" name="Maradona" desc="Diego A." nation="ARG" jersey="10" star="true"
+		 offense="100" defense="20" hability="100" speed="70" stamina="30" />
+	
+	<card id="6" name="Messi" desc="Lionel" nation="ARG" jersey="10" star="false"
+		 offense="80" defense="15" hability="80" speed="70" stamina="40" />
+	
+	<card id="7" name="Hierro" desc="Fernando" nation="ESP" jersey="4" star="false"
+		 offense="10" defense="80" hability="70" speed="50" stamina="70" />
+		 
+	<card id="8" name="Neymar" desc="JR." nation="BRA" jersey="11" star="false"
+		 offense="70" defense="30" hability="70" speed="60" stamina="10" />
+		 
+	<card id="9" name="Ronaldo" desc="Cristiano" nation="POR" jersey="7" star="false"
+		 offense="75" defense="20" hability="75" speed="60" stamina="10" />
+		 
+	<card id="10" name="Pele" desc="Arantes" nation="BRA" jersey="10" star="true"
+		 offense="90" defense="10" hability="80" speed="65" stamina="25" />
+		 
+	<card id="11" name="Keirrison" desc="Carneiro" nation="BRA" jersey="9" star="false"
+		 offense="60" defense="20" hability="60" speed="70" stamina="50" />
+		 
+	<card id="12" name="Di Stefano" desc="???" nation="ARG" jersey="10" star="true"
+		 offense="80" defense="30" hability="90" speed="50" stamina="40" />
+		 
+	<card id="13" name="Beckenbauer" desc="Franz" nation="ALE" jersey="4" star="true"
+		 offense="60" defense="90" hability="40" speed="60" stamina="90" />
+		 
+	<card id="14" name="Cruyff" desc="Johann" nation="HOL" jersey="8" star="true"
+		 offense="90" defense="50" hability="70" speed="60" stamina="10" />
+		 
+	<card id="15" name="Platini" desc="Michel" nation="FRA" jersey="11" star="true"
+		 offense="70" defense="40" hability="75" speed="65" stamina="30" />
+		 
+	<card id="16" name="Puskás" desc="???" nation="HUN" jersey="9" star="true"
+		 offense="95" defense="40" hability="70" speed="60" stamina="20" />
+		 
+	<card id="17" name="Pique" desc="Gerard" nation="ESP" jersey="3" star="false"
+		 offense="40" defense="60" hability="50" speed="60" stamina="60" />
+		 
+	<card id="18" name="Makelele" desc="Claude" nation="FRA" jersey="4" star="false"
+		 offense="0" defense="80" hability="10" speed="30" stamina="80" />
+		 
+	<card id="19" name="Matthäus" desc="Lothar" nation="ALE" jersey="5" star="false"
+		 offense="15" defense="60" hability="40" speed="70" stamina="70" />
+		 
+	<card id="20" name="Klinsmann" desc="Jürgen" nation="ALE" jersey="11" star="false"
+		 offense="80" defense="50" hability="65" speed="70" stamina="20" />
+		 
+	<card id="21" name="Illgner" desc="Bodo" nation="ALE" jersey="1" star="false"
+		 offense="0" defense="100" hability="0" speed="50" stamina="100" />
+		 
+	<card id="22" name="Kluivert" desc="Patrick" nation="HOL" jersey="9" star="false"
+		 offense="70" defense="10" hability="55" speed="50" stamina="10" />
+		 
+	<card id="23" name="Krüger" desc="Dirceu" nation="BRA" jersey="7" star="true"
+		 offense="80" defense="10" hability="77" speed="80" stamina="30" />
+		 
+	<card id="24" name="Ayala" desc="Fernando" nation="ARG" jersey="3" star="false"
+		 offense="0" defense="80" hability="0" speed="50" stamina="70" />
+		 
+	<card id="25" name="Maldini" desc="Paolo" nation="ITA" jersey="4" star="false"
+		 offense="15" defense="60" hability="50" speed="60" stamina="90" />
+		 
+	<card id="26" name="Nesta" desc="Alessandro" nation="ITA" jersey="4" star="false"
+		 offense="0" defense="70" hability="0" speed="50" stamina="100" />
+		 
+	<card id="27" name="Cannavaro" desc="Fabio" nation="ITA" jersey="3" star="false"
+		 offense="30" defense="80" hability="30" speed="50" stamina="60" />
+		 
+	<card id="28" name="Thuram" desc="Lilian" nation="FRA" jersey="2" star="false"
+		 offense="20" defense="70" hability="10" speed="60" stamina="60" />
+		 
+	<card id="29" name="Puyol" desc="Carles" nation="ESP" jersey="3" star="false"
+		 offense="40" defense="60" hability="20" speed="50" stamina="80" />
+		 
+	<card id="30" name="Zanetti" desc="Javier" nation="ARG" jersey="8" star="false"
+		 offense="60" defense="65" hability="60" speed="40" stamina="50" />
+		 
+	<card id="31" name="Morientes" desc="Fernando" nation="ESP" jersey="9" star="false"
+		 offense="65" defense="30" hability="60" speed="45" stamina="20" />
+		 
+	<card id="32" name="Figueroa" desc="Elías" nation="CHI" jersey="4" star="false"
+		 offense="15" defense="60" hability="40" speed="55" stamina="70" />
+		 
+</data>

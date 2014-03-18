@@ -1,8 +1,3 @@
-/**
- * SmartFoxServer 2X Examples - BuddyMessenger
- * http://www.smartfoxserver.com
- * (c) 2011 gotoAndPlay
- */
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.core.SFSBuddyEvent;
 import com.smartfoxserver.v2.core.SFSEvent;
@@ -13,6 +8,7 @@ import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.entities.variables.BuddyVariable;
 import com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables;
 import com.smartfoxserver.v2.entities.variables.SFSBuddyVariable;
+import com.smartfoxserver.v2.requests.JoinRoomRequest;
 import com.smartfoxserver.v2.requests.buddylist.AddBuddyRequest;
 import com.smartfoxserver.v2.requests.buddylist.BlockBuddyRequest;
 import com.smartfoxserver.v2.requests.buddylist.BuddyMessageRequest;
@@ -22,13 +18,13 @@ import com.smartfoxserver.v2.requests.buddylist.RemoveBuddyRequest;
 import com.smartfoxserver.v2.requests.buddylist.SetBuddyVariablesRequest;
 import com.smartfoxserver.v2.util.ClientDisconnectionReason;
 
-import components.ChatTab;
-
 import flash.events.Event;
 
 import mx.collections.ArrayCollection;
 import mx.controls.Alert;
 import mx.managers.PopUpManager;
+
+import components.ChatTab;
 
 [Embed(source="assets/icon_available.png")]
 public static var iconAvailable:Class;
@@ -65,6 +61,7 @@ private function init():void
 	sfs.addEventListener(SFSEvent.LOGIN, onLogin);
 	sfs.addEventListener(SFSEvent.CONNECTION_LOST, onConnectionLost);
 	sfs.addEventListener(SFSBuddyEvent.BUDDY_LIST_INIT, onBuddyListInit);
+	sfs.addEventListener(SFSEvent.MODERATOR_MESSAGE, onModeratorMessage);
 	sfs.addEventListener(SFSBuddyEvent.BUDDY_ERROR, onBuddyError);
 	sfs.addEventListener(SFSBuddyEvent.BUDDY_ONLINE_STATE_UPDATE, onBuddyListUpdate);
 	sfs.addEventListener(SFSBuddyEvent.BUDDY_VARIABLES_UPDATE, onBuddyListUpdate);
@@ -74,6 +71,11 @@ private function init():void
 	sfs.addEventListener(SFSBuddyEvent.BUDDY_MESSAGE, onBuddyMessage);
 	
 	isBuddyListInited = false;
+}
+
+protected function onModeratorMessage(event:SFSEvent):void
+{
+	trace ("Ae ae ae");
 }
 
 [Bindable]
@@ -192,12 +194,13 @@ private function onAlertClosed(evt:Event):void
  */
 private function onLogin(evt:SFSEvent):void
 {
-	// Move to main view, and display user name 
+	// Move to main view, and display user name
 	mainView.selectedChild = view_main;
 	lb_myUserName.text = sfs.mySelf.name;
 	
 	// Initialize buddy list system
 	sfs.send(new InitBuddyListRequest());
+	sfs.send(new JoinRoomRequest("The Lobby"));
 }
 
 /**
@@ -372,8 +375,8 @@ public function sendMessageToBuddy(message:String, buddy:Buddy):void
 	// so that we are able to write messages in the proper chat tab
 	var params:ISFSObject = new SFSObject();
 	params.putUtfString("recipient", buddy.name);
-	
-	sfs.send(new BuddyMessageRequest(message, buddy, params));
+	var bdyMsn:BuddyMessageRequest = new BuddyMessageRequest(message, buddy, params)
+	sfs.send(bdyMsn);
 }
 
 private function showAlert(message:String):void
