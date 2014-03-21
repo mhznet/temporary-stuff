@@ -1,4 +1,4 @@
-package com
+package com.display.screens.match
 {
 	public class NarratorSpeech
 	{

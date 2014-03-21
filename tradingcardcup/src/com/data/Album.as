@@ -1,16 +1,15 @@
-package com
+package com.data
 {
+
 	public final class Album
 	{
-		public var data		:XMLList;
-		public var fullDeck	:Vector.<Card>;
-		public var asset	:AlbumAsset;
+		public var data			:XMLList;
+		public var fullDeck		:Vector.<Card>;
+		public var playerDeck	:Vector.<Card>;
 		public function Album(albumData:XML)
 		{
 			data = albumData.card;
 			fullDeck = getAlbumVectorFromData();
-			asset = new AlbumAsset();
-			trace ("AlbumSize:", data.length());
 		}
 		public function getAlbumVectorFromData():Vector.<Card>
 		{
@@ -22,6 +21,47 @@ package com
 			}
 			return vec;
 		}
+		public function getCardById(id:int):Card
+		{
+			var card:Card;
+			for (var i:int = 0; i < fullDeck.length; i++) 
+			{
+				if (fullDeck[i].id == id)
+				{
+					card = fullDeck[i];
+					break;
+				}
+			}
+			return card;
+		}
+		public function getAllPlayerCards():Vector.<Card>
+		{
+			if (!playerDeck)
+			{
+				playerDeck = new Vector.<Card>();
+				for (var i:int = 0; i < fullDeck.length; i++) 
+				{
+					if (fullDeck[i].doHave)
+					{
+						playerDeck.push(fullDeck[i]);
+					}
+				}
+			}
+			return playerDeck;
+		}
+		
+		public function pushToPlayerDeck(card:Card):void
+		{
+			for (var i:int = 0; i < playerDeck.length; i++) 
+			{
+				if (playerDeck[i].id == card.id)
+				{
+					return;
+				}
+				playerDeck.push(card);
+			}
+		}
+		
 		public function updateDeck(player:Vector.<Card>):void
 		{
 			for (var i:int = 0; i < player.length; i++) 
@@ -30,11 +70,12 @@ package com
 				{
 					if (fullDeck[j].id == player[i].id)
 					{
-						fullDeck[j].equipped = true;
+						fullDeck[j].doHave = true;
 					}
 				}
 			}
 		}
+		
 		public function bubbleSort(vec:Vector.<Card>):void
 		{
 			for (var i:int = vec.length-1; i >= 0; i--)
@@ -42,7 +83,7 @@ package com
 				for (var j:int = 1; j < vec.length; j++) 
 				{
 					var hold:Card;
-					if (vec[j].equipped && !vec[j-1].equipped)
+					if (vec[j].doHave && !vec[j-1].doHave)
 					{
 						hold = vec[j-1];
 						vec[j-1] = vec[j]
@@ -51,6 +92,7 @@ package com
 				}
 			}
 		}
+		
 		public function getRandomDeck(length:int):Vector.<Card>
 		{
 			var allCards	:Vector.<Card> =  getAlbumVectorFromData();

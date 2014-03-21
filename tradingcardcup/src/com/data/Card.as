@@ -1,7 +1,8 @@
-package com
+package com.data
 {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.text.TextField;
+	import flash.filters.GlowFilter;
 
 	public final class Card extends Sprite
 	{
@@ -11,7 +12,8 @@ package com
 		/**DATA**/
 		public var id			:int;
 		public var star			:Boolean;
-		public var equipped		:Boolean = false;
+		private var equipped	:Boolean = false;
+		public var doHave		:Boolean = false;
 		public var m_name		:String;
 		public var description	:String;
 		public var nation		:String;
@@ -24,32 +26,10 @@ package com
 		public var stamina 		:int;
 		public var overall 		:int;
 		public var style		:int;
+		
 		/**DISPLAY**/
 		public var thumb		:CardHolder;
-		public var asset		:CardAsset;
-		public var assetName	:TextField;
-		public var assetDesc	:TextField;
-		public var assetOvr		:TextField;
-		public var assetStyle	:TextField;
-		public var assetRarity	:TextField;
 		
-		public function fillOverallAndAssets():void
-		{
-			overall = (offense + defense + hability + speed) / 4;
-			asset = new CardAsset();
-			assetName = asset.txt_Name;
-			assetName.text = m_name;
-			assetDesc = asset.txt_Desc;
-			assetDesc.text = description;
-			assetOvr = asset.txt_Overall;
-			assetOvr.text = overall.toString();
-			assetStyle = asset.txt_Style;
-			assetStyle.text = style.toString();
-			assetRarity = asset.txt_Rarity;
-			assetRarity.text = star.toString();
-			//this.addChild(asset);
-			//trace (name, overall, translateSpeacialty(specialty));
-		}
 		public function Card(data:XML)
 		{
 			id 			= data.@id;
@@ -64,7 +44,31 @@ package com
 			speed		= data.@speed;
 			stamina 	= data.@stamina;
 			offense > defense ? style = OFFENSIVE : style = DEFENSIVE;
-			fillOverallAndAssets();
+		}
+		
+		public function addGlow(spr:MovieClip):void
+		{
+			var glow:GlowFilter = new GlowFilter(); 
+			glow.color = 0x009922; 
+			glow.alpha = 1; 
+			glow.blurX = 25; 
+			glow.blurY = 25; 
+			spr.filters = [glow];
+		}
+		public function removeGlow(spr:MovieClip):void
+		{
+			var glow:GlowFilter = new GlowFilter();
+			spr.filters = [glow];
+		}
+		
+		public function setEquipped(param0:Boolean):void
+		{
+			equipped = param0;
+			equipped ? addGlow(thumb) : removeGlow(thumb);
+		}
+		public function getEquipped():Boolean
+		{
+			return equipped;
 		}
 	}
 }

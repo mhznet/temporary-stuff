@@ -1,8 +1,10 @@
-package com
+package com.display.screens.match
 {
-	import flash.display.Sprite;
+	import com.display.screens.selector.Deck;
+	import com.display.MainDisplay;
+	import com.display.screens.AbstractScreen;
 
-	public final class Match extends Sprite
+	public final class MatchScreen extends AbstractScreen
 	{
 		private var round		:int = 1;
 		private var totalRounds	:int = 10;
@@ -10,8 +12,9 @@ package com
 		private var home		:Deck;
 		private var away		:Deck;
 		public  var narrator	:Narrator;
-		public function Match()
+		public function MatchScreen(disp:MainDisplay)
 		{
+			super(disp);
 			narrator = new Narrator();
 			this.addChild(narrator.asset);
 		}
@@ -35,6 +38,12 @@ package com
 					
 					break;
 			}
+		}
+		
+		private function testMatch():void
+		{
+			narrator.test();
+			narrator.play();
 		}
 	}
 }
