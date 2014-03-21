@@ -1,7 +1,7 @@
 package com.display.screens.selector
 {
 	import com.data.Card;
-	import com.display.Thumb;
+	import com.display.cards.Thumb;
 	
 	import flash.display.Sprite;
 	import flash.text.TextField;

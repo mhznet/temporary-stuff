@@ -1,6 +1,6 @@
 package com.data
 {
-	import com.display.Thumb;
+	import com.display.cards.Thumb;
 	
 	import flash.display.Sprite;
 
