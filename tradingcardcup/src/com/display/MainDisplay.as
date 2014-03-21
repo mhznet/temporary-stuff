@@ -1,7 +1,7 @@
 package com.display
 {
 	import com.Main;
-	import com.display.screens.ChallengersScreen;
+	import com.display.screens.challenger.ChallengersScreen;
 	import com.display.screens.CollectScreen;
 	import com.display.screens.StatisticsScreen;
 	import com.display.screens.TitleScreen;
@@ -88,6 +88,11 @@ package com.display
 		{
 			showOrHide(this,cardSelectScreen);
 			showOrHide(this,challengeScreen);
+		}
+		
+		public function goToMatch():void
+		{
+			trace ("Match!");
 		}
 	}
 }

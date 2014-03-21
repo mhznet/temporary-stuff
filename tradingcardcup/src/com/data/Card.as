@@ -1,8 +1,8 @@
 package com.data
 {
-	import flash.display.MovieClip;
+	import com.display.Thumb;
+	
 	import flash.display.Sprite;
-	import flash.filters.GlowFilter;
 
 	public final class Card extends Sprite
 	{
@@ -28,7 +28,7 @@ package com.data
 		public var style		:int;
 		
 		/**DISPLAY**/
-		public var thumb		:CardHolder;
+		public var thumb		:Thumb;
 		
 		public function Card(data:XML)
 		{
@@ -46,25 +46,10 @@ package com.data
 			offense > defense ? style = OFFENSIVE : style = DEFENSIVE;
 		}
 		
-		public function addGlow(spr:MovieClip):void
-		{
-			var glow:GlowFilter = new GlowFilter(); 
-			glow.color = 0x009922; 
-			glow.alpha = 1; 
-			glow.blurX = 25; 
-			glow.blurY = 25; 
-			spr.filters = [glow];
-		}
-		public function removeGlow(spr:MovieClip):void
-		{
-			var glow:GlowFilter = new GlowFilter();
-			spr.filters = [glow];
-		}
-		
 		public function setEquipped(param0:Boolean):void
 		{
 			equipped = param0;
-			equipped ? addGlow(thumb) : removeGlow(thumb);
+			equipped ? thumb.addGlow() : thumb.removeGlow();
 		}
 		public function getEquipped():Boolean
 		{

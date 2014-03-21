@@ -7,7 +7,7 @@ package com.display.screens.selector
 	
 	public class SelectionScreen extends AbstractScreen
 	{
-		public var selector	:SelectorTool;
+		public var selector	:CardSelectorTool;
 		public var deck		:Deck;
 		public var btCont	:GenericBt;
 		public function SelectionScreen(disp:MainDisplay)
@@ -21,7 +21,7 @@ package com.display.screens.selector
 			btCont.mouseChildren=false;
 			this.addChild(btCont);
 			
-			selector = new SelectorTool(this);
+			selector = new CardSelectorTool(this,10,1,60,800,600,70);
 			this.addChild(selector);
 			
 			deck = new Deck();

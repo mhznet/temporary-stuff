@@ -1,6 +1,7 @@
 package com.display.screens.selector
 {
 	import com.data.Card;
+	import com.display.Thumb;
 	
 	import flash.display.Sprite;
 	import flash.text.TextField;
@@ -10,6 +11,7 @@ package com.display.screens.selector
 		public var inUse	:Vector.<Card>;
 		public var txtVector:Vector.<TextField>;
 		public var deckSize	:int = 5;
+		public var thumb	:Thumb;
 		/**ASSETS**/
 		public var asset	:DeckAsset;
 		public var assetAtk	:TextField;
@@ -19,7 +21,6 @@ package com.display.screens.selector
 		public var assetAtt	:TextField;
 		public var assetDft	:TextField;
 		public var assetOvr	:TextField;
-		/**PLAY STYLE**/
 		/**STATS**/
 		public var overall 	:int;
 		public var offense 	:int;
@@ -29,7 +30,11 @@ package com.display.screens.selector
 		
 		public function fillDeckOverall(cards:Vector.<Card>):void
 		{
-			inUse = cards;
+			overall = 0;
+			offense = 0;
+			defense = 0;
+			hability = 0;
+			speed = 0;
 			for each (var fig:Card in inUse) 
 			{
 				overall += fig.overall; 

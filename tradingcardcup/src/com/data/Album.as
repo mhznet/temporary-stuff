@@ -6,6 +6,7 @@ package com.data
 		public var data			:XMLList;
 		public var fullDeck		:Vector.<Card>;
 		public var playerDeck	:Vector.<Card>;
+		
 		public function Album(albumData:XML)
 		{
 			data = albumData.card;
