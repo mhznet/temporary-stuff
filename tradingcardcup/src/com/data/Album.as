@@ -1,6 +1,5 @@
 package com.data
 {
-
 	public final class Album
 	{
 		public var data			:XMLList;
@@ -34,6 +33,16 @@ package com.data
 				}
 			}
 			return card;
+		}
+		public function getCardVectorFromIdVector(vec:Vector.<int>):Vector.<Card>
+		{
+			var cards:Vector.<Card> = new Vector.<Card>();
+			for (var i:int = 0; i < vec.length; i++) 
+			{
+				var card:Card = this.getCardById(vec[i]);
+				if (card!=null)cards.push(card);
+			}
+			return cards;
 		}
 		public function getAllPlayerCards():Vector.<Card>
 		{

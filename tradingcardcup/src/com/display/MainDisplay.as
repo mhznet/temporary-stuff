@@ -52,10 +52,6 @@ package com.display
 		}
 		public function initializeScreens():void
 		{
-			titleScreen = new TitleScreen(this);
-			cardSelectScreen = new SelectionScreen(this);
-			challengeScreen = new ChallengersScreen(this);
-			matchScreen = new MatchScreen(this);
 			statisticsScreen = new StatisticsScreen(this);
 			collectScreen = new CollectScreen(this);
 		}
@@ -72,12 +68,14 @@ package com.display
 		}
 		public function gotoTitle(event:MouseEvent = null):void
 		{
+			if (!titleScreen) titleScreen = new TitleScreen(this);
 			if (this.contains(btloading))
 				this.removeChild(btloading);
 			showOrHide(this,titleScreen);
 		}
 		public function gotoSelectCards(event:MouseEvent):void
 		{
+			if (!cardSelectScreen)cardSelectScreen = new SelectionScreen(this);
 			showOrHide(this,titleScreen);
 			showOrHide(this,cardSelectScreen);
 			main.sortPlayerDeck();
@@ -86,12 +84,14 @@ package com.display
 		
 		public function goToChallenger():void
 		{
+			if(!challengeScreen)challengeScreen = new ChallengersScreen(this);
 			showOrHide(this,cardSelectScreen);
 			showOrHide(this,challengeScreen);
 		}
 		
 		public function goToMatch():void
 		{
+			if (matchScreen) matchScreen = new MatchScreen(this);
 			trace ("Match!");
 		}
 	}

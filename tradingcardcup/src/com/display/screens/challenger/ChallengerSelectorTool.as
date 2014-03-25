@@ -1,13 +1,14 @@
 package com.display.screens.challenger
 {
-	import com.display.cards.Thumb;
+	import com.data.Deck;
 	import com.display.cards.SelectorTool;
-	import com.display.screens.selector.Deck;
+	import com.display.cards.Thumb;
 	
 	import flash.events.MouseEvent;
 	
 	public class ChallengerSelectorTool extends SelectorTool
 	{
+		private var activeThumb:Thumb;
 		private var screen:ChallengersScreen;
 		public function ChallengerSelectorTool(scn:ChallengersScreen,columnsNumber:int, rowsNumber:int, distBetweenRows:int, distBetweenPages:int, containerWidth:Number, containerHeight:Number)
 		{
@@ -40,9 +41,10 @@ package com.display.screens.challenger
 								thumb.x = 3 + (distBtwnRows * column) + (page * distBtwnPgs);
 								thumb.addEventListener(MouseEvent.CLICK, onThumbClicked);
 								thumb.buttonMode = true;
-								/*thumb.idtxt.text = deck.id.toString();
-								thumb.nametxt.text = card.m_name;
-								thumb.tenhotxt.text = card.doHave.toString();*/
+								thumb.nametxt.text = deck.m_name;
+								thumb.idtxt.text = deck.id.toString();
+								thumb.removeGlow();
+								//thumb.tenhotxt.text = card.doHave.toString();
 								/*if(card.doHave)
 								{
 									thumb.alpha = 1;
@@ -59,7 +61,6 @@ package com.display.screens.challenger
 								deck.addChild(thumb);
 							}
 							cont[page][row][column] = deck;
-							deck.removeChild(deck.asset);
 							container.addChild(deck);
 							if (i+1 >= array.length)
 							{
@@ -75,7 +76,10 @@ package com.display.screens.challenger
 		}
 		override protected function onThumbClicked(event:MouseEvent):void
 		{
-			//screen.thumbChosen(event.target.idtxt.text);
+			if (activeThumb!=null) activeThumb.removeGlow();
+			activeThumb = Thumb(event.target);
+			activeThumb.addGlow();
+			screen.thumbChosen(event.target.idtxt.text);
 		}
 	}
 }

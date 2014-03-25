@@ -16,6 +16,10 @@ package com.display.cards
 		{
 			super();
 			asset = new CardHolder();
+			idtxt = asset.idtxt;
+			nametxt = asset.nametxt;
+			tenhotxt = asset.tenhotxt;
+			equippedtxt = asset.equippedtxt;
 			this.addChild(asset);
 		}
 		public function addGlow():void

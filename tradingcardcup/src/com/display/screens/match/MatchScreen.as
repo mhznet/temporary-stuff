@@ -1,6 +1,6 @@
 package com.display.screens.match
 {
-	import com.display.screens.selector.Deck;
+	import com.data.Deck;
 	import com.display.MainDisplay;
 	import com.display.screens.AbstractScreen;
 

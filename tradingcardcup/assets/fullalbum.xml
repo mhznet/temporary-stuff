@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
+	<team id="1" name="Coritiba" players="2,3,11,23,33" desc="bom demais"/>
+	<team id="2" name="França" players="1,4,6,7,10" desc="bom demais"/>
+	<team id="3" name="EUA" players="12,21,30,14,15" desc="bom demais"/>
+	<team id="4" name="Canada" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="5" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="6" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="7" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="8" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="9" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="10" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="11" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="12" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="13" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	<team id="14" name="RANDOM" players="13,5,9,16,18" desc="bom demais"/>
+	
+	
 	<card id="1" name="Zidane" desc="Zinedine" nation="FRA" jersey="10" star="true"
 		 offense="90" defense="50" hability="90" speed="70" stamina="40" />
 	
@@ -95,5 +111,8 @@
 		 
 	<card id="32" name="Figueroa" desc="Elías" nation="CHI" jersey="4" star="false"
 		 offense="15" defense="60" hability="40" speed="55" stamina="70" />
+		 
+	<card id="33" name="Geraldo" desc="Angolano" nation="ANG" jersey="17" star="false"
+		 offense="75" defense="30" hability="60" speed="90" stamina="70" />
 		 
 </data>

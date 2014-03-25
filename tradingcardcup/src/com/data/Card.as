@@ -43,6 +43,7 @@ package com.data
 			hability	= data.@hability;
 			speed		= data.@speed;
 			stamina 	= data.@stamina;
+			overall = (offense+defense+speed+hability)/4
 			offense > defense ? style = OFFENSIVE : style = DEFENSIVE;
 		}
 		
