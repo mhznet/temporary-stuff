@@ -1,16 +1,24 @@
 package com.data
 {
-
 	public class Teams
 	{
 		public var main_data	:MainData;
 		public var data			:XMLList;
 		public var fullteams	:Vector.<Deck>;
+		public var playerTeam	:Vector.<Card>;
 		public function Teams(teamData:XML,main:MainData)
 		{
 			main_data = main;
 			data = teamData.team;
 			fullteams = getTeamsFromData();
+		}
+		public function setPlayerTeam(vec:Vector.<Card>):void
+		{
+			playerTeam = vec;
+		}
+		public function getPlayerTeam():Vector.<Card>
+		{
+			return playerTeam;
 		}
 		public function getTeamsFromData():Vector.<Deck>
 		{
@@ -21,6 +29,7 @@ package com.data
 				deck.id			= data[i].@id;
 				deck.m_name 	= data[i].@name;
 				deck.description= data[i].@desc;
+				deck.url 		= data[i].@img;
 				var ids:String = data[i].@players;
 				var players:Array = ids.split(",");
 				var idVec:Vector.<int> = new Vector.<int>();

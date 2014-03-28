@@ -9,6 +9,7 @@ package com.data
 		public var id		:int;
 		public var m_name	:String;
 		public var description:String;
+		public var url		:String;
 		public var inUse	:Vector.<Card>;
 		
 		/**STATS**/
@@ -19,6 +20,27 @@ package com.data
 		public var speed	:int;
 		public var thumb	:Thumb;
 		
+		public function updateValues():void
+		{
+			overall	 = 0;
+			offense	 = 0;
+			defense	 = 0;
+			hability = 0;
+			speed	 = 0;
+			for each (var fig:Card in inUse) 
+			{
+				overall += fig.overall; 
+				offense += fig.offense;
+				defense += fig.defense;
+				hability+= fig.hability;
+				speed 	+= fig.speed;
+			}
+			overall  = overall  / inUse.length;
+			offense  = offense  / inUse.length;
+			defense  = defense  / inUse.length;
+			hability = hability / inUse.length;
+			speed  	 = speed	/ inUse.length;
+		}
 		public function traceDeckInfo():void
 		{
 			var teamInfo:String = "ATK: " + offense + " / DEF: " + defense + " / HAB: " + hability + " / SPD: " + speed + " / OVR: " + overall;

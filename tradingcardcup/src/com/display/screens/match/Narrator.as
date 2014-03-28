@@ -6,12 +6,16 @@ package com.display.screens.match
 	{
 		public var asset	:NarratorAsset;
 		public var speechs	:Vector.<NarratorSpeech>;
+		public var types	:SpeechTypes;
 		public var turn		:int = 0;
 		public function Narrator()
 		{
 			asset = new NarratorAsset();
 			speechs = new Vector.<NarratorSpeech>();
+			types = new SpeechTypes();
+			trace ("ae");
 		}
+		
 		public function test():void
 		{
 			queue("E rola a bola..")
@@ -30,7 +34,6 @@ package com.display.screens.match
 			queue("Ele comemora sem camisa...");
 			queue("E toma cartão amarelo!");
 			queue("Bola no meio da cancha..");
-			
 		}
 		public function play():void
 		{
@@ -50,9 +53,13 @@ package com.display.screens.match
 		}
 		public function queue(text:String, time:int = 2):void
 		{
-			var speech:NarratorSpeech = new NarratorSpeech(text, time);
+			var speech:NarratorSpeech = new NarratorSpeech(1,text, time, 0);
 			speechs.push(speech);
 		}
 		
+		public function add(speech:NarratorSpeech):void
+		{
+			speechs.push(speech);
+		}
 	}
 }

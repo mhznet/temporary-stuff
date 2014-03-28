@@ -1,5 +1,8 @@
 package com.data
 {
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+
 	public class Utility
 	{
 		public static var instance:Utility;
@@ -46,6 +49,13 @@ package com.data
 				}
 			}
 			return index;
+		}
+		public function bringForward(cont:DisplayObjectContainer, spr:DisplayObject):void
+		{
+			if (cont.contains(spr))
+			{
+				cont.setChildIndex(spr, cont.numChildren-1);
+			}
 		}
 	}
 }

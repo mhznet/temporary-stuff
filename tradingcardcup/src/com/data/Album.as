@@ -2,9 +2,9 @@ package com.data
 {
 	public final class Album
 	{
-		public var data			:XMLList;
-		public var fullDeck		:Vector.<Card>;
-		public var playerDeck	:Vector.<Card>;
+		public var data				:XMLList;
+		public var fullDeck			:Vector.<Card>;
+		public var playerDeck		:Vector.<Card>;
 		
 		public function Album(albumData:XML)
 		{

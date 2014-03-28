@@ -91,8 +91,10 @@ package com.display
 		
 		public function goToMatch():void
 		{
-			if (matchScreen) matchScreen = new MatchScreen(this);
-			trace ("Match!");
+			if (!matchScreen) matchScreen = new MatchScreen(this);
+			matchScreen.setTeams(main.data.teams.getTeamDeckById(challengeScreen.selectedId).inUse, main.data.teams.getPlayerTeam());
+			showOrHide(this,challengeScreen);
+			showOrHide(this,matchScreen);
 		}
 	}
 }

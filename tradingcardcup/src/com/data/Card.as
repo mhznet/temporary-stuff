@@ -17,6 +17,7 @@ package com.data
 		public var m_name		:String;
 		public var description	:String;
 		public var nation		:String;
+		public var url			:String;
 		public var jersey		:int;
 		/**STATS**/
 		public var offense 		:int;
@@ -42,6 +43,7 @@ package com.data
 			defense 	= data.@defense;
 			hability	= data.@hability;
 			speed		= data.@speed;
+			url 		= data.@img;
 			stamina 	= data.@stamina;
 			overall = (offense+defense+speed+hability)/4
 			offense > defense ? style = OFFENSIVE : style = DEFENSIVE;

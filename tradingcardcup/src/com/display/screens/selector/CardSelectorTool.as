@@ -34,7 +34,7 @@ package com.display.screens.selector
 							var thumb:Thumb = card.thumb;
 							if (thumb == null)
 							{
-								thumb = new Thumb();
+								thumb = new Thumb(card.url);
 								thumb.y = (distBtwnRows * row);
 								thumb.x = 3 + (distBtwnRows * column) + (page * distBtwnPgs);
 								thumb.idtxt.text = card.id.toString();

@@ -36,7 +36,7 @@ package com.display.screens.challenger
 							var thumb:Thumb = deck.thumb;
 							if (thumb == null)
 							{
-								thumb = new Thumb();
+								thumb = new Thumb(deck.url);
 								thumb.y = (distBtwnRows * row);
 								thumb.x = 3 + (distBtwnRows * column) + (page * distBtwnPgs);
 								thumb.addEventListener(MouseEvent.CLICK, onThumbClicked);

@@ -9,7 +9,7 @@ package com.data
 	public class MainData
 	{
 		public var main 	:Main;
-		public var version	:String = "?v=1";
+		public var version	:String = "?v=1.1";
 		public var album	:Album;
 		public var teams	:Teams;
 		public function MainData(maine:Main)
