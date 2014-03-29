@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<config paramsNumber="6" params1="Nome" params2="Pontos" params3="Partidas" params4="Gols" params5="Artilheiro" params6="Titulos"/>
+	
+	<card id="1" params1="Argentina" params2="1234" params3="70" params4="123" params5="10" params6="2"/>
+	<card id="2" params1="Alemanha" params2="1336" params3="99" params4="206" params5="14" params6="3"/>
+	<card id="3" params1="Inglaterra" params2="1045" params3="59" params4="77" params5="10" params6="1"/>
+	<card id="4" params1="Brazil" params2="1104" params3="97" params4="210" params5="15" params6="5"/>
+	<card id="5" params1="Espanha" params2="1510" params3="56" params4="88" params5="8" params6="1"/>
+	<card id="6" params1="China" params2="339" params3="3" params4="0" params5="0" params6="0"/>
+	<card id="7" params1="Australia" params2="545" params3="10" params4="8" params5="3" params6="0"/>
+	<card id="8" params1="Canadá" params2="279" params3="3" params4="0" params5="0" params6="0"/>
+		  
+	<asset id="1" img="../src/assets/teams/logo.png"/>
+	<asset id="2" img="../src/assets/teams/logo.png"/>
+	<asset id="3" img="../src/assets/teams/logo.png"/>
+	<asset id="4" img="../src/assets/teams/logo.png"/>
+	<asset id="5" img="../src/assets/teams/logo.png"/>
+	<asset id="6" img="../src/assets/teams/logo.png"/>
+	<asset id="7" img="../src/assets/teams/logo.png"/>
+	<asset id="8" img="../src/assets/teams/logo.png"/>
+</data>
