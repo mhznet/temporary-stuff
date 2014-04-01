@@ -2,7 +2,9 @@ package com.data
 {
 	import com.Main;
 	
+	import flash.display.Bitmap;
 	import flash.display.Loader;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
@@ -12,6 +14,7 @@ package com.data
 	{
 		public var main			:Main;
 		public var paramsNumber	:int;
+		public var cover		:Sprite;
 		public var paramsNames	:Vector.<String>;
 		public var cardVector	:Vector.<Card>;
 		public function Data(m_main:Main, xmlConfig:XMLList, xmlCards:XMLList, xmlAssets:XMLList)
@@ -30,14 +33,7 @@ package com.data
 				var id	:int 	= xmlAssets[i].@id;
 				var card:Card = getCardById(id);
 				var url	:String = xmlAssets[i].@img;
-				var loader	:Loader = new Loader();
-				if (card!=null && url!="")
-				{
-					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, 		 card.onImgLoaded);
-					loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, card.onIOError);
-					var req		:URLRequest = new URLRequest(url);
-					loader.load(req);
-				}
+				load(url,card.onImgLoaded);
 			}
 		}
 		private function fillCards(xmlCards:XMLList):void
@@ -52,12 +48,36 @@ package com.data
 		
 		private function fillConfig(xmlConfig:XMLList):void
 		{
+			cover = new Sprite();
+			var coverurl:String = xmlConfig.@backcover;
+			load(coverurl, onCoverLoaded);
 			paramsNames = new Vector.<String>();
 			paramsNumber = xmlConfig.@paramsNumber;
 			for (var i:int = 1; i <= paramsNumber; i++) 
 			{
 				paramsNames.push(xmlConfig.@["params"+i]);
 			}			
+		}
+		private function onCoverLoaded(e:Event):void
+		{
+			cover.addChild(e.currentTarget.content as Bitmap);
+			//main.addChild(cover);
+		}
+		private function load(url:String, onComplete:Function):void
+		{
+			var loader	:Loader = new Loader();
+			if (url!="")
+			{
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, 	onComplete);
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+				var req		:URLRequest = new URLRequest(url);
+				loader.load(req);
+			}
+		}
+		
+		private function onIOError(e:IOErrorEvent):void
+		{
+			trace("Card.onIOError(e) " + e.text);
 		}
 		public function getCardById(id:int):Card
 		{
@@ -121,7 +141,6 @@ package com.data
 			var p3			:Vector.<int>;
 			var p4			:Vector.<int>;
 			var quantity	:int = transfer.length / param0;
-			trace ("Qtty:", quantity);
 			switch(param0)
 			{
 				case 2:
@@ -141,13 +160,11 @@ package com.data
 					break;
 			}
 			//trace ("Total Depois:",transfer.length);
-			trace ("p1:", p1.length);
-			trace ("p2:", p2.length);
 			if (p3) 
 			{
 				if (p3.length!=p2.length || p3.length!=p1.length)
 				{
-					trace ("fodeu p3");
+					trace ("com erro p3");
 				}
 				trace ("p3:", p3.length);
 			}
@@ -155,7 +172,7 @@ package com.data
 			{
 				if (p4.length!=p3.length || p4.length!=p2.length || p4.length!=p1.length)
 				{
-					trace ("fodeu p4");
+					trace ("om err p4");
 				}
 				trace ("p4:", p4.length);
 			}

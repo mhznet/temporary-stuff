@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-	<config paramsNumber="6" params1="Nome" params2="Pontos" params3="Partidas" params4="Gols" params5="Artilheiro" params6="Titulos"/>
+	<config backcover="../src/assets/deck2.png" paramsNumber="6" params1="Nome" params2="Pontos" params3="Partidas" params4="Gols" params5="Artilheiro" params6="Titulos"/>
 	
 	<card id="1" params1="Argentina" params2="1234" params3="70" params4="123" params5="10" params6="2"/>
 	<card id="2" params1="Alemanha" params2="1336" params3="99" params4="206" params5="14" params6="3"/>

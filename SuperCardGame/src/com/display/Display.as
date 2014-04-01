@@ -2,6 +2,7 @@ package com.display
 {
 	import com.Main;
 	import com.display.Screens.ModeSelectionScreen;
+	import com.display.Screens.SingleGameScreen;
 	
 	import flash.display.MovieClip;
 	import flash.display.Shape;
@@ -56,10 +57,10 @@ package com.display
 			this.addChild(modeSelect);
 		}
 		
-		public function goGame():void
+		public function goGame(p_num:int):void
 		{
 			if (this.contains(modeSelect)) this.removeChild(modeSelect);
-			if (!game) game = new SingleGameScreen(this);
+			if (!game) game = new SingleGameScreen(this,p_num);
 			this.addChild(game);
 		}
 	}

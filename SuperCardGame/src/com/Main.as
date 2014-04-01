@@ -13,7 +13,7 @@ package com
 	{
 		public var data		:Data;
 		public var display	:Display;
-		public var version	:String = "?=v1.1";
+		public var version	:String = "?=v1.113";
 		public function Main()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAdded);

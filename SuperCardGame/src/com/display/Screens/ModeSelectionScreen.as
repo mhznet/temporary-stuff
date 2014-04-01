@@ -27,7 +27,7 @@ package com.display.Screens
 		}
 		private function onSingleClicked(e:MouseEvent):void
 		{
-			display.goGame();
+			display.goGame(2);
 		}
 	}
 }
