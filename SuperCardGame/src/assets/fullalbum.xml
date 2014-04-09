@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-	<config backcover="../src/assets/deck2.png" paramsNumber="6" params1="Nome" params2="Pontos" params3="Partidas" params4="Gols" params5="Artilheiro" params6="Titulos"/>
+	<config 
+	paramsNumber="6"
+	params1="Nome"   params2="Pontos" params3="Partidas" params4="Gols"  params5="Artilheiro" params6="Titulos"
+	iparams1="false" iparams2="true"  iparams3="true"    iparams4="true" iparams5="true" 	  iparams6="true"/>
+	
+	<bmp id="1" bmpurl="../src/assets/jogar.png"/>
+	<bmp id="2" bmpurl="../src/assets/bgBtn.png"/>
+	<bmp id="3" bmpurl="../src/assets/backcard.png"/>
+	<bmp id="4" bmpurl="../src/assets/bgImg.png"/>
+	<bmp id="5" bmpurl="../src/assets/title.png"/>
+	<bmp id="6" bmpurl="../src/assets/regras.png"/>
+	<bmp id="7" bmpurl="../src/assets/1jogador.png"/>
+	<bmp id="8" bmpurl="../src/assets/2jogador.png"/>
 	
 	<card id="1" params1="Argentina" params2="1234" params3="70" params4="123" params5="10" params6="2"/>
 	<card id="2" params1="Alemanha" params2="1336" params3="99" params4="206" params5="14" params6="3"/>
@@ -11,12 +23,12 @@
 	<card id="7" params1="Australia" params2="545" params3="10" params4="8" params5="3" params6="0"/>
 	<card id="8" params1="Canadá" params2="279" params3="3" params4="0" params5="0" params6="0"/>
 		  
-	<asset id="1" img="../src/assets/teams/logo.png"/>
-	<asset id="2" img="../src/assets/teams/logo.png"/>
-	<asset id="3" img="../src/assets/teams/logo.png"/>
-	<asset id="4" img="../src/assets/teams/logo.png"/>
-	<asset id="5" img="../src/assets/teams/logo.png"/>
-	<asset id="6" img="../src/assets/teams/logo.png"/>
-	<asset id="7" img="../src/assets/teams/logo.png"/>
-	<asset id="8" img="../src/assets/teams/logo.png"/>
+	<asset id="1" img="../src/assets/teams/brasil.png"/>
+	<asset id="2" img="../src/assets/teams/brasil.png"/>
+	<asset id="3" img="../src/assets/teams/brasil.png"/>
+	<asset id="4" img="../src/assets/teams/brasil.png"/>
+	<asset id="5" img="../src/assets/teams/brasil.png"/>
+	<asset id="6" img="../src/assets/teams/brasil.png"/>
+	<asset id="7" img="../src/assets/teams/brasil.png"/>
+	<asset id="8" img="../src/assets/teams/brasil.png"/>
 </data>

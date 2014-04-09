@@ -8,7 +8,7 @@ package com
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 
-	[SWF(width="950",height="705",frameRate="24",backgroundColor="#BBBBBB")]
+	[SWF(width="940",height="600",frameRate="24",backgroundColor="#BBBBBB")]
 	public class Main extends Sprite
 	{
 		public var data		:Data;
@@ -35,7 +35,7 @@ package com
 		protected function onXMLLoaded(event:Event):void
 		{
 			var xml:XML = new XML(event.target.data)
-			data = new Data(this,xml.config, xml.card, xml.asset);
+			data = new Data(this,xml.config, xml.card, xml.asset, xml.bmp);
 		}
 		
 		public function onDataReady():void

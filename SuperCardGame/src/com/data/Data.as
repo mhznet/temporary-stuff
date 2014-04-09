@@ -2,9 +2,8 @@ package com.data
 {
 	import com.Main;
 	
-	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Loader;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
@@ -14,18 +13,42 @@ package com.data
 	{
 		public var main			:Main;
 		public var paramsNumber	:int;
-		public var cover		:Sprite;
+		public var bmpVector	:Vector.<BMP>;
 		public var paramsNames	:Vector.<String>;
+		public var paramsIntera	:Vector.<String>;
 		public var cardVector	:Vector.<Card>;
-		public function Data(m_main:Main, xmlConfig:XMLList, xmlCards:XMLList, xmlAssets:XMLList)
+		public function Data(m_main:Main, xmlConfig:XMLList, xmlCards:XMLList, xmlAssets:XMLList, xmlBMPs:XMLList)
 		{
 			main=m_main;
 			fillConfig(xmlConfig);
 			fillCards(xmlCards)
 			fillAssets(xmlAssets);
-			main.onDataReady();
+			fillBMPs(xmlBMPs);
 		}
 		
+		private function fillBMPs(xmlBMPs:XMLList):void
+		{
+			bmpVector = new Vector.<BMP>();
+			for (var i:int = 0; i < xmlBMPs.length(); i++) 
+			{
+				var bmp:BMP = new BMP(xmlBMPs[i].@id, verifyLoads);
+				load(xmlBMPs[i].@bmpurl, bmp.onBMPLoaded);
+				bmpVector.push(bmp);
+			}
+		}
+		public function verifyLoads():void
+		{
+			var rdy:Boolean = true;
+			for (var i:int = 0; i < bmpVector.length; i++) 
+			{
+				if (!bmpVector[i].ready)
+				{
+					rdy = false;
+					break;
+				}
+			}
+			if (rdy) main.onDataReady();
+		}
 		private function fillAssets(xmlAssets:XMLList):void
 		{
 			for (var i:int = 0; i < xmlAssets.length(); i++) 
@@ -36,6 +59,19 @@ package com.data
 				load(url,card.onImgLoaded);
 			}
 		}
+		public function getBMPById(id:int):BitmapData
+		{
+			var bdata:BitmapData;
+			for (var i:int = 0; i < bmpVector.length; i++) 
+			{
+				if(id == bmpVector[i].id)
+				{
+					bdata = bmpVector[i].bmp.clone();
+					break;
+				}
+			}
+			return bdata;
+		}
 		private function fillCards(xmlCards:XMLList):void
 		{
 			cardVector = new Vector.<Card>();
@@ -45,23 +81,16 @@ package com.data
 				cardVector.push(crd);
 			}
 		}
-		
 		private function fillConfig(xmlConfig:XMLList):void
 		{
-			cover = new Sprite();
-			var coverurl:String = xmlConfig.@backcover;
-			load(coverurl, onCoverLoaded);
-			paramsNames = new Vector.<String>();
+			paramsNames  = new Vector.<String>();
+			paramsIntera = new Vector.<String>();
 			paramsNumber = xmlConfig.@paramsNumber;
 			for (var i:int = 1; i <= paramsNumber; i++) 
 			{
 				paramsNames.push(xmlConfig.@["params"+i]);
-			}			
-		}
-		private function onCoverLoaded(e:Event):void
-		{
-			cover.addChild(e.currentTarget.content as Bitmap);
-			//main.addChild(cover);
+				paramsIntera.push(xmlConfig.@["iparams"+i]);
+			}
 		}
 		private function load(url:String, onComplete:Function):void
 		{
