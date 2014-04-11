@@ -21,7 +21,8 @@ package com.display
 		public var realbg		:Sprite;
 		public var load			:MovieClip;
 		public var winnerSplash	:WinnerSplashScreen;
-		
+		public var turns		:int = 1;
+		public var shuffle		:CardShuffle;
 		public function Display(m_main:Main)
 		{
 			main=m_main;
@@ -72,6 +73,7 @@ package com.display
 			if (!title) title = new TitleScreen(this);
 			this.addChild(title);
 		}
+		
 		public function goModeSelect():void
 		{
 			if (this.contains(title)) this.removeChild(title);
@@ -87,11 +89,11 @@ package com.display
 			}
 			else
 			{
-				game.begin(p_num,0, ia);
+				game.begin(p_num, turns, ia);
 			}
 			this.addChild(game);
 		}
-		public function goToWinner(name:String):void
+		public function goToWinner(name:String,cardNum:int):void
 		{
 			//resetOlderScreens
 			if (this.contains(game)) 
@@ -99,7 +101,7 @@ package com.display
 				this.removeChild(game);
 				game.reset();
 			}
-			if (!winnerSplash) winnerSplash= new WinnerSplashScreen(this,name);
+			if (!winnerSplash) winnerSplash= new WinnerSplashScreen(this,name,cardNum);
 			this.addChild(winnerSplash);
 		}
 		public function reset(e:MouseEvent):void

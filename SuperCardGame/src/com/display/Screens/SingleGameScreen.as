@@ -2,49 +2,67 @@ package com.display.Screens
 {
 	import com.data.Card;
 	import com.data.Player;
+	import com.display.CardShuffle;
 	import com.display.Display;
 	import com.display.GenericBt;
 	import com.greensock.TweenLite;
 	
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
 	public class SingleGameScreen extends AbstractScreen
 	{
+		private var container		:Sprite;
 		private var stack			:Vector.<int>;
 		private var oldStack		:Vector.<int>;
 		private var players			:Vector.<Player>;
 		private var c_details		:Vector.<CardDetails>;
-		private var p_number		:int;
+		public var p_number			:int;
 		private var nextBt			:GenericBt;
 		private var hasIA			:Boolean;
 		private var indexPlaying	:int;
-		private var turns			:int;
+		public var turns			:int;
 		/**DISPLAY**/
 		private var score			:GameScore;
+		private var shuffle			:CardShuffle;
 		
 		public function SingleGameScreen(disp:Display, p_num:int, ia:Boolean)
 		{
 			super(disp);
-			begin(p_num, 0, ia);
+			container = new Sprite();
+			this.addChild(container);
+			begin(p_num, display.turns, ia);
 		}
 		
-		public function begin(p_num:int, turnTotal:int, ia:Boolean):void
+		public function begin(p_num:int, turnTotal:int, ia:Boolean = false):void
 		{
 			hasIA = ia;
 			if(hasIA)showNextBt();
 			p_number = p_num;
 			turns = turnTotal;
+			shuffle = new CardShuffle(display, reallyStart);
+			this.addChild(shuffle);
+			shuffle.begin();
+		}
+		private function reallyStart():void
+		{
 			startScore();
 			start();
+			if (shuffle)
+			{
+				if(this.contains(shuffle))
+				{
+					shuffle.remove();
+				}
+			}
 		}
-		
 		private function showNextBt():void
 		{
 			nextBt = new GenericBt(selecIA,"NEXT",100,50,display.main.data.getBMPById(2));
 			nextBt.x = display.background.width * 0.5 - nextBt.width * 0.5;
 			nextBt.y = display.background.height - nextBt.height * 2;
 			nextBt.visible = false;
-			this.addChild(nextBt);
+			container.addChild(nextBt);
 		}
 		
 		private function selecIA(e:MouseEvent):void
@@ -67,13 +85,13 @@ package com.display.Screens
 				var play	:Player = new Player(i,playable,vec[i]);
 				players.push(play);
 				var cards	:CardDetails = new CardDetails(display.main.data.paramsNumber, this);
-				cards.x = 60 + (display.background.width * 1.15 * i) / p_number;
-				cards.y = 110;
+				cards.x = 63 + (display.background.width * 1.156 * i) / p_number;
+				cards.y = 111;
 				var card	:Card = display.main.data.getCardById(players[i].cards[0]);
 				cards.update(card.paramsNames,card.paramsValue,card.imgContainer, playable);
 				cards.id = i;
 				cards.close(true);
-				this.addChild(cards);
+				container.addChild(cards);
 				c_details.push(cards);
 			}
 			score.update(players);
@@ -99,20 +117,19 @@ package com.display.Screens
 			c_details[indexPlaying].open();
 			if (hasIA && indexPlaying == 1) 
 			{
-				nextBt.visible = true
+				if (nextBt!=null)nextBt.visible = true
 			}
 			else
 			{
-				nextBt.visible = false;
+				if (nextBt!=null)nextBt.visible = false;
 			}
 		}
 		private function startScore():void
 		{
-			score = new GameScore(p_number);
-			score.x = display.background.width * 0.5 - score.width * 0.5;
-			score.y = display.background.height - score.height * 0.6;
-			this.addChild(score);
+			score = new GameScore(this);
+			container.addChild(score);
 		}
+		
 		public function compareParams(index:int):void
 		{
 			var playerIndex:Vector.<int> = new Vector.<int>();
@@ -139,7 +156,7 @@ package com.display.Screens
 					c_details[k].glowRed();
 				}*/
 				TweenLite.delayedCall(2.5,next);
-				score.update(players);
+				//score.update(players);
 			}
 			else
 			{
@@ -151,7 +168,7 @@ package com.display.Screens
 				stack.splice(0,stack.length);		
 				oldStack.splice(0,oldStack.length);
 				indexPlaying = winningPlayerIndex;
-				score.update(players);
+				//score.update(players);
 			}
 			for (var j:int = 0; j < players.length; j++) 
 			{
@@ -192,10 +209,20 @@ package com.display.Screens
 		public function next():void
 		{
 			var endGame:Boolean = false;
-			for (var i:int = 0; i < players.length; i++) 
+			turns--;
+			score.update(players);
+			trace ("TURN:", turns);
+			if (turns<=0)
 			{
-				if (players[i].cards.length == 0)
-					endGame = true;
+				endGame=true;
+			}
+			else
+			{
+				for (var i:int = 0; i < players.length; i++) 
+				{
+					if (players[i].cards.length == 0)
+						endGame = true;
+				}
 			}
 			if (!endGame) 
 			{
@@ -203,7 +230,8 @@ package com.display.Screens
 			}
 			else
 			{
-				display.goToWinner("Player_"+getActualWinner());
+				var winner:int = getActualWinner();
+				display.goToWinner("Player_"+winner,players[winner].cards.length);
 			}
 		}
 		
@@ -232,9 +260,17 @@ package com.display.Screens
 				c_details[i].destroy();
 				c_details[i]= null;
 			}
-			while(this.numChildren>0)
+			while(container.numChildren>0)
 			{
-				this.removeChildAt(0);
+				container.removeChildAt(0);
+			}
+			if (shuffle)
+			{
+				if(this.contains(shuffle))
+				{
+					this.removeChild(shuffle);
+				}
+				shuffle = null;
 			}
 			c_details 	= null;
 			players		= null;

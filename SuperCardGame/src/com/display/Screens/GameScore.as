@@ -2,6 +2,7 @@ package com.display.Screens
 {
 	import com.data.Player;
 	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -9,15 +10,54 @@ package com.display.Screens
 	
 	public class GameScore extends Sprite
 	{
+		private var m_main	:SingleGameScreen;
 		private var m_bg	:Sprite;
 		private var textNum	:int;
 		private var txtVec	:Vector.<TextField>;
+		private var turnTx			:TextField;
+		private var turnBt1			:Sprite;
+		private var turnBt2			:Sprite;
 		
-		public function GameScore(p_num:int)
+		public function GameScore(main:SingleGameScreen)
 		{
-			textNum = p_num;
+			textNum = main.p_number;
+			m_main = main;
 			super();
 			create();
+			turns();
+		}
+		
+		private function turns():void
+		{
+			/*turnBt1 = new Sprite();
+			var bt1bmp:Bitmap = new Bitmap();
+			bt1bmp.bitmapData = m_main.display.main.data.getBMPById(10);
+			turnBt1.addChild(bt1bmp);
+			turnBt1.x = m_main.display.background.width * 0.5 - turnBt1.width - 10;
+			turnBt1.y = m_main.display.background.height * 0.4;
+			this.addChild(turnBt1);*/
+			
+			turnBt2 = new Sprite();
+			var bt2bmp:Bitmap = new Bitmap();
+			//bt2bmp.bitmapData = m_main.display.main.data.getBMPById(12);
+			bt2bmp.bitmapData = m_main.display.main.data.getBMPById(10);
+			bt2bmp.scaleX *= -1;
+			bt2bmp.x = bt2bmp.width;
+			turnBt2.addChild(bt2bmp);
+			turnBt2.x = m_main.display.background.width * 0.5 + 10;
+			turnBt2.y = m_main.display.background.height * 0.3;
+			this.addChild(turnBt2);
+			
+			turnTx = new TextField();
+			turnTx.width = turnBt2.width;
+			turnTx.height = turnBt2.height;
+			turnTx.selectable = false;
+			turnTx.text = "RESTAM: " + m_main.turns + " TURNOS!";
+			turnTx.border = false;
+			turnTx.borderColor = 0xFFFFFF;
+			turnTx.textColor = 0xFFFFFF;
+			turnBt2.addChild(turnTx);
+			trace ("add",turnTx);
 		}
 		
 		private function create():void
@@ -34,7 +74,8 @@ package com.display.Screens
 				text.width 	= 200;
 				text.height = 150;
 				text.text 	= "TBA";
-				text.x = 550 * i;
+				text.x = 100 + (550  * i);
+				text.y = m_main.display.background.height * 0.85;
 				this.addChild(text);
 				txtVec.push(text);
 			}
@@ -58,6 +99,7 @@ package com.display.Screens
 				txtVec[i].text = String(vec[i].cards.length) + " CARTAS";
 				txtVec[i].setTextFormat(getTextFormat());
 			}
+			turnTx.text = m_main.turns + " TURNOS!";
 		}
 		
 		public function destroy():void
