@@ -21,7 +21,20 @@ package com.display.Screens
 		public var m_name			:Vector.<TextField>;
 		public var m_hit			:Vector.<Sprite>;
 		public var m_upperhit		:Vector.<Sprite>;
+		public var textFormat		:TextFormat;
+		
 		private var counter			:int=0;
+		[Embed(source="/assets/BebasNeue.otf", 
+    		fontName = "BebasNehueeee", 
+   			mimeType = "application/x-font", 
+			fontFamily="BebasBeer",
+    		fontWeight="normal", 
+    		fontStyle="normal", 
+			unicodeRange = "U+0020-007E,U+00A1-024F,U+1E00-1EFF,U+2000-206F,U+20A0-20CF,U+2100-2183",
+    		advancedAntiAliasing="true", 
+    		embedAsCFF="false")]
+		public var font			:Class;
+		public const FONT_NAME	:String = "BebasNehueeee";
 		public function CardDetails(paramsNum:int, main:SingleGameScreen)
 		{
 			super();
@@ -45,7 +58,7 @@ package com.display.Screens
 				var val:String;
 				var nam:String;
 				t_name==null ? nam = "NAME_" + i : nam = t_name[i]; 
-				t_value==null? val = "VALUE_" + i : val = t_value[i]; 
+				t_value==null? val = "VALUE_" + i : val = t_value[i];
 				m_value[i].text = val.toUpperCase();
 				m_name[i].text = nam.toUpperCase();
 				m_value[i].setTextFormat(getTextFormat(false));
@@ -97,10 +110,13 @@ package com.display.Screens
 		
 		private function getTextFormat(param0:Boolean):TextFormat
 		{
-			var textFormat:TextFormat = new TextFormat();
-			textFormat.font = m_main.display.main.data.FONT_NAME;
-			textFormat.size = 14;
-			textFormat.bold = true;
+			if (!textFormat)
+			{
+				textFormat = new TextFormat(FONT_NAME);
+				textFormat.size = 14;
+				trace ("Porra fonte",textFormat.font);
+				//textFormat.bold = true;
+			}
 			param0 ? textFormat.align = TextFormatAlign.LEFT : textFormat.align = TextFormatAlign.RIGHT;
 			return textFormat;
 		}
