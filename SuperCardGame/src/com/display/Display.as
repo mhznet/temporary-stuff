@@ -19,7 +19,7 @@ package com.display
 		public var game			:SingleGameScreen;
 		public var background	:Shape;
 		public var realbg		:Sprite;
-		public var load			:MovieClip;
+		public var load			:InitialLoading;
 		public var winnerSplash	:WinnerSplashScreen;
 		public var turns		:int = 1;
 		public var shuffle		:CardShuffle;
@@ -43,19 +43,16 @@ package com.display
 		private function addBackground():void
 		{
 			background = new Shape();
-			background.graphics.beginFill(0x000000);
+			background.graphics.beginFill(0xFFFFFF);
 			background.graphics.drawRect(0, 0, 940, 600);
 			background.graphics.endFill();
 			this.addChild(background);
 		}
 		private function addLoading():void
 		{
-			load = new MovieClip();
-			var shape:Shape = new Shape();
-			shape.graphics.beginFill(0xFF794B);
-			shape.graphics.drawCircle(50, 50, 30);
-			shape.graphics.endFill();
-			load.addChild(shape);
+			load = new InitialLoading();
+			load.x = background.width*0.5 - load.width * 0.5;
+			load.y = background.height*0.5 - load.height * 0.5;
 			addChild(load);
 		}
 		public function hideLoad():void

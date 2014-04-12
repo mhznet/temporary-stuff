@@ -13,6 +13,16 @@ package com.data
 	{
 		public var main			:Main;
 		public var paramsNumber	:int;
+		[Embed(source="/assets/BebasNeue.otf", 
+    		fontName = "BebasNehue", 
+   			mimeType = "application/x-font", 
+    		fontWeight="normal", 
+    		fontStyle="normal", 
+			unicodeRange = "U+0020-007E,U+00A1-024F,U+1E00-1EFF,U+2000-206F,U+20A0-20CF,U+2100-2183",
+    		advancedAntiAliasing="true", 
+    		embedAsCFF="false")]
+		public var font			:Class;
+		public const FONT_NAME		:String = "BebasNehue";
 		public var bmpVector	:Vector.<BMP>;
 		public var paramsNames	:Vector.<String>;
 		public var paramsIntera	:Vector.<String>;

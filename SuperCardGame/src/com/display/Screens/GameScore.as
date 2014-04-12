@@ -1,6 +1,8 @@
 package com.display.Screens
 {
 	import com.data.Player;
+	import com.greensock.TweenLite;
+	import com.greensock.easing.Back;
 	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -14,9 +16,9 @@ package com.display.Screens
 		private var m_bg	:Sprite;
 		private var textNum	:int;
 		private var txtVec	:Vector.<TextField>;
-		private var turnTx			:TextField;
-		private var turnBt1			:Sprite;
-		private var turnBt2			:Sprite;
+		private var turnTx	:TextField;
+		private var turnBt1	:Sprite;
+		private var turnBt2	:Sprite;
 		
 		public function GameScore(main:SingleGameScreen)
 		{
@@ -25,6 +27,7 @@ package com.display.Screens
 			super();
 			create();
 			turns();
+			tweens();
 		}
 		
 		private function turns():void
@@ -44,7 +47,7 @@ package com.display.Screens
 			bt2bmp.scaleX *= -1;
 			bt2bmp.x = bt2bmp.width;
 			turnBt2.addChild(bt2bmp);
-			turnBt2.x = m_main.display.background.width * 0.5 + 10;
+			turnBt2.x = m_main.display.background.width * 0.5 + 10 + turnBt2.width;
 			turnBt2.y = m_main.display.background.height * 0.3;
 			this.addChild(turnBt2);
 			
@@ -58,6 +61,15 @@ package com.display.Screens
 			turnTx.textColor = 0xFFFFFF;
 			turnBt2.addChild(turnTx);
 			trace ("add",turnTx);
+		}
+		
+		private function tweens():void
+		{
+			TweenLite.to(turnBt2,1,{x:m_main.display.background.width * 0.5 + 10, ease:Back.easeOut});
+			for (var i:int = 0; i < textNum; i++) 
+			{
+				TweenLite.to(txtVec[i],2,{delay:1,alpha:1});
+			}
 		}
 		
 		private function create():void
@@ -75,6 +87,7 @@ package com.display.Screens
 				text.height = 150;
 				text.text 	= "TBA";
 				text.x = 100 + (550  * i);
+				text.alpha = 0;
 				text.y = m_main.display.background.height * 0.85;
 				this.addChild(text);
 				txtVec.push(text);

@@ -98,6 +98,7 @@ package com.display.Screens
 		private function getTextFormat(param0:Boolean):TextFormat
 		{
 			var textFormat:TextFormat = new TextFormat();
+			textFormat.font = m_main.display.main.data.FONT_NAME;
 			textFormat.size = 14;
 			textFormat.bold = true;
 			param0 ? textFormat.align = TextFormatAlign.LEFT : textFormat.align = TextFormatAlign.RIGHT;
