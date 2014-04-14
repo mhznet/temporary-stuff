@@ -24,17 +24,6 @@ package com.display.Screens
 		public var textFormat		:TextFormat;
 		
 		private var counter			:int=0;
-		[Embed(source="/assets/BebasNeue.otf", 
-    		fontName = "BebasNehueeee", 
-   			mimeType = "application/x-font", 
-			fontFamily="BebasBeer",
-    		fontWeight="normal", 
-    		fontStyle="normal", 
-			unicodeRange = "U+0020-007E,U+00A1-024F,U+1E00-1EFF,U+2000-206F,U+20A0-20CF,U+2100-2183",
-    		advancedAntiAliasing="true", 
-    		embedAsCFF="false")]
-		public var font			:Class;
-		public const FONT_NAME	:String = "BebasNehueeee";
 		public function CardDetails(paramsNum:int, main:SingleGameScreen)
 		{
 			super();
@@ -112,8 +101,12 @@ package com.display.Screens
 		{
 			if (!textFormat)
 			{
-				textFormat = new TextFormat(FONT_NAME);
-				textFormat.size = 14;
+				textFormat = new TextFormat();
+				textFormat.font = "BebasNeue";
+				textFormat.size = 23;
+				textFormat.bold = true;
+				textFormat.kerning = true;
+				textFormat.leading = -1;
 				trace ("Porra fonte",textFormat.font);
 				//textFormat.bold = true;
 			}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
 	<config 
-	paramsNumber="6"
-	params1="Nome"   params2="Pontos" params3="Partidas" params4="Gols"  params5="Artilheiro" params6="Titulos"
-	iparams1="false" iparams2="true"  iparams3="true"    iparams4="true" iparams5="true" 	  iparams6="true"/>
+	paramsNumber="5"
+	params1="Titulos"   params2="Pontuação" params3="Artilheiro" 	params4="Gols"  params5="Partidas"
+	iparams1="true" 	iparams2="true"  	iparams3="true"    		iparams4="true" 		 iparams5="true"/>
 	
 	<bmp id="1" bmpurl="../src/assets/jogar.png"/>
 	<bmp id="2" bmpurl="../src/assets/bgBtn.png"/>
@@ -18,14 +18,14 @@
 	<bmp id="11" bmpurl="../src/assets/reset.png"/>
 	<bmp id="12" bmpurl="../src/assets/yellowBig.png"/>
 	
-	<card id="1" params1="Argentina" params2="1234" params3="70" params4="123" params5="10" params6="2"/>
-	<card id="2" params1="Alemanha" params2="1336" params3="99" params4="206" params5="14" params6="3"/>
-	<card id="3" params1="Inglaterra" params2="1045" params3="59" params4="77" params5="10" params6="1"/>
-	<card id="4" params1="Brazil" params2="1104" params3="97" params4="210" params5="15" params6="5"/>
-	<card id="5" params1="Espanha" params2="1510" params3="56" params4="88" params5="8" params6="1"/>
-	<card id="6" params1="China" params2="339" params3="3" params4="0" params5="0" params6="0"/>
-	<card id="7" params1="Australia" params2="545" params3="10" params4="8" params5="3" params6="0"/>
-	<card id="8" params1="Canadá" params2="279" params3="3" params4="0" params5="0" params6="0"/>
+	<card id="1" params1="2" params2="1234" params3="12" params4="123" params5="70"/>
+	<card id="2" params1="3" params2="1336" params3="14" params4="206" params5="99"/>
+	<card id="3" params1="1" params2="1045" params3="10" params4="77" params5="59"/>
+	<card id="4" params1="5" params2="1104" params3="15" params4="210" params5="97"/>
+	<card id="5" params1="1" params2="1510" params3="8" params4="88" params5="56"/>
+	<card id="6" params1="0" params2="339" params3="0" params4="0" params5="3"/>
+	<card id="7" params1="0" params2="545" params3="3" params4="8" params5="10"/>
+	<card id="8" params1="0" params2="279" params3="0" params4="0" params5="3"/>
 		  
 	<asset id="1" img="../src/assets/teams/brasil.png"/>
 	<asset id="2" img="../src/assets/teams/brasil.png"/>
