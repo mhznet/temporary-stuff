@@ -40,7 +40,7 @@ package com
 		
 		public function onDataReady():void
 		{
-			display.goTitle();
+			//display.goTitle();
 		}
 	}
 }

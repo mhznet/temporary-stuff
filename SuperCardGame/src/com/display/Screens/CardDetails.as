@@ -94,14 +94,14 @@ package com.display.Screens
 			m_upperhit = new Vector.<Sprite>();
 			for (var i:int = 0; i < p_num; i++)
 			{
-				var m_height:int = 30;
+				var m_height:Number = 30;
 				var t_hit	:Sprite = new Sprite();
 				var t_uhit	:Sprite = new Sprite();
 				var t_name	:TextField = new TextField();
 				var t_value	:TextField = new TextField();
 				//t_value.width = t_name.width = 100;
 				t_value.height = t_name.height = m_height
-				t_name.x = 20;
+				t_name.x = 20;1
 				t_value.x = t_name.x + t_value.width * 1.39;
 				t_name.y = m_height * i + 220;
 				t_value.y = t_name.y;
