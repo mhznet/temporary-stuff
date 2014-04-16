@@ -1,5 +1,7 @@
 package com.display.Screens
 {
+	import com.greensock.TweenLite;
+	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -16,14 +18,19 @@ package com.display.Screens
 		public var p_num			:int;
 		public var m_bg				:Sprite;
 		public var m_back			:Sprite;
+		public var back_transition	:Sprite;
 		public var m_cont			:Sprite;
 		public var m_value			:Vector.<TextField>;
 		public var m_name			:Vector.<TextField>;
 		public var m_hit			:Vector.<Sprite>;
 		public var m_upperhit		:Vector.<Sprite>;
 		public var textFormat		:TextFormat;
-		
 		private var counter			:int=0;
+		private var feedBackCont	:Sprite;
+		private var equal	:Sprite;
+		private var won		:Sprite;
+		private var lost	:Sprite;
+		
 		public function CardDetails(paramsNum:int, main:SingleGameScreen)
 		{
 			super();
@@ -31,9 +38,10 @@ package com.display.Screens
 			p_num = paramsNum;
 			start();
 		}
-		public function update(t_name:Vector.<String> = null, t_value:Vector.<String> = null, spr:Sprite = null, isPlayable:Boolean = false):void
+		private function showUpdate(t_name:Vector.<String> = null, t_value:Vector.<String> = null, spr:Sprite = null, isPlayable:Boolean = false):void
 		{
-			playAble = isPlayable;
+			//playAble = isPlayable;
+			//trace ("Porra", isPlayable);
 			if (spr!=null)
 			{
 				while(m_cont.numChildren > 0)
@@ -54,8 +62,24 @@ package com.display.Screens
 				m_name[i].setTextFormat(getTextFormat(true));
 			}
 		}
+		public function update(t_name:Vector.<String> = null, t_value:Vector.<String> = null, spr:Sprite = null, isPlayable:Boolean = false):void
+		{
+			if (!this.contains(back_transition)) this.addChild(back_transition);
+			back_transition.alpha = 1;
+			TweenLite.to(back_transition,1,{delay:0.5, alpha:0});
+			TweenLite.delayedCall(1, showUpdate, [t_name, t_value, spr, isPlayable]);
+			playAble = isPlayable;
+		}
 		private function start():void
 		{
+			back_transition = new Sprite();
+			var bmp2:Bitmap = new Bitmap;
+			bmp2.bitmapData = m_main.display.main.data.getBMPById(3).clone();
+			back_transition.addChild(bmp2);
+			back_transition.mouseEnabled = false;
+			back_transition.mouseChildren = false;
+			back_transition.alpha = 0;
+			
 			m_bg = new Sprite();
 			m_bg.graphics.beginFill(0xFFFFFF);
 			this.addChild(m_bg);
@@ -63,27 +87,28 @@ package com.display.Screens
 			m_cont.y = 14;
 			m_cont.x = 14;
 			this.addChild(m_cont);
+			startFeedBack();
 			m_name = new Vector.<TextField>();
 			m_value = new Vector.<TextField>();
 			m_hit = new Vector.<Sprite>();
 			m_upperhit = new Vector.<Sprite>();
 			for (var i:int = 0; i < p_num; i++)
 			{
-				var m_y:	int = 25;
+				var m_height:int = 30;
 				var t_hit	:Sprite = new Sprite();
 				var t_uhit	:Sprite = new Sprite();
 				var t_name	:TextField = new TextField();
 				var t_value	:TextField = new TextField();
-				t_value.width = t_name.width = 100;
-				t_value.height = t_name.height = 24;
+				//t_value.width = t_name.width = 100;
+				t_value.height = t_name.height = m_height
 				t_name.x = 20;
 				t_value.x = t_name.x + t_value.width * 1.39;
-				t_name.y = m_y * i + 230;
+				t_name.y = m_height * i + 220;
 				t_value.y = t_name.y;
 				t_hit.graphics.beginFill(0xFFFFFF);
-				t_hit.graphics.drawRect(0,t_name.y,273,25);
+				t_hit.graphics.drawRect(0,t_name.y,271,m_height);
 				t_uhit.graphics.beginFill(0xFF794B,0);
-				t_uhit.graphics.drawRect(0,t_name.y,273,25);
+				t_uhit.graphics.drawRect(0,t_name.y,271,m_height);
 				t_uhit.name = i.toString();
 				m_name.push(t_name);
 				m_value.push(t_value);
@@ -94,7 +119,64 @@ package com.display.Screens
 				this.addChild(t_value);
 				this.addChild(t_uhit);
 			}
-			m_bg.graphics.drawRect(0,0,273,64*m_value.length);
+			m_bg.graphics.drawRect(0,0,271,377/*64*m_value.length*/);
+		}
+		public function showProperFeedBack(status:int):void
+		{
+			var spr:Sprite;
+			switch(status)
+			{
+				case -1:
+					spr = lost;
+					break;
+				case 1:
+					spr = won;
+					break;
+				case 0:
+					spr = equal;
+					break;
+			}
+			spr.alpha = 0;
+			feedBackCont.addChild(spr);
+			TweenLite.to(spr,0.5,{alpha:1,onComplete:onFeedBackShown,onCompleteParams:[spr]});
+		}
+		private function onFeedBackShown(spr:Sprite):void
+		{
+			TweenLite.to(spr,0.5,{alpha:0,delay:1,onComplete:cleanFeedBack});
+		}
+		private function cleanFeedBack():void
+		{
+			while(feedBackCont.numChildren>0)
+			{
+				this.feedBackCont.removeChildAt(0);
+			}
+		}
+		private function startFeedBack():void
+		{
+			feedBackCont = new Sprite();
+			feedBackCont.mouseEnabled=false;
+			feedBackCont.mouseChildren=false;
+			feedBackCont.x = 100;
+			feedBackCont.y = 100;
+			this.addChild(feedBackCont);
+			
+			won 	= new Sprite();
+			var bmp	:Bitmap = new Bitmap();
+			bmp.bitmapData = m_main.display.main.data.getBMPById(14);
+			won.addChild(bmp);
+			won.alpha = 0;
+			
+			lost	= new Sprite();
+			var bmp2:Bitmap = new Bitmap();
+			bmp2.bitmapData = m_main.display.main.data.getBMPById(15);
+			lost.addChild(bmp2);
+			lost.alpha = 0;
+			
+			equal	= new Sprite();
+			var bmp3:Bitmap = new Bitmap();
+			bmp3.bitmapData = m_main.display.main.data.getBMPById(16);
+			equal.addChild(bmp3);
+			equal.alpha = 0;
 		}
 		
 		private function getTextFormat(param0:Boolean):TextFormat
@@ -103,12 +185,9 @@ package com.display.Screens
 			{
 				textFormat = new TextFormat();
 				textFormat.font = "BebasNeue";
-				textFormat.size = 23;
+				textFormat.size = 24.8/*23*/;
 				textFormat.bold = true;
 				textFormat.kerning = true;
-				textFormat.leading = -1;
-				trace ("Porra fonte",textFormat.font);
-				//textFormat.bold = true;
 			}
 			param0 ? textFormat.align = TextFormatAlign.LEFT : textFormat.align = TextFormatAlign.RIGHT;
 			return textFormat;

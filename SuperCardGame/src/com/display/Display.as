@@ -6,7 +6,6 @@ package com.display
 	import com.display.Screens.WinnerSplashScreen;
 	
 	import flash.display.Bitmap;
-	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -21,7 +20,7 @@ package com.display
 		public var realbg		:Sprite;
 		public var load			:InitialLoading;
 		public var winnerSplash	:WinnerSplashScreen;
-		public var turns		:int = 1;
+		public var turns		:int = 100;
 		public var shuffle		:CardShuffle;
 		public function Display(m_main:Main)
 		{
@@ -74,12 +73,23 @@ package com.display
 		public function goModeSelect():void
 		{
 			if (this.contains(title)) this.removeChild(title);
-			if (!modeSelect) modeSelect = new ModeSelectionScreen(this);
+			if (!modeSelect) 
+			{
+				modeSelect = new ModeSelectionScreen(this);
+			}
+			else
+			{
+				modeSelect.begin();
+			}
 			this.addChild(modeSelect);
 		}
 		public function goGame(p_num:int, ia:Boolean):void
 		{
-			if (this.contains(modeSelect)) this.removeChild(modeSelect);
+			if (this.contains(modeSelect))
+			{
+				this.removeChild(modeSelect);
+				modeSelect.close();
+			}
 			if (!game)
 			{
 				game = new SingleGameScreen(this, p_num, ia);
@@ -90,7 +100,7 @@ package com.display
 			}
 			this.addChild(game);
 		}
-		public function goToWinner(name:String,cardNum:int):void
+		public function goToWinner(hasIa:Boolean,winLostOrDraw:int,name:int,cardNum:int):void
 		{
 			//resetOlderScreens
 			if (this.contains(game)) 
@@ -98,12 +108,32 @@ package com.display
 				this.removeChild(game);
 				game.reset();
 			}
-			if (!winnerSplash) winnerSplash= new WinnerSplashScreen(this,name,cardNum);
+			switch(name)
+			{
+				case 0:
+					name = 1;
+					break;
+				case 1:
+					name = 2;
+					break;
+			}
+			if (!winnerSplash)
+			{
+				winnerSplash= new WinnerSplashScreen(this,winLostOrDraw,name,cardNum,hasIa);
+			}
+			else
+			{
+				winnerSplash.begin(winLostOrDraw,name,cardNum,hasIa);
+			}
 			this.addChild(winnerSplash);
 		}
 		public function reset(e:MouseEvent):void
 		{
-			if (this.contains(winnerSplash)) this.removeChild(winnerSplash);
+			if (this.contains(winnerSplash)) 
+			{
+				this.removeChild(winnerSplash);
+				winnerSplash.close();
+			}
 			goModeSelect();
 		}
 	}

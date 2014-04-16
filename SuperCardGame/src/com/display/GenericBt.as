@@ -63,6 +63,7 @@ package com.display
 		private function addText(str:String):void
 		{
 			var format:TextFormat = new TextFormat();
+			format.font = "BebasNeue";
 			format.size = 25;
 			format.align = TextFormatAlign.LEFT;
 			format.bold = true;

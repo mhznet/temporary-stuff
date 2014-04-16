@@ -20,6 +20,11 @@ package com.display.Screens
 		private var turnBt1	:Sprite;
 		private var turnBt2	:Sprite;
 		
+		private var pilhaNum:int;
+		private var pilhaBt	:Sprite;
+		private var pilhaTxt:TextField;
+		
+		
 		public function GameScore(main:SingleGameScreen)
 		{
 			textNum = main.p_number;
@@ -52,15 +57,17 @@ package com.display.Screens
 			this.addChild(turnBt2);
 			
 			turnTx = new TextField();
-			turnTx.width = turnBt2.width;
+			turnTx.width = turnBt2.width-20;
 			turnTx.height = turnBt2.height;
 			turnTx.selectable = false;
-			turnTx.text = "RESTAM: " + m_main.turns + " TURNOS!";
 			turnTx.border = false;
 			turnTx.borderColor = 0xFFFFFF;
 			turnTx.textColor = 0xFFFFFF;
+			turnTx.multiline = true;
+			turnTx.wordWrap = true;
+			//updateTurn();
+			showTurn();
 			turnBt2.addChild(turnTx);
-			trace ("add",turnTx);
 		}
 		
 		private function tweens():void
@@ -72,8 +79,34 @@ package com.display.Screens
 			}
 		}
 		
+		public function updateTurn():void
+		{
+			TweenLite.to(turnBt2,0.5,{x:m_main.display.background.width * 0.5 + 10 + turnBt2.width, ease:Back.easeOut, onComplete:showTurn});
+			if (pilhaBt.x!=m_main.display.background.width * 0.5 + 10 + pilhaBt.width)
+			{
+				TweenLite.to(pilhaBt,0.5,{x:m_main.display.background.width * 0.5 + 10 + pilhaBt.width, ease:Back.easeOut});
+			}
+		}
+		public function updateAndShowPilha():void
+		{
+			if (pilhaNum > 0)
+			{
+				pilhaTxt.text = "CARTAS NA PILHA: " + pilhaNum;
+				pilhaTxt.setTextFormat(getTextFormat(true));
+				TweenLite.to(pilhaBt,0.5,{delay:0.5,x:m_main.display.background.width * 0.5 + 10, ease:Back.easeOut});
+			}
+		}
+		private function showTurn():void
+		{
+			updateAndShowPilha();
+			turnTx.text = "TURNOS PARA ACABAR: " + m_main.turns;
+			turnTx.setTextFormat(getTextFormat(true));
+			TweenLite.to(turnBt2,1,{x:m_main.display.background.width * 0.5 + 10, ease:Back.easeOut});
+		}
+		
 		private function create():void
 		{
+			createPilha();
 			m_bg = new Sprite();
 			m_bg.graphics.beginFill(0xFFFFFF);
 			this.addChild(m_bg);
@@ -84,35 +117,83 @@ package com.display.Screens
 				var text:TextField = new TextField();
 				text.selectable = false;
 				text.width 	= 200;
-				text.height = 150;
+				//text.height = 150;
 				text.text 	= "TBA";
 				text.x = 100 + (550  * i);
 				text.alpha = 0;
-				text.y = m_main.display.background.height * 0.85;
+				text.y = m_main.display.background.height * 0.82;
 				this.addChild(text);
 				txtVec.push(text);
 			}
 			m_bg.graphics.drawRect(txtVec[0].x,0,txtVec[txtVec.length-1].x+txtVec[txtVec.length-1].width,50);
 		}
 		
-		private function getTextFormat():TextFormat
+		private function createPilha():void
+		{
+			pilhaBt = new Sprite();
+			var bt2bmp:Bitmap = new Bitmap();
+			bt2bmp.bitmapData = m_main.display.main.data.getBMPById(10);
+			bt2bmp.scaleX *= -1;
+			bt2bmp.x = bt2bmp.width;
+			pilhaBt.addChild(bt2bmp);
+			pilhaBt.x = m_main.display.background.width * 0.5 + 10 + pilhaBt.width;
+			pilhaBt.y = m_main.display.background.height * 0.43;
+			this.addChild(pilhaBt);
+			
+			pilhaTxt = new TextField();
+			pilhaTxt.width = pilhaBt.width-20;
+			pilhaTxt.height = pilhaBt.height;
+			pilhaTxt.selectable = false;
+			pilhaTxt.border = false;
+			pilhaTxt.borderColor = 0xFFFFFF;
+			pilhaTxt.textColor = 0xFFFFFF;
+			pilhaTxt.multiline = true;
+			pilhaTxt.wordWrap = true;
+			pilhaBt.addChild(pilhaTxt);
+		}
+		
+		private function getTextFormat(turn:Boolean = false):TextFormat
 		{
 			var textFormat:TextFormat = new TextFormat();
-			textFormat.size = 30;
-			textFormat.bold = true;
+			textFormat.font = "BebasNeue";
+			if (!turn)
+			{
+				textFormat.size = 53;
+				textFormat.align = TextFormatAlign.CENTER;
+			}
+			else
+			{
+				textFormat.size = 25;
+				textFormat.align = TextFormatAlign.RIGHT;
+			}
+			textFormat.bold = false;
+			textFormat.kerning = true;
 			textFormat.color = 0xFFFFFF;
-			textFormat.align = TextFormatAlign.CENTER;
 			return textFormat;
 		}
 		
-		public function update(vec:Vector.<Player>):void
+		public function update(vec:Vector.<Player>, oldStack:int):void
+		{
+			pilhaNum = oldStack;
+			updateTurn();
+			updateCards(vec);
+		}
+		
+		private function updateCards(vec:Vector.<Player>):void
 		{
 			for (var i:int = 0; i < txtVec.length; i++) 
 			{
-				txtVec[i].text = String(vec[i].cards.length) + " CARTAS";
-				txtVec[i].setTextFormat(getTextFormat());
+				TweenLite.to(txtVec[i],0.5,{alpha:0, onComplete:showCard, onCompleteParams:[i,vec[i].cards.length]});
 			}
-			turnTx.text = m_main.turns + " TURNOS!";
+		}
+		private function showCard(index:int,length:int):void
+		{
+			if (txtVec)
+			{
+				txtVec[index].text = String(length) + " CARTAS";
+				txtVec[index].setTextFormat(getTextFormat());
+				TweenLite.to(txtVec[index],1,{alpha:1});
+			}
 		}
 		
 		public function destroy():void

@@ -17,6 +17,7 @@ package com.display.Screens
 		public function getTextFormat(param:int):TextFormat
 		{
 			var textFormat:TextFormat = new TextFormat();
+			textFormat.font = "BebasNeue";
 			textFormat.color = 0xFFFFFF;
 			textFormat.size = 40;
 			textFormat.bold = true;
@@ -27,8 +28,9 @@ package com.display.Screens
 					break;
 				case 0:
 					textFormat.align = TextFormatAlign.CENTER;
+					textFormat.size = 50;
 					break;
-				case -1:	
+				case -1:
 					textFormat.align = TextFormatAlign.LEFT;
 					break;
 			}

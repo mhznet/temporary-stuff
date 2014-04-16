@@ -39,5 +39,15 @@ package com.display.Screens
 		{
 			display.goGame(2, true);
 		}
+		
+		public function begin():void
+		{
+			goAlpha();
+		}
+		public function close():void
+		{
+			singlePlayer.alpha = 0;
+			multiPlayer.alpha = 0;
+		}
 	}
 }

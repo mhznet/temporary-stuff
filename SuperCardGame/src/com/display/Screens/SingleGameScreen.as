@@ -14,7 +14,7 @@ package com.display.Screens
 	{
 		private var container		:Sprite;
 		private var stack			:Vector.<int>;
-		private var oldStack		:Vector.<int>;
+		private	var oldStack		:Vector.<int>;
 		private var players			:Vector.<Player>;
 		private var c_details		:Vector.<CardDetails>;
 		public var p_number			:int;
@@ -58,7 +58,7 @@ package com.display.Screens
 		}
 		private function showNextBt():void
 		{
-			nextBt = new GenericBt(selecIA,"NEXT",100,50,display.main.data.getBMPById(2));
+			nextBt = new GenericBt(selecIA,"",138,70,display.main.data.getBMPById(13));
 			nextBt.x = display.background.width * 0.5 - nextBt.width * 0.5;
 			nextBt.y = display.background.height - nextBt.height * 2;
 			nextBt.visible = false;
@@ -94,7 +94,7 @@ package com.display.Screens
 				container.addChild(cards);
 				c_details.push(cards);
 			}
-			score.update(players);
+			score.update(players,oldStack.length);
 			indexPlaying = Math.floor(Math.random()*players.length);
 			if (hasIA&&indexPlaying==1)nextBt.visible = true;
 			c_details[indexPlaying].close(false);
@@ -147,28 +147,35 @@ package com.display.Screens
 			var ordenado:Vector.<int> = bubble(playerIndex);
 			if (ordenado[0] == ordenado[1])
 			{
+				for (var k:int = 0; k < c_details.length; k++) 
+				{
+					c_details[k].showProperFeedBack(0);
+				}
 				trace ("VALORES IGUAIS, NEXT PLS");
 				oldStack = oldStack.concat(stack);
 				stack.splice(0,stack.length);
-				//FEEDBACK
-				/*for (var k:int = 0; k < c_details.length; k++) 
-				{
-					c_details[k].glowRed();
-				}*/
 				TweenLite.delayedCall(2.5,next);
-				//score.update(players);
 			}
 			else
 			{
 				trace ("player"+winningPlayerIndex,"é o vencedor!, ganha:", oldStack.length, stack.length);
 				players[winningPlayerIndex].cards = players[winningPlayerIndex].cards.concat(oldStack,stack);
-				//c_details[winningPlayerIndex].blinkGlow();
 				c_details[winningPlayerIndex].removeBlink(false);
+				for (var i2:int = 0; i2 < players.length; i2++) 
+				{
+					if (i2 == winningPlayerIndex)
+					{
+						c_details[i2].showProperFeedBack(1);
+					}
+					else
+					{
+						c_details[i2].showProperFeedBack(-1);
+					}
+				}
 				TweenLite.delayedCall(3,next);
 				stack.splice(0,stack.length);		
 				oldStack.splice(0,oldStack.length);
 				indexPlaying = winningPlayerIndex;
-				//score.update(players);
 			}
 			for (var j:int = 0; j < players.length; j++) 
 			{
@@ -210,7 +217,7 @@ package com.display.Screens
 		{
 			var endGame:Boolean = false;
 			turns--;
-			score.update(players);
+			score.update(players, oldStack.length);
 			trace ("TURN:", turns);
 			if (turns<=0)
 			{
@@ -231,8 +238,33 @@ package com.display.Screens
 			else
 			{
 				var winner:int = getActualWinner();
-				display.goToWinner("Player_"+winner,players[winner].cards.length);
+				display.goToWinner(hasIA,getWinLostOrDraw(),winner,players[winner].cards.length);
 			}
+		}
+		
+		private function getWinLostOrDraw():int
+		{
+			var returns	:int;
+			if (players[0].cards.length > players[1].cards.length)
+			{
+				returns = 1;
+			}
+			else if (players[0].cards.length < players[1].cards.length)
+			{
+				if (hasIA)
+				{
+					returns = -1;
+				}
+				else
+				{
+					returns = 1;
+				}
+			}
+			else if (players[0].cards.length == players[1].cards.length)
+			{
+				returns = 0;
+			}
+			return returns;
 		}
 		
 		private function getActualWinner():int
