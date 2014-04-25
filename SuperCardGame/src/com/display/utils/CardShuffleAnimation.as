@@ -1,27 +1,48 @@
-package com.display
+package com.display.utils
 {
+	import com.Main;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
+	import com.display.Display;
 	
-	public class CardShuffle extends Sprite
+	public class CardShuffleAnimation extends Sprite
 	{
 		private var m_main	:Display;
 		private var vec	:Vector.<Sprite>;
 		
+		private var skip		:GenericBt;
 		private var cont		:int = 0;
 		private var numOfCards	:int = 6;
 		private var timeToTween	:Number = 0.5;
 		private var amComplete	:Function;
 		
-		public function CardShuffle(main:Display, onComplete:Function)
+		public function CardShuffleAnimation(main:Display, onComplete:Function)
 		{
 			super();
 			amComplete=onComplete;
 			m_main = main;
+			bts();
+		}
+		private function bts():void
+		{
+			skip = new GenericBt(skipTweens,"",140,70,m_main.main.data.getBMPById(18));
+			skip.x = 736;
+			skip.y = 500;
+			addChild(skip);
+		}
+		private function skipTweens(e:MouseEvent):void
+		{
+			for (var i:int = 0; i < vec.length; i++) 
+			{
+				TweenLite.killTweensOf(vec[i]);
+			}
+			amComplete();
+			destroy();
 		}
 		public function begin():void
 		{
@@ -61,7 +82,6 @@ package com.display
 			var posX:int;
 			var posY:int = m_main.background.height*0.5-vec[index].height*0.5;
 			index % 2 != 0 ? posX = 63 : posX = m_main.background.width - 63 - vec[index].width ;
-			trace ("POSX",posX, vec[index].width, posY);
 			TweenLite.to(vec[index],timeToTween,{x:posX,y:posY, ease:Back.easeInOut,onComplete:tweenLast,onCompleteParams:[vec[index]]});
 		}
 		private function fillVec(vec:Vector.<Sprite>):Vector.<Sprite>

@@ -13,6 +13,7 @@ package com
 	{
 		public var data		:Data;
 		public var display	:Display;
+		public var isLocal	:Boolean = true;
 		public var version	:String = "?=v1.113";
 		public function Main()
 		{
@@ -28,7 +29,16 @@ package com
 		public function loadXML():void
 		{
 			var loader:URLLoader = new URLLoader();
-			var req:URLRequest = new URLRequest("../src/assets/fullalbum.xml"+version);
+			var url	  :String;
+			if (!isLocal)
+			{
+				url = "http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/fullalbum.xml"+version; 
+			}
+			else
+			{
+				url = "../src/assets/fullalbumlocal.xml"+version;
+			}
+			var req:URLRequest = new URLRequest(url);
 			loader.addEventListener(Event.COMPLETE, onXMLLoaded);
 			loader.load(req);
 		}
@@ -40,7 +50,7 @@ package com
 		
 		public function onDataReady():void
 		{
-			//display.goTitle();
+			display.goTitle();
 		}
 	}
 }

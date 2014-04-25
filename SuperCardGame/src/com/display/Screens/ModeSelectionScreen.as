@@ -1,10 +1,11 @@
 package com.display.Screens
 {
 	import com.display.Display;
-	import com.display.GenericBt;
+	import com.display.utils.GenericBt;
 	import com.greensock.TweenLite;
 	
 	import flash.events.MouseEvent;
+	import com.display.utils.AbstractScreen;
 
 	public class ModeSelectionScreen extends AbstractScreen
 	{

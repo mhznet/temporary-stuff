@@ -9,19 +9,24 @@ package com.display
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import com.display.Screens.RuleScreen;
+	import com.display.Screens.TitleScreen;
+	import com.display.utils.CardShuffleAnimation;
+	import com.display.utils.InitialLoading;
 
 	public class Display extends Sprite
 	{
 		public var main			:Main;
 		public var title		:TitleScreen;
+		public var rules		:RuleScreen;
 		public var modeSelect	:ModeSelectionScreen;
 		public var game			:SingleGameScreen;
 		public var background	:Shape;
 		public var realbg		:Sprite;
 		public var load			:InitialLoading;
 		public var winnerSplash	:WinnerSplashScreen;
-		public var turns		:int = 100;
-		public var shuffle		:CardShuffle;
+		public var turns		:int = 1;
+		public var shuffle		:CardShuffleAnimation;
 		public function Display(m_main:Main)
 		{
 			main=m_main;
@@ -62,16 +67,22 @@ package com.display
 		{
 			load.visible = true;
 		}
-		public function goTitle():void
+		public function goTitle(e:MouseEvent=null):void
 		{
 			hideLoad();
 			addRealBG();
 			if (!title) title = new TitleScreen(this);
 			this.addChild(title);
 		}
-		
+		public function goRules():void
+		{
+			if (this.contains(title)) this.removeChild(title);
+			if(!rules) rules = new RuleScreen(this);
+			this.addChild(rules);
+		}
 		public function goModeSelect():void
 		{
+			if (rules) if (this.contains(rules)) this.removeChild(rules);
 			if (this.contains(title)) this.removeChild(title);
 			if (!modeSelect) 
 			{

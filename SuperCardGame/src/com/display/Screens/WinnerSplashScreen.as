@@ -1,13 +1,14 @@
 package com.display.Screens
 {
 	import com.display.Display;
-	import com.display.GenericBt;
+	import com.display.utils.GenericBt;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.text.TextField;
+	import com.display.utils.AbstractScreen;
 	
 	public class WinnerSplashScreen extends AbstractScreen
 	{
@@ -69,7 +70,7 @@ package com.display.Screens
 		
 		private function showBts():void
 		{
-			TweenLite.to(yCont, 1, {x:display.background.width * 0.3, ease:Back.easeOut, onComplete:showPlayAgain});
+			TweenLite.to(yCont, 1, {x:display.background.width * 0.4, /*ease:Back.easeOut,*/ onComplete:showPlayAgain});
 		}
 		private function showPlayAgain():void
 		{

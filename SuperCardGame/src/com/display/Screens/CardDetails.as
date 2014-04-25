@@ -3,6 +3,7 @@ package com.display.Screens
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
@@ -26,7 +27,7 @@ package com.display.Screens
 		public var m_upperhit		:Vector.<Sprite>;
 		public var textFormat		:TextFormat;
 		private var counter			:int=0;
-		private var feedBackCont	:Sprite;
+		private var feedBackCont	:MovieClip;
 		private var equal	:Sprite;
 		private var won		:Sprite;
 		private var lost	:Sprite;
@@ -138,7 +139,7 @@ package com.display.Screens
 			}
 			spr.alpha = 0;
 			feedBackCont.addChild(spr);
-			TweenLite.to(spr,0.5,{alpha:1,onComplete:onFeedBackShown,onCompleteParams:[spr]});
+			TweenLite.to(spr,0.5,{delay:1,alpha:1,onComplete:onFeedBackShown,onCompleteParams:[spr]});
 		}
 		private function onFeedBackShown(spr:Sprite):void
 		{
@@ -153,11 +154,11 @@ package com.display.Screens
 		}
 		private function startFeedBack():void
 		{
-			feedBackCont = new Sprite();
+			feedBackCont = new MovieClip();
 			feedBackCont.mouseEnabled=false;
 			feedBackCont.mouseChildren=false;
-			feedBackCont.x = 100;
-			feedBackCont.y = 100;
+			feedBackCont.x = 14;
+			feedBackCont.y = 14;
 			this.addChild(feedBackCont);
 			
 			won 	= new Sprite();

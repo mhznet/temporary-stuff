@@ -1,4 +1,4 @@
-package com.display.Screens
+package com.display.utils
 {
 	import com.display.Display;
 	

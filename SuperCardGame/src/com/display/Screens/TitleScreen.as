@@ -1,10 +1,12 @@
-package com.display
+package com.display.Screens
 {
-	import com.display.Screens.AbstractScreen;
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
 	import flash.events.MouseEvent;
+	import com.display.Display;
+	import com.display.utils.GenericBt;
+	import com.display.utils.AbstractScreen;
 	
 	public class TitleScreen extends AbstractScreen
 	{
@@ -53,7 +55,7 @@ package com.display
 		}
 		private function goRules(e:MouseEvent):void
 		{
-			//GORULS
+			display.goRules();
 		}
 	}
 }

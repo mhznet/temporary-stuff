@@ -1,4 +1,4 @@
-package com.display
+package com.display.utils
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -47,16 +47,19 @@ package com.display
 		
 		protected function onOverEtOut(event:MouseEvent):void
 		{
-			if (event.type == MouseEvent.ROLL_OVER)
+			if (bmp)
 			{
-				if (original==null) original = bmp.filters;
-				//var glow:GlowFilter = new GlowFilter(0xf1c018);
-				var glow:GlowFilter = new GlowFilter(0x000000,0.3,9.0,9.0,1);
-				bmp.filters = [glow];
-			}
-			else if (event.type == MouseEvent.ROLL_OUT)
-			{
-				bmp.filters = original;
+				if (event.type == MouseEvent.ROLL_OVER)
+				{
+					if (original==null) original = bmp.filters;
+					//var glow:GlowFilter = new GlowFilter(0xf1c018);
+					var glow:GlowFilter = new GlowFilter(0x000000,0.3,9.0,9.0,1);
+					bmp.filters = [glow];
+				}
+				else if (event.type == MouseEvent.ROLL_OUT)
+				{
+					 bmp.filters = original;
+				}
 			}
 		}
 		

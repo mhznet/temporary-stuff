@@ -1,4 +1,4 @@
-package com.display
+package com.display.utils
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;

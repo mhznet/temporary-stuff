@@ -2,13 +2,14 @@ package com.display.Screens
 {
 	import com.data.Card;
 	import com.data.Player;
-	import com.display.CardShuffle;
+	import com.display.utils.CardShuffleAnimation;
 	import com.display.Display;
-	import com.display.GenericBt;
+	import com.display.utils.GenericBt;
 	import com.greensock.TweenLite;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import com.display.utils.AbstractScreen;
 	
 	public class SingleGameScreen extends AbstractScreen
 	{
@@ -24,7 +25,7 @@ package com.display.Screens
 		public var turns			:int;
 		/**DISPLAY**/
 		private var score			:GameScore;
-		private var shuffle			:CardShuffle;
+		private var shuffle			:CardShuffleAnimation;
 		
 		public function SingleGameScreen(disp:Display, p_num:int, ia:Boolean)
 		{
@@ -40,7 +41,7 @@ package com.display.Screens
 			if(hasIA)showNextBt();
 			p_number = p_num;
 			turns = turnTotal;
-			shuffle = new CardShuffle(display, reallyStart);
+			shuffle = new CardShuffleAnimation(display, reallyStart);
 			this.addChild(shuffle);
 			shuffle.begin();
 		}
@@ -113,6 +114,10 @@ package com.display.Screens
 					c_details[i].close(true);
 				}
 			}
+			TweenLite.delayedCall(1, openNextCard);
+		}
+		private function openNextCard():void
+		{
 			c_details[indexPlaying].close(false);
 			c_details[indexPlaying].open();
 			if (hasIA && indexPlaying == 1) 
@@ -172,15 +177,15 @@ package com.display.Screens
 						c_details[i2].showProperFeedBack(-1);
 					}
 				}
-				TweenLite.delayedCall(3,next);
+				TweenLite.delayedCall(2.5,next);
 				stack.splice(0,stack.length);		
 				oldStack.splice(0,oldStack.length);
 				indexPlaying = winningPlayerIndex;
 			}
-			for (var j:int = 0; j < players.length; j++) 
+			/*for (var j:int = 0; j < players.length; j++) 
 			{
 				trace("Player"+j,"tem",players[j].cards.length,"cartas.");
-			}
+			}*/
 		}
 		private function bubble(vec:Vector.<int>):Vector.<int>
 		{
