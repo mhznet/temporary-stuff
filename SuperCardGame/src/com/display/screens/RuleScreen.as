@@ -1,4 +1,4 @@
-package com.display.Screens
+package com.display.screens
 {
 	
 	import flash.display.Bitmap;

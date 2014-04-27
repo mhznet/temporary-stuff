@@ -1,4 +1,4 @@
-package com.display.Screens
+package com.display.screens
 {
 	import com.data.Card;
 	import com.data.Player;

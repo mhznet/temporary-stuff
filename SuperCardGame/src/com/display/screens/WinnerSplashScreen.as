@@ -1,4 +1,4 @@
-package com.display.Screens
+package com.display.screens
 {
 	import com.display.Display;
 	import com.display.utils.GenericBt;

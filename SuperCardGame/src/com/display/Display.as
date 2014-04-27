@@ -1,16 +1,16 @@
 package com.display
 {
 	import com.Main;
-	import com.display.Screens.ModeSelectionScreen;
-	import com.display.Screens.SingleGameScreen;
-	import com.display.Screens.WinnerSplashScreen;
+	import com.display.screens.ModeSelectionScreen;
+	import com.display.screens.SingleGameScreen;
+	import com.display.screens.WinnerSplashScreen;
 	
 	import flash.display.Bitmap;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import com.display.Screens.RuleScreen;
-	import com.display.Screens.TitleScreen;
+	import com.display.screens.RuleScreen;
+	import com.display.screens.TitleScreen;
 	import com.display.utils.CardShuffleAnimation;
 	import com.display.utils.InitialLoading;
 
