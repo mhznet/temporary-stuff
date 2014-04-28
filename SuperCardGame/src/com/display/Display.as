@@ -99,6 +99,7 @@ package com.display
 			if (this.contains(modeSelect))
 			{
 				this.removeChild(modeSelect);
+				turns = modeSelect.getTurns();
 				modeSelect.close();
 			}
 			if (!game)

@@ -1,16 +1,18 @@
 package com.display.screens
 {
 	import com.display.Display;
+	import com.display.utils.AbstractScreen;
 	import com.display.utils.GenericBt;
+	import com.display.utils.TurnSlider;
 	import com.greensock.TweenLite;
 	
 	import flash.events.MouseEvent;
-	import com.display.utils.AbstractScreen;
 
 	public class ModeSelectionScreen extends AbstractScreen
 	{
 		private var singlePlayer:GenericBt;
 		private var multiPlayer	:GenericBt;
+		private var turnSlider	:TurnSlider;
 		public function ModeSelectionScreen(disp:Display)
 		{
 			super(disp);
@@ -24,13 +26,24 @@ package com.display.screens
 			multiPlayer.x = singlePlayer.x + multiPlayer.width * 1.9;
 			multiPlayer.alpha = 0;
 			this.addChild(multiPlayer);
+			makeTurnSlider();
 			goAlpha();
+		}
+		
+		private function makeTurnSlider():void
+		{
+			turnSlider = new TurnSlider(this);
+			turnSlider.x = 400;
+			turnSlider.y = 450;
+			turnSlider.alpha = 0;
+			this.addChild(turnSlider);
 		}
 		
 		private function goAlpha():void
 		{
 			TweenLite.to(singlePlayer,1.5,{alpha:1});
 			TweenLite.to(multiPlayer, 1.5,{alpha:1});
+			turnSlider.show();
 		}
 		private function onMultiClicked(e:MouseEvent):void
 		{
@@ -45,10 +58,15 @@ package com.display.screens
 		{
 			goAlpha();
 		}
+		public function getTurns():int
+		{
+			return turnSlider.getTurnNumber();
+		}
 		public function close():void
 		{
 			singlePlayer.alpha = 0;
 			multiPlayer.alpha = 0;
+			turnSlider.hide();
 		}
 	}
 }

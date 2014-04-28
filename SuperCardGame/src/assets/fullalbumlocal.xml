@@ -23,6 +23,7 @@
 	<bmp id="16" bmpurl="../src/assets/igual.png"/>
 	<bmp id="17" bmpurl="../src/assets/tela_regras.png"/>
 	<bmp id="18" bmpurl="../src/assets/pular.png"/>
+	<bmp id="19" bmpurl="../src/assets/duracao.png"/>
 	
 	<!--   ID     TITULOS	  PONTOS		ARTILHEIRO	  GOLS			PARTIDAS		 	 -->
 	<asset id="1" img="../src/assets/teams/alemanha.jpg"/>

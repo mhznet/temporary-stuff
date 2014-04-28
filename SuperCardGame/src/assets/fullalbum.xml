@@ -23,6 +23,7 @@
 	<bmp id="16" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/igual.png"/>
 	<bmp id="17" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/tela_regras.png"/>
 	<bmp id="18" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/pular.png"/>
+	<bmp id="18" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/duracao.png"/>
 	
 	<!--   ID     TITULOS	  PONTOS		ARTILHEIRO	  GOLS			PARTIDAS		 	 -->
 	<asset id="1" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/alemanha.jpg"/>
