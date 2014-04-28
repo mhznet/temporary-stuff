@@ -3,7 +3,9 @@ package com.display.screens
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
+	import flash.display.BlendMode;
 	import flash.display.MovieClip;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
@@ -162,20 +164,50 @@ package com.display.screens
 			this.addChild(feedBackCont);
 			
 			won 	= new Sprite();
+			var bg_cont_won:MovieClip = new MovieClip();
+			var bg_won:Shape = new Shape();
+			bg_won.graphics.beginFill(0x97cd03,1);
+			bg_won.graphics.drawRect(0,0, 241,198);
+			bg_won.graphics.endFill();
+			bg_cont_won.addChild(bg_won);
+			bg_cont_won.blendMode = BlendMode.MULTIPLY;
 			var bmp	:Bitmap = new Bitmap();
 			bmp.bitmapData = m_main.display.main.data.getBMPById(14);
+			bmp.x = 120.5 - bmp.width*0.5;
+			bmp.y = 99 - bmp.height*0.5;
+			won.addChild(bg_cont_won);
 			won.addChild(bmp);
 			won.alpha = 0;
 			
 			lost	= new Sprite();
+			var bg_cont_lost:MovieClip = new MovieClip();
+			var bg_lost:Shape = new Shape();
+			bg_lost.graphics.beginFill(0xd84b00,1);
+			bg_lost.graphics.drawRect(0,0, 241,198);
+			bg_lost.graphics.endFill();
+			bg_cont_lost.addChild(bg_lost);
+			bg_cont_lost.blendMode = BlendMode.MULTIPLY;
 			var bmp2:Bitmap = new Bitmap();
 			bmp2.bitmapData = m_main.display.main.data.getBMPById(15);
+			bmp2.x = 120.5- bmp2.width*0.5;
+			bmp2.y = 99 - bmp2.height*0.5;;
+			lost.addChild(bg_cont_lost);
 			lost.addChild(bmp2);
 			lost.alpha = 0;
 			
 			equal	= new Sprite();
+			var bg_cont_equal:MovieClip = new MovieClip();
+			var bg_equal:Shape = new Shape();
+			bg_equal.graphics.beginFill(0xeebf00,1);
+			bg_equal.graphics.drawRect(0,0, 241,198);
+			bg_equal.graphics.endFill();
+			bg_cont_equal.addChild(bg_equal);
+			bg_cont_equal.blendMode = BlendMode.MULTIPLY;
 			var bmp3:Bitmap = new Bitmap();
 			bmp3.bitmapData = m_main.display.main.data.getBMPById(16);
+			bmp3.x = 120.5 - bmp3.width*0.5;
+			bmp3.y = 99 - bmp3.height*0.5;
+			equal.addChild(bg_cont_equal);
 			equal.addChild(bmp3);
 			equal.alpha = 0;
 		}

@@ -18,9 +18,9 @@
 	<bmp id="11" bmpurl="../src/assets/reset.png"/>
 	<bmp id="12" bmpurl="../src/assets/yellowBig.png"/>
 	<bmp id="13" bmpurl="../src/assets/pronto.png"/>
-	<bmp id="14" bmpurl="../src/assets/correto.png"/>
-	<bmp id="15" bmpurl="../src/assets/errado.png"/>
-	<bmp id="16" bmpurl="../src/assets/igual.png"/>
+	<bmp id="14" bmpurl="../src/assets/correto-icon.png"/>
+	<bmp id="15" bmpurl="../src/assets/errado-icon.png"/>
+	<bmp id="16" bmpurl="../src/assets/igual-icon.png"/>
 	<bmp id="17" bmpurl="../src/assets/tela_regras.png"/>
 	<bmp id="18" bmpurl="../src/assets/pular.png"/>
 	<bmp id="19" bmpurl="../src/assets/duracao.png"/>
