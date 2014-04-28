@@ -4,7 +4,6 @@ package com
 	import com.display.Display;
 	
 	import flash.display.Sprite;
-	import flash.errors.IOError;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;

@@ -33,8 +33,8 @@ package com.display.screens
 		private function makeTurnSlider():void
 		{
 			turnSlider = new TurnSlider(this);
-			turnSlider.x = 400;
-			turnSlider.y = 450;
+			turnSlider.x = 440;
+			turnSlider.y = 550;
 			turnSlider.alpha = 0;
 			this.addChild(turnSlider);
 		}

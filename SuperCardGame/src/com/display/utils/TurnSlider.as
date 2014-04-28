@@ -12,6 +12,7 @@ package com.display.utils
 	public class TurnSlider extends Sprite
 	{
 		private var text		:GenericBt;
+		private var sprCont		:Sprite;
 		private var vec			:Vector.<Sprite>;
 		private var shadowVec	:Vector.<Shape>;
 		private var selectedId	:int = 2;
@@ -20,15 +21,15 @@ package com.display.utils
 		{
 			vec = new Vector.<Sprite>();
 			shadowVec = new Vector.<Shape>();
-			makeIt();
-			text = new GenericBt(null,"",163,67,main.display.main.data.getBMPById(19),false);
-			text.x = -20;
-			text.y = 60;
+			text = new GenericBt(null,"",65,29,main.display.main.data.getBMPById(19),false);
+			text.x = 10;
+			text.y = -5;
 			this.addChild(text);
+			makeIt();
 		}
 		private function makeIt():void
 		{
-			var back:Shape = new Shape();
+			/*var back:Shape = new Shape();
 			back.graphics.beginFill(0xFFFFFF, 1);
 			back.graphics.drawRect(0, 20, 120, 10);
 			back.graphics.endFill();
@@ -37,8 +38,8 @@ package com.display.utils
 			backShadow.graphics.drawRect(-1, 19, 120, 10);
 			backShadow.graphics.endFill();
 			this.addChild(backShadow);
-			this.addChild(back);
-			
+			this.addChild(back);*/
+			sprCont = new Sprite();
 			for (var i:int = 0; i < 5; i++) 
 			{
 				var sprite:Sprite = new Sprite();
@@ -48,18 +49,18 @@ package com.display.utils
 				shapeShadow.graphics.beginFill(0x99CC33, 1);
 				selectShadow.graphics.beginFill(0x000000, 1);
 				shape.graphics.beginFill(0xFFFFFF, 1);
-				if (i==0 || i ==4)
+				/*if (i==0 || i ==4)
 				{
 					shape.graphics.drawRect(i * 30, 0, 10, 50);
 					shapeShadow.graphics.drawRect((i * 30)-1, -1, 10, 50);
 					selectShadow.graphics.drawRect((i * 30)-1, -1, 12, 52);
 				}
 				else
-				{
-					shape.graphics.drawRect(i * 30, 10, 10, 30);
-					shapeShadow.graphics.drawRect((i * 30)-1, 9, 10, 30);
-					selectShadow.graphics.drawRect((i * 30)-1, 9, 12, 32);
-				}
+				{*/
+					shape.graphics.drawRect(i * 18, 10, 10, (i*12)+20);
+					shapeShadow.graphics.drawRect((i * 18)-1, 9, 10, ((i*12) + 20));
+					selectShadow.graphics.drawRect((i * 18)-1, 9, 12, ((i*12)+ 22));
+				//}
 				shape.graphics.endFill();
 				shapeShadow.graphics.endFill();
 				selectShadow.graphics.endFill();
@@ -73,8 +74,10 @@ package com.display.utils
 				sprite.buttonMode = true;
 				shadowVec.push(selectShadow);
 				vec.push(sprite);
-				this.addChild(sprite);
+				sprCont.addChild(sprite);
 			}
+			sprCont.scaleY*=-1;
+			this.addChild(sprCont);
 		}
 		
 		public function getTurnNumber():int
@@ -83,8 +86,8 @@ package com.display.utils
 			switch(selectedId)
 			{
 				case 0: //1
-					//turns = 7;
-					turns = 1;
+					turns = 7;
+					//turns = 1;
 					break;
 				case 1: //4
 					turns = 28;
