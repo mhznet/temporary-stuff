@@ -2,17 +2,18 @@ package com.display
 {
 	import com.Main;
 	import com.display.screens.ModeSelectionScreen;
+	import com.display.screens.RuleScreen;
 	import com.display.screens.SingleGameScreen;
+	import com.display.screens.TitleScreen;
 	import com.display.screens.WinnerSplashScreen;
+	import com.display.utils.CardShuffleAnimation;
+	import com.display.utils.InitialLoading;
 	
 	import flash.display.Bitmap;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import com.display.screens.RuleScreen;
-	import com.display.screens.TitleScreen;
-	import com.display.utils.CardShuffleAnimation;
-	import com.display.utils.InitialLoading;
+	import flash.ui.Mouse;
 
 	public class Display extends Sprite
 	{
@@ -67,7 +68,7 @@ package com.display
 		{
 			load.visible = true;
 		}
-		public function goTitle(e:MouseEvent=null):void
+		public function goTitle():void
 		{
 			hideLoad();
 			addRealBG();
@@ -80,7 +81,7 @@ package com.display
 			if(!rules) rules = new RuleScreen(this);
 			this.addChild(rules);
 		}
-		public function goModeSelect():void
+		public function goModeSelect(e:MouseEvent = null):void
 		{
 			if (rules) if (this.contains(rules)) this.removeChild(rules);
 			if (this.contains(title)) this.removeChild(title);

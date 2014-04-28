@@ -23,8 +23,9 @@ package com.display.utils
 			textFormat.bold = true;
 			switch(param)
 			{
-				case 1:
+				case 1://Tela de resultado no winnersplash
 					textFormat.align = TextFormatAlign.RIGHT;
+					//textFormat.size = 31.7;
 					break;
 				case 0:
 					textFormat.align = TextFormatAlign.CENTER;
