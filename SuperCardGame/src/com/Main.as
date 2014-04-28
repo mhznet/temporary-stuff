@@ -4,7 +4,9 @@ package com
 	import com.display.Display;
 	
 	import flash.display.Sprite;
+	import flash.errors.IOError;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 
@@ -40,7 +42,13 @@ package com
 			}
 			var req:URLRequest = new URLRequest(url);
 			loader.addEventListener(Event.COMPLETE, onXMLLoaded);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, onXMLIOError);
 			loader.load(req);
+		}
+		
+		protected function onXMLIOError(event:IOErrorEvent):void
+		{
+			trace ("IOERROR Carregando XML", event.errorID, event.text);
 		}
 		protected function onXMLLoaded(event:Event):void
 		{
