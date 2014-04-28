@@ -14,7 +14,7 @@
 		private var myloader:Loader = new Loader();
 		private var date:Date;
 		private var numVal:Number;
-		private var isLocal:Boolean = true;
+		private var isLocal:Boolean = false;
 		
 		public function PreLoader()
 		{
@@ -38,7 +38,7 @@
 			}
 			else
 			{
-				//url =
+				url = "http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/bin-release-build/Main.swf";
 			}
 			//url = "appfacebook.swf?v=" + String(numVal);
 			mymovie = new URLRequest(url);
