@@ -7,76 +7,81 @@ package com.display.utils
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
 
 	public class TurnSlider extends Sprite
 	{
+		private var m_main		:ModeSelectionScreen;
 		private var text		:GenericBt;
+		private var over		:GenericBt;
+		private var selected	:GenericBt;
+		private var normal		:GenericBt;
+		
 		private var sprCont		:Sprite;
 		private var vec			:Vector.<Sprite>;
-		private var shadowVec	:Vector.<Shape>;
 		private var selectedId	:int = 2;
-		private var original	:Array;
 		public function TurnSlider(main:ModeSelectionScreen)
 		{
+			m_main = main;
 			vec = new Vector.<Sprite>();
-			shadowVec = new Vector.<Shape>();
-			text = new GenericBt(null,"",65,29,main.display.main.data.getBMPById(19),false);
-			text.x = 10;
-			text.y = -5;
-			this.addChild(text);
+			makeImgs();
+			makeText();
 			makeIt();
+		}
+		
+		private function makeImgs():void
+		{
+			normal = new GenericBt(null,"",167,34,m_main.display.main.data.getBMPById(21),false);
+			over = new GenericBt(null,"",167,34,m_main.display.main.data.getBMPById(22),false);
+			selected = new GenericBt(null,"",167,34,m_main.display.main.data.getBMPById(20),false);
+			selected.visible = false;
+			over.visible = false;
+			this.addChild(normal);
+			this.addChild(over);
+			this.addChild(selected);
+		}
+		
+		private function makeText():void
+		{
+			text = new GenericBt(null,"",98,38,m_main.display.main.data.getBMPById(19),false);
+			text.x = 30;
+			text.y = -50;
+			this.addChild(text);			
 		}
 		private function makeIt():void
 		{
-			/*var back:Shape = new Shape();
-			back.graphics.beginFill(0xFFFFFF, 1);
-			back.graphics.drawRect(0, 20, 120, 10);
-			back.graphics.endFill();
-			var backShadow:Shape = new Shape();
-			backShadow.graphics.beginFill(0x99CC33, 1);
-			backShadow.graphics.drawRect(-1, 19, 120, 10);
-			backShadow.graphics.endFill();
-			this.addChild(backShadow);
-			this.addChild(back);*/
 			sprCont = new Sprite();
 			for (var i:int = 0; i < 5; i++) 
 			{
 				var sprite:Sprite = new Sprite();
 				var shape:Shape = new Shape();
-				var shapeShadow:Shape = new Shape();
-				var selectShadow:Shape = new Shape();
-				shapeShadow.graphics.beginFill(0x99CC33, 1);
-				selectShadow.graphics.beginFill(0x000000, 1);
 				shape.graphics.beginFill(0xFFFFFF, 1);
-				/*if (i==0 || i ==4)
+
+				var x:Number;
+				var y:int = 0;
+				var width:int = 30;
+				var height:int = 36;
+				switch(i)
 				{
-					shape.graphics.drawRect(i * 30, 0, 10, 50);
-					shapeShadow.graphics.drawRect((i * 30)-1, -1, 10, 50);
-					selectShadow.graphics.drawRect((i * 30)-1, -1, 12, 52);
+					case 3:
+						x = (i * 35) - 12;
+						width = 35;
+						break;
+					case 4:
+						x = (i * 34.5) - 5;
+						width = 35;
+						break;
+					default:
+						x = (i * 34.5) - 10
+						break;
 				}
-				else
-				{*/
-					shape.graphics.drawRect(i * 18, 10, 10, (i*12)+20);
-					shapeShadow.graphics.drawRect((i * 18)-1, 9, 10, ((i*12) + 20));
-					selectShadow.graphics.drawRect((i * 18)-1, 9, 12, ((i*12)+ 22));
-				//}
+				shape.graphics.drawRect(x, y, width,height);
+				shape.alpha = 0;
 				shape.graphics.endFill();
-				shapeShadow.graphics.endFill();
-				selectShadow.graphics.endFill();
-				selectShadow.alpha = 0;
-				sprite.addChild(shapeShadow);
-				sprite.addChild(selectShadow);
 				sprite.addChild(shape);
-				sprite.addEventListener(MouseEvent.ROLL_OUT, overNOut);
-				sprite.addEventListener(MouseEvent.ROLL_OVER, overNOut);
-				sprite.addEventListener(MouseEvent.CLICK, select);
 				sprite.buttonMode = true;
-				shadowVec.push(selectShadow);
 				vec.push(sprite);
 				sprCont.addChild(sprite);
 			}
-			sprCont.scaleY*=-1;
 			this.addChild(sprCont);
 		}
 		
@@ -86,20 +91,20 @@ package com.display.utils
 			switch(selectedId)
 			{
 				case 0: //1
-					turns = 7;
+					turns = 5;
 					//turns = 1;
 					break;
 				case 1: //4
-					turns = 28;
+					turns = 10;
 					break;
 				case 2: //6
-					turns = 42;
+					turns = 15;
 					break;
 				case 3: //9
-					turns = 63;
+					turns = 20;
 					break;
 				case 4: //12
-					turns = 84;
+					turns = 35;
 					break;
 			}
 			return turns;
@@ -112,11 +117,9 @@ package com.display.utils
 				if (vec[i] == event.currentTarget)
 				{
 					selectedId = i;
-					shadowVec[i].alpha = 1;
-				}
-				else
-				{
-					shadowVec[i].alpha = 0;
+					selected.visible = true;
+					over.visible = false;
+					selected.mask = vec[i];
 				}
 			}
 		}
@@ -124,18 +127,31 @@ package com.display.utils
 		{
 			if (event.type == MouseEvent.ROLL_OUT)
 			{
-				event.currentTarget.filters = original;
+				normal.visible = true;
+				over.visible = false;
 			}
 			else if (event.type == MouseEvent.ROLL_OVER)
 			{
-				if (original==null) original = event.currentTarget.filters;
-				var glow:GlowFilter = new GlowFilter(0x000000,0.3,9.0,9.0,1);
-				event.currentTarget.filters = [glow];
+				for (var i:int = 0; i < vec.length; i++) 
+				{
+					if (event.currentTarget == vec[i])
+					{
+						if (i!=selectedId)
+						{
+							over.mask = vec[i];
+							over.visible = true;
+						}
+						else
+						{
+							over.mask = null;
+							over.visible = false;
+						}
+					}
+				}
 			}
 		}
 		public function hide():void
 		{
-			shadowVec[selectedId].alpha = 0;
 			this.alpha = 0;
 		}
 		public function show():void
@@ -144,7 +160,15 @@ package com.display.utils
 		}
 		private function showSelected():void
 		{
-			shadowVec[selectedId].alpha = 1;
+			for (var i:int = 0; i < vec.length; i++) 
+			{
+				vec[i].addEventListener(MouseEvent.ROLL_OUT, overNOut);
+				vec[i].addEventListener(MouseEvent.ROLL_OVER, overNOut);
+				vec[i].addEventListener(MouseEvent.CLICK, select);
+			}
+			vec[selectedId].dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+			vec[selectedId].dispatchEvent(new MouseEvent(MouseEvent.ROLL_OUT));
+			vec[selectedId].dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 		}
 	}
 }

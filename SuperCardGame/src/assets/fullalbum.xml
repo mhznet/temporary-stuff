@@ -23,102 +23,105 @@
 	<bmp id="16" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/igual-icon.png"/>
 	<bmp id="17" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/tela_regras.png"/>
 	<bmp id="18" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/pular.png"/>
-	<bmp id="18" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/duracao.png"/>
+	<bmp id="19" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/duracao.png"/>
+	<bmp id="20" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/duracao_turnos_shadow.png"/>
+	<bmp id="21" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/duracao_turnos_frente.png"/>
+	<bmp id="22" bmpurl="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/duracao_turnos_over.png"/>
 	
 	<!--   ID     TITULOS	  PONTOS		ARTILHEIRO	  GOLS			PARTIDAS		 	 -->
 	<asset id="1" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/alemanha.jpg"/>
-	<card  id="1" params1="3" params2="1336" params3="14" params4="206" params5="99"/>
+	<card  id="1" params1="3" params2="1340" params3="14" params4="206" params5="99"/>
 
 	<asset id="2" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/argelia.jpg"/>
-	<card  id="2" params1="0" params2="0" params3="0" params4="0" params5="0"/>
+	<card  id="2" params1="0" params2="795" params3="2" params4="6" params5="9"/>
 
 	<asset id="3" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/argentina.jpg"/>
-	<card  id="3" params1="2" params2="1234" params3="10" params4="123" params5="70"/>
+	<card  id="3" params1="2" params2="1174" params3="10" params4="123" params5="70"/>
 
 	<asset id="4" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/australia.jpg"/>
 	<card  id="4" params1="0" params2="545" params3="3" params4="8" params5="10"/>
 
 	<asset id="5" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/belgica.jpg"/>
-	<card  id="5" params1="0" params2="1084" params3="5" params4="46" params5="36"/>
+	<card  id="5" params1="0" params2="1039" params3="5" params4="46" params5="36"/>
 	
 	<asset id="6" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/bosnia.jpg"/>
-	<card  id="6" params1="0" params2="0" params3="0" params4="0" params5="0"/>
+	<card  id="6" params1="0" params2="795" params3="0" params4="0" params5="0"/>
 
 	<asset id="7" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/brasil.jpg"/>
-	<card  id="7" params1="5" params2="1104" params3="15" params4="210" params5="97"/>
+	<card  id="7" params1="5" params2="1174" params3="15" params4="210" params5="97"/>
 	
 	<asset id="8" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/camaroes.jpg"/>
-	<card  id="8" params1="0" params2="588" params3="5" params4="17" params5="20"/>
+	<card  id="8" params1="0" params2="583" params3="5" params4="17" params5="20"/>
 	
 	<asset id="9" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/chile.jpg"/>
-	<card  id="9" params1="0" params2="998" params3="4" params4="34" params5="29"/>
+	<card  id="9" params1="0" params2="1011" params3="4" params4="34" params5="29"/>
 	
 	<asset id="10" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/colombia.jpg"/>
-	<card  id="10" params1="0" params2="1183" params3="2" params4="14" params5="13"/>
+	<card  id="10" params1="0" params2="1186" params3="2" params4="14" params5="13"/>
 
 	<asset id="11" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/coreia-do-sul.jpg"/>
-	<card  id="11" params1="0" params2="552" params3="3" params4="28" params5="28"/>
+	<card  id="11" params1="0" params2="551" params3="3" params4="28" params5="28"/>
 
 	<asset id="12" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/costamarfim.jpg"/>
-	<card  id="12" params1="0" params2="839" params3="2" params4="9" params5="6"/>
+	<card  id="12" params1="0" params2="830" params3="2" params4="9" params5="6"/>
 	
 	<asset id="13" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/costarica.jpg"/>
-	<card  id="13" params1="0" params2="732" params3="3" params4="12" params5="10"/>
+	<card  id="13" params1="0" params2="744" params3="3" params4="12" params5="10"/>
 
 	<asset id="14" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/croacia.jpg"/>
-	<card  id="14" params1="0" params2="955" params3="6" params4="15" params5="13"/>
+	<card  id="14" params1="0" params2="871" params3="6" params4="15" params5="13"/>
 
 	<asset id="15" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/equador.jpg"/>
-	<card  id="15" params1="0" params2="0" params3="0" params4="0" params5="0"/>
+	<card  id="15" params1="0" params2="790" params3="3" params4="7" params5="7"/>
 
 	<asset id="16" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/espanha.jpg"/>
-	<card  id="16" params1="1" params2="1510" params3="8" params4="88" params5="56"/>
+	<card  id="16" params1="1" params2="1460" params3="8" params4="88" params5="56"/>
 
 	<asset id="17" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/eua.jpg"/>
-	<card  id="17" params1="1" params2="1017" params3="5" params4="32" params5="29"/>
+	<card  id="17" params1="1" params2="1015" params3="5" params4="32" params5="29"/>
 
 	<asset id="18" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/franca.jpg"/>
-	<card  id="18" params1="1" params2="929" params3="13" params4="96" params5="54"/>
+	<card  id="18" params1="1" params2="935" params3="13" params4="96" params5="54"/>
 	
 	<asset id="19" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/gana.jpg"/>
-	<card  id="19" params1="0" params2="729" params3="4" params4="9" params5="9"/>
+	<card  id="19" params1="0" params2="713" params3="4" params4="9" params5="9"/>
 
 	<asset id="20" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/grecia.jpg"/>
-	<card  id="20" params1="0" params2="1038" params3="1" params4="2" params5="6"/>
+	<card  id="20" params1="0" params2="1082" params3="1" params4="2" params5="6"/>
 
 	<asset id="21" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/holanda.jpg"/>
-	<card  id="21" params1="0" params2="1077" params3="7" params4="71" params5="43"/>
+	<card  id="21" params1="0" params2="967" params3="7" params4="71" params5="43"/>
 
 	<asset id="22" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/honduras.jpg"/>
-	<card  id="22" params1="0" params2="0" params3="0" params4="0" params5="0"/>
+	<card  id="22" params1="0" params2="754" params3="1" params4="2" params5="6"/>
 
 	<asset id="23" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/inglaterra.jpg"/>
-	<card  id="23" params1="1" params2="1045" params3="10" params4="77" params5="59"/>
+	<card  id="23" params1="1" params2="1043" params3="10" params4="77" params5="59"/>
 
 	<asset id="24" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/ira.jpg"/>
 	<card  id="24" params1="0" params2="692" params3="1" params4="6" params5="9"/>
 
 	<asset id="25" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/italia.jpg"/>
-	<card  id="25" params1="4" params2="1112" params3="9" params4="126" params5="80"/>
+	<card  id="25" params1="4" params2="1115" params3="9" params4="126" params5="80"/>
 
 	<asset id="26" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/japao.jpg"/>
-	<card  id="26" params1="0" params2="622" params3="2" params4="12" params5="14"/>
+	<card  id="26" params1="0" params2="613" params3="2" params4="12" params5="14"/>
 
 	<asset id="27" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/mexico.jpg"/>
-	<card  id="27" params1="0" params2="888" params3="4" params4="52" params5="49"/>
+	<card  id="27" params1="0" params2="876" params3="4" params4="52" params5="49"/>
 
 	<asset id="28" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/nigeria.jpg"/>
-	<card  id="28" params1="0" params2="626" params3="2" params4="17" params5="14"/>
+	<card  id="28" params1="0" params2="620" params3="2" params4="17" params5="14"/>
 
 	<asset id="29" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/portugal.jpg"/>
-	<card  id="29" params1="0" params2="1199" params3="9" params4="39" params5="23"/>
+	<card  id="29" params1="0" params2="1245" params3="9" params4="39" params5="23"/>
 
 	<asset id="30" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/russia.jpg"/>
-	<card  id="30" params1="0" params2="889" params3="6" params4="64" params5="37"/>
+	<card  id="30" params1="0" params2="903" params3="6" params4="64" params5="37"/>
 
 	<asset id="31" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/suica.jpg"/>
-	<card  id="31" params1="0" params2="1123" params3="6" params4="38" params5="29"/>
+	<card  id="31" params1="0" params2="1161" params3="6" params4="38" params5="29"/>
 
 	<asset id="32" img="http://media.mundodositio.globo.com.s3.amazonaws.com/face/matamata/assets/teams/uruguai.jpg"/>
-	<card  id="32" params1="2" params2="1126" params3="8" params4="76" params5="47"/>
+	<card  id="32" params1="2" params2="1181" params3="8" params4="76" params5="47"/>
 </data>
