@@ -17,7 +17,7 @@ package com.display.utils
 		public function getTextFormat(param:int):TextFormat
 		{
 			var textFormat:TextFormat = new TextFormat();
-			textFormat.font = "BebasNeue";
+			textFormat.font = display.BEBAS;
 			textFormat.color = 0xFFFFFF;
 			textFormat.size = 40;
 			textFormat.bold = true;

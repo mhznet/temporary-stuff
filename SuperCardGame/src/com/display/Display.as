@@ -13,10 +13,19 @@ package com.display
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import flash.ui.Mouse;
 
 	public class Display extends Sprite
 	{
+		public const BEBAS		:String = "MyBebasBold"; //BebasNeue //"Bebas Neue Bold" //"BebasBold" 
+		[Embed(source="../../assets/BebasNeue.ttf", 
+    	fontName = "MyBebasBold", 
+    	mimeType = "application/x-font-truetype", 
+    	fontWeight="bold", 
+    	fontStyle="normal", 
+    	advancedAntiAliasing="true", 
+    	embedAsCFF="false")]
+		private var myEmbeddedBebasFont:Class;
+		
 		public var main			:Main;
 		public var title		:TitleScreen;
 		public var rules		:RuleScreen;
@@ -33,6 +42,10 @@ package com.display
 			main=m_main;
 			addBackground();
 			addLoading();
+			/*for each (var i:Font in Font.enumerateFonts()) 
+			{
+				trace ("FonteEmbbeded:",i.fontName);
+			}*/
 		}
 		
 		public function addRealBG():void

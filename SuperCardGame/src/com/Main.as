@@ -8,6 +8,7 @@ package com
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.text.Font;
 
 	[SWF(width="940",height="600",frameRate="24",backgroundColor="#BBBBBB")]
 	public class Main extends Sprite
@@ -16,19 +17,27 @@ package com
 		public var display	:Display;
 		public var isLocal	:Boolean = true;
 		public var version	:String = "?=v1.113";
+		public var mayShow	:Function;
+		public var font		:Font;
 		public function Main()
 		{
-			addEventListener(Event.ADDED_TO_STAGE, onAdded);
+			//addEventListener(Event.ADDED_TO_STAGE, onAdded);
+			onAdded();
 		}
-		protected function onAdded(event:Event):void
+		public function setCompleteFunction(func:Function):void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE, onAdded);
+			mayShow = func;
+		}
+		protected function onAdded(event:Event=null):void
+		{
+			//removeEventListener(Event.ADDED_TO_STAGE, onAdded);
 			display = new Display(this);
 			this.addChild(display);
 			loadXML();
 		}
 		public function loadXML():void
 		{
+			trace ("Main - I'm Loading XML's");
 			var loader:URLLoader = new URLLoader();
 			var url	  :String;
 			if (!isLocal)
@@ -57,6 +66,7 @@ package com
 		
 		public function onDataReady():void
 		{
+			if (mayShow!=null) mayShow();
 			display.goTitle();
 		}
 	}

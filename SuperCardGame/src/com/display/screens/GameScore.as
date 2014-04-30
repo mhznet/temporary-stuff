@@ -57,6 +57,7 @@ package com.display.screens
 			this.addChild(turnBt2);
 			
 			turnTx = new TextField();
+			turnTx.embedFonts = true;
 			turnTx.width = turnBt2.width-20;
 			turnTx.height = turnBt2.height;
 			turnTx.selectable = false;
@@ -115,6 +116,7 @@ package com.display.screens
 			for (var i:int = 0; i < textNum; i++) 
 			{
 				var text:TextField = new TextField();
+				text.embedFonts = true;
 				text.selectable = false;
 				text.width 	= 200;
 				//text.height = 150;
@@ -141,6 +143,7 @@ package com.display.screens
 			this.addChild(pilhaBt);
 			
 			pilhaTxt = new TextField();
+			pilhaTxt.embedFonts = true;
 			pilhaTxt.width = pilhaBt.width-20;
 			pilhaTxt.height = pilhaBt.height;
 			pilhaTxt.selectable = false;
@@ -155,7 +158,7 @@ package com.display.screens
 		private function getTextFormat(turn:Boolean = false):TextFormat
 		{
 			var textFormat:TextFormat = new TextFormat();
-			textFormat.font = "BebasNeue";
+			textFormat.font = m_main.display.BEBAS;
 			if (!turn)
 			{
 				textFormat.size = 53;

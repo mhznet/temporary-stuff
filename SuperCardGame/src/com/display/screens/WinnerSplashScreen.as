@@ -110,7 +110,9 @@ package com.display.screens
 			cardImg.bitmapData = display.main.data.getBMPById(3);
 			yellow= new Bitmap();
 			tf = new TextField();
+			tf.embedFonts = true;
 			tfCards= new TextField();
+			tfCards.embedFonts = true;
 			yellow.bitmapData = display.main.data.getBMPById(12);
 			tf.textColor = 0xFFFFFF;
 			tf.multiline = true;

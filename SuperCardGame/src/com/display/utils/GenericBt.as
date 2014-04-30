@@ -12,6 +12,7 @@ package com.display.utils
 	
 	public class GenericBt extends Sprite
 	{
+		public const BEBAS		:String = "MyBebasBold";
 		public var text:TextField;
 		public var bmp	:Bitmap;
 		public var bg	:Shape;
@@ -25,7 +26,7 @@ package com.display.utils
 			if (name!="")addText(name);
 			this.width = width;
 			this.height = height;
-			if (click)
+			if (click!=null)
 			{
 				onClick = click;
 				this.buttonMode = true;
@@ -66,12 +67,13 @@ package com.display.utils
 		private function addText(str:String):void
 		{
 			var format:TextFormat = new TextFormat();
-			format.font = "BebasNeue";
+			format.font = BEBAS;
 			format.size = 25;
 			format.align = TextFormatAlign.LEFT;
 			format.bold = true;
 			format.color = 0xFFFFFFF;
 			text = new TextField();
+			text.embedFonts = true;
 			text.text = str;
 			text.width = 100;
 			text.height = 50;

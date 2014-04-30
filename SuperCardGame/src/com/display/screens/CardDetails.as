@@ -1,5 +1,6 @@
 package com.display.screens
 {
+	import com.Main;
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
@@ -9,6 +10,7 @@ package com.display.screens
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
@@ -101,7 +103,9 @@ package com.display.screens
 				var t_hit	:Sprite = new Sprite();
 				var t_uhit	:Sprite = new Sprite();
 				var t_name	:TextField = new TextField();
+				t_name.embedFonts = true;
 				var t_value	:TextField = new TextField();
+				t_value.embedFonts = true;
 				//t_value.width = t_name.width = 100;
 				t_value.height = t_name.height = m_height
 				t_name.x = 20;1
@@ -217,7 +221,7 @@ package com.display.screens
 			if (!textFormat)
 			{
 				textFormat = new TextFormat();
-				textFormat.font = "BebasNeue";
+				textFormat.font = m_main.display.BEBAS;
 				textFormat.size = 24.8/*23*/;
 				textFormat.bold = true;
 				textFormat.kerning = true;

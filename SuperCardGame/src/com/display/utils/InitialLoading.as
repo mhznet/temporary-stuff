@@ -79,6 +79,7 @@ package com.display.utils
 				card.addChild(shap);*/
 				
 				var txt		:TextField = new TextField();
+				txt.embedFonts = false;
 				var form	:TextFormat = new TextFormat();
 				form.bold = false;
 				form.color = 0x000000;
