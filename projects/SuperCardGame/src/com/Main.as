@@ -11,7 +11,7 @@ package com
 	import flash.text.Font;
 
 	[SWF(width="940",height="600",frameRate="24",backgroundColor="#BBBBBB")]
-	public class Main extends Sprite
+	public class Main extends Sprite implements IMain
 	{
 		public var data		:Data;
 		public var display	:Display;

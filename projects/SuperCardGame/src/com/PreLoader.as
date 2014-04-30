@@ -1,11 +1,14 @@
 ﻿package com
 {
 	
+	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
+	import flash.events.TimerEvent;
 	import flash.net.URLRequest;
+	import flash.utils.Timer;
 
 	//import flash.system.Security;
 	
@@ -13,12 +16,13 @@
 	{
 		private var asset	:PLAsset;
 		private var sndLoad	:SecondLoad;
-		private var movieObj:Main;
-		private var mymovie:URLRequest;
+		private var movieObj:IMain;
+		private var mymovie	:URLRequest;
 		private var myloader:Loader = new Loader();
-		private var date:Date;
-		private var numVal:Number;
-		private var isLocal:Boolean = true;
+		private var date	:Date;
+		private var numVal	:Number;
+		private var isLocal	:Boolean = true;
+		private var timer	:Timer
 		
 		public function PreLoader()
 		{
@@ -64,12 +68,6 @@
 		
 		public function addMovie(e:Event):void
 		{
-			// Embaralhando...
-			sndLoad = new SecondLoad();
-			sndLoad.x = 470;
-			sndLoad.y = 250;
-			sndLoad.scaleX = sndLoad.scaleY = 0.3;
-			this.addChild(sndLoad);
 			movieObj = e.target.content;
 			movieObj.setCompleteFunction(showMovie);
 			with (e.target.content)
@@ -77,15 +75,47 @@
 				x = 0;
 				y = 0;
 			}
+			completeBar();
+		}
+		
+		private function completeBar():void
+		{
+			var delay:uint = 500;
+			timer = new Timer(delay);
+			timer.addEventListener(TimerEvent.TIMER, tick);
+			timer.start();
+		}
+		
+		protected function tick(event:TimerEvent):void
+		{
+			if (asset.preloader.bar.scaleX<=1)
+			{
+				asset.preloader.bar.scaleX += 0.025;
+			}
+			else
+			{
+				timer.stop();
+				showSecondLoad();
+			}
+		}
+		private function showSecondLoad():void
+		{
+			sndLoad = new SecondLoad();
+			sndLoad.x = 470;
+			sndLoad.y = 300;
+			sndLoad.scaleX = sndLoad.scaleY = 0.3;
+			this.addChild(sndLoad);
+			asset.preloader.visible = false;
 		}
 		public function showMovie():void
 		{
+			if (timer) timer.stop();
 			destroy();
-			addChild(movieObj as Main);
+			addChild(movieObj as DisplayObject);
 		}
 		public function movieProgress(e:ProgressEvent):void
 		{
-			asset.preloader.bar.scaleX = e.bytesLoaded / e.bytesTotal;
+			asset.preloader.bar.scaleX = (e.bytesLoaded / e.bytesTotal) * 0.2;
 			//asset.preloader.porcent.porcentagem_txt.text = String(Math.ceil(e.target.bytesLoaded / e.target.bytesTotal * 80) + "%");
 		}
 		private function destroy():void

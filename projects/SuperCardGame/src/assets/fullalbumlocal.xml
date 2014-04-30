@@ -78,7 +78,7 @@
 	<card  id="16" params1="1" params2="1460" params3="8" params4="88" params5="56"/>
 
 	<asset id="17" img="../src/assets/teams/eua.jpg"/>
-	<card  id="17" params1="1" params2="1015" params3="5" params4="32" params5="29"/>
+	<card  id="17" params1="0" params2="1015" params3="5" params4="32" params5="29"/>
 
 	<asset id="18" img="../src/assets/teams/franca.jpg"/>
 	<card  id="18" params1="1" params2="935" params3="13" params4="96" params5="54"/>
