@@ -2,10 +2,11 @@ head
 {
     background-color:orange;
 }
-.display
-{
-    color: greenyellow;
-    background-color: gray;
+h1{
+    color:gray;
+}
+h2{
+    color:white;
 }
 body
 {
@@ -13,3 +14,7 @@ body
     border-style: ridge;
     border-width: 5 px
 }
+
+
+
+
