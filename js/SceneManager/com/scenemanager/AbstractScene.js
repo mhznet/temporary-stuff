@@ -1,4 +1,4 @@
-Scene.prototype.id = undefined;
+Scene.prototype.m_index = undefined;
 Scene.prototype.isRunning = false;
 Scene.prototype.m_container = undefined;
 function Scene()
@@ -21,6 +21,6 @@ Scene.prototype.doStop = function ()
 };
 Scene.prototype.destroy = function ()
 {
-    this.id = null;
+    this.m_index = null;
     this.isRunning = false;
 };

@@ -7,11 +7,11 @@ function ExtendedScene()
 ExtendedScene.prototype.showDisplay = function ()
 {
     var circle = new createjs.Shape();
-    circle.graphics.beginFill(this.getColorById(this.id));
+    circle.graphics.beginFill(this.getColorByIndex(this.m_index));
     circle.graphics.drawCircle(50,50,30);
     this.m_container.addChild(circle);
 };
-ExtendedScene.prototype.getColorById = function (id)
+ExtendedScene.prototype.getColorByIndex = function (id)
 {
     var returned ="";
     switch (id)
@@ -38,6 +38,6 @@ ExtendedScene.prototype.getColorById = function (id)
             returned = "pink";
             break;
     }
-    //console.log("MyColor: ", returned, this.id, id);
+    //console.log("MyColor: ", returned, this.m_index, id);
     return returned;
 };
