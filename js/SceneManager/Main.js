@@ -5,7 +5,6 @@ function Main ()
 {
     canvas = document.getElementById("myCanv");
     stag = new createjs.Stage(canvas);
-    stag.mouseEventsEnabled = true;
     manager = new SceneManager(stag);
     createScenes();
     createBtns();
