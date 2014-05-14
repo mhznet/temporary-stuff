@@ -3,6 +3,7 @@ SceneManager.prototype.m_cont = undefined;
 SceneManager.prototype.actualscene = undefined;
 SceneManager.prototype.scenes = [];
 SceneManager.prototype.scenes_total = 0;
+SceneManager.prototype.traceEnable = false;
 function SceneManager(stag)
 {
     this.m_stage = stag;
@@ -15,7 +16,7 @@ SceneManager.prototype.showSceneByIndex = function(index)
     {
         if (!this.m_cont.contains(this.scenes[index].m_container))
         {
-            console.log("ShowSceneByIndex:",index, "ADDED!");
+            if (this.traceEnable) console.log("ShowSceneByIndex:",index, "ADDED!");
             this.m_cont.addChild(this.scenes[index].m_container);
             this.scenes[index].doRun();
             this.m_stage.update();
@@ -28,7 +29,7 @@ SceneManager.prototype.hideSceneByIndex = function(index)
     {
         if (this.m_cont.contains(this.scenes[index].m_container))
         {
-            console.log("hideSceneByIndex:",index, "REMOVED!");
+            if (this.traceEnable)console.log("hideSceneByIndex:",index, "REMOVED!");
             this.m_cont.removeChild(this.scenes[index].m_container);
             this.scenes[index].doStop();
         }
@@ -36,7 +37,7 @@ SceneManager.prototype.hideSceneByIndex = function(index)
 };
 SceneManager.prototype.validIndex = function (index)
 {
-    //console.log("Index", index, "is valid:",(index >= 0 && index <= this.scenes_total));
+    if (this.traceEnable) console.log("Index", index, "is valid?",(index >= 0 && index <= this.scenes_total));
     return (index >= 0 && index <= this.scenes_total);
 };
 SceneManager.prototype.addScenes = function (e)
@@ -60,7 +61,7 @@ SceneManager.prototype.addScenes = function (e)
         this.showSceneByIndex(this.actualscene);
     }
     this.scenes_total = this.scenes.length-1;
-    console.log("addScenes Indexes:", this.scenes_total);
+    if (this.traceEnable)console.log("addScenes Indexes:", this.scenes_total);
 };
 SceneManager.prototype.getSceneByIndex = function (index)
 {
@@ -82,7 +83,7 @@ SceneManager.prototype.removeSceneByIndex = function (index)
 };
 SceneManager.prototype.nextScene = function()
 {
-    console.log("Will try to show next scene", this.actualscene+1, "am showing", this.actualscene, "of", this.scenes_total);
+    if (this.traceEnable) console.log("Will try to show next scene", this.actualscene+1, "am showing", this.actualscene, "of", this.scenes_total);
     if (this.scenes_total > 0)
     {
         if (this.actualscene < this.scenes_total)
@@ -100,11 +101,11 @@ SceneManager.prototype.nextScene = function()
     {
         console.log("ERROR: There is no scene available");
     }
-    console.log("I'm showing:",this.actualscene, "of", this.scenes_total);
+    if (this.traceEnable) console.log("I'm showing:",this.actualscene, "of", this.scenes_total);
 };
 SceneManager.prototype.previousScene = function()
 {
-    console.log("Will try to show previous scene", this.actualscene-1, "am showing", this.actualscene, "of", this.scenes_total);
+    if (this.traceEnable) console.log("Will try to show previous scene", this.actualscene-1, "am showing", this.actualscene, "of", this.scenes_total);
     if (this.scenes_total > 0)
     {
         if (this.actualscene > 0)
@@ -122,7 +123,7 @@ SceneManager.prototype.previousScene = function()
     {
         console.log("ERROR: There is no scene available");
     }
-    console.log("I'm showing:",this.actualscene, "of", this.scenes_total);
+    if (this.traceEnable) console.log("I'm showing:",this.actualscene, "of", this.scenes_total);
 };
 SceneManager.prototype.destroy = function ()
 {

@@ -8,7 +8,7 @@ ExtendedScene.prototype.showDisplay = function ()
 {
     var circle = new createjs.Shape();
     circle.graphics.beginFill(this.getColorByIndex(this.m_index));
-    circle.graphics.drawCircle(50,50,30);
+    circle.graphics.drawCircle(70,30,30);
     this.m_container.addChild(circle);
 };
 ExtendedScene.prototype.getColorByIndex = function (id)
