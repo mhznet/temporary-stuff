@@ -17,7 +17,7 @@ function createBtns()
         var init_x;
         i == 0 ? init_x = 10 : init_x = 100;
         shape.graphics.beginFill("green").drawRect(init_x,80,30,20);
-        shape.
+        shape.myInitX = init_x;
         shape.name = i;
         shape.buttonmode = true;
         shape.addEventListener("click",handleClick);
@@ -31,30 +31,16 @@ function createBtns()
 function handleOut(e)
 {
     document.body.style.cursor= "default";
-    var m_initial_x = 0;
-    if(e.currentTarget.name === 1)
-    {
-        m_initial_x = 10
-    }
-    else if(e.currentTarget.name === 2)
-    {
-        m_initial_x = 100;
-    }
+    var m_initial_x = e.currentTarget.myInitX;
+    //console.log("initX", m_initial_x, e.currentTarget.name);
     e.currentTarget.graphics.clear().beginFill("green").drawRect(m_initial_x,80,30,20);
     stag.update();
 }
 function handleOver(e)
 {
     document.body.style.cursor = "pointer";
-    var m_initial_x = 0;
-    if(e.currentTarget.name === 1)
-    {
-        m_initial_x = 10
-    }
-    else if(e.currentTarget.name === 2)
-    {
-        m_initial_x = 100;
-    }
+    var m_initial_x = e.currentTarget.myInitX;
+    //console.log("initX", m_initial_x, e.currentTarget.name);
     e.currentTarget.graphics.clear().beginFill("black").drawRect(m_initial_x,80,30,20);
     stag.update();
 }

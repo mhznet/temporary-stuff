@@ -8,9 +8,9 @@ QAFile.prototype.setId = function (id)
 {
     this.m_id = id;
 };
-QAFile.prototype.setIndex = function ()
+QAFile.prototype.setIndex = function (p_index)
 {
-    return this.m_index;
+    this.m_index = p_index;
 };
 QAFile.prototype.setQuestion = function (question)
 {

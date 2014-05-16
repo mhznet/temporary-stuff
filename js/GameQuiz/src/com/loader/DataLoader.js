@@ -1,30 +1,28 @@
-function DataLoader(){}
-DataLoader.prototype.main = undefined;
-DataLoader.prototype.xmlData = undefined;
-DataLoader.prototype.loader = undefined;
+DataLoader.prototype.xmlData   = undefined;
+DataLoader.prototype.loader    = undefined;
 DataLoader.prototype.xmlSource = undefined;
-DataLoader.prototype.onComplete = undefined;
-DataLoader.prototype.setMain = function (mainJS)
+DataLoader.prototype.mf_main   = undefined;
+DataLoader.prototype.mf_onComplete = undefined;
+
+function DataLoader(mmmain, urrele, oncompleto)
 {
-    this.main = mainJS;
-};
+    mf_main = mmmain;
+    this.xmlSource = urrele;
+    DataLoader.mf_onComplete = oncompleto;
+}
 DataLoader.prototype.setXMLAdress = function (xmlSrc)
 {
     this.xmlSource = xmlSrc;
 };
-DataLoader.prototype.setOnCompleteFunction = function (onComp)
-{
-    this.onComplete = onComp;
-    console.log("OnCompleteSet",this.onComplete);
-}
 DataLoader.prototype.init = function ()
 {
     this.loader = new createjs.LoadQueue(true);
     this.loader.on("fileload", this.handleFileLoad);
-    this.loader.on("complete", this.handleComplete);
+    this.loader.on("complete", DataLoader.handleComplete);
     if (this.xmlSource !== undefined)
     {
         this.loader.loadFile(this.xmlSource);
+        console.log(this.xmlSource,"AQUI");
     }
     else
     {
@@ -33,10 +31,13 @@ DataLoader.prototype.init = function ()
 };
 DataLoader.prototype.handleComplete = function (e)
 {
-     this.xmlData = e.currentTarget._loadedRawResults;
-     this.onComplete(this.xmlData);
-};
+    this.xmlData = e.currentTarget._loadedRawResults;
+    //this.mf_onComplete();
+    this.mf_onComplete();
+    //mf_main.onXMLComplete();
+    console.log("agora foi");
+}
 DataLoader.prototype.handleFileLoad = function (e)
 {
     console.log("XML FILE LOAD START!");
-};
+}
