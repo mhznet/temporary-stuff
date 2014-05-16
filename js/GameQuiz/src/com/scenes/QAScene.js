@@ -20,7 +20,7 @@ QAScene.prototype.createQuestionTF = function ()
     this.questionTF.x = 50;
     this.questionTF.y = 50;
     this.m_container.addChild(this.questionTF);
-}
+};
 QAScene.prototype.createAnswersTF = function ()
 {
     this.aAnswerTF = new createjs.Text("0", "20px Arial", "#ff7700");
@@ -51,7 +51,7 @@ QAScene.prototype.createAnswersTF = function ()
     this.m_container.addChild(this.bAnswerTF);
     this.m_container.addChild(this.cAnswerTF);
     this.m_container.addChild(this.dAnswerTF);
-}
+};
 QAScene.prototype.updateQA = function (qafile)
 {
     this.m_qa = qafile;
@@ -61,7 +61,7 @@ QAScene.prototype.updateQA = function (qafile)
     this.bAnswerTF.text = qafile.m_answers[1];
     this.cAnswerTF.text = qafile.m_answers[2];
     this.dAnswerTF.text = qafile.m_answers[3];
-}
+};
 QAScene.prototype.getColorByIndex = function (id)
 {
     var returned ="";

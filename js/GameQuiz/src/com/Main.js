@@ -1,29 +1,36 @@
 var canvas;
 var stag;
-var manager;
+var sce_manager;
+var dta_manager;
 var mahLoader;
+Function.prototype.context = function(context)
+{
+    var action = this;
+    return function()
+    {
+        return action.apply(context, arguments);
+    };
+}
 function Main ()
 {
     canvas = document.getElementById("myCanv");
     stag = new createjs.Stage(this.canvas);
     stag.enableMouseOver();
-    manager = new SceneManager(this.stag);
+    sce_manager = new SceneManager(this.stag);
     beginDataLoader();
     //createTestScenes();
     //createBtns();
 }
 function beginDataLoader ()
 {
-    var urlxml= "assets/myData.xml";
-    mahLoader = new DataLoader(this,urlxml,onXMLComplete);
-    //mahLoader.setMain(this);
-    //mahLoader.setXMLAdress(urlxml);
-    //mahLoader.mf_onComplete = onXMLComplete;
+    mahLoader = new DataLoader(this,"assets/myData.xml");
     mahLoader.init();
 };
-function onXMLComplete ()
+function onXMLComplete (xmlObj)
 {
-    console.log("TUDO CERTO CHAMPS");
+    dta_manager = new QAManager();
+    dta_manager.init(xmlObj);
+    console.log("TUDO CERTO CHAMPS", xmlObj);
 };
 function createBtns  ()
 {
@@ -65,11 +72,11 @@ function handleClick (e)
     {
         if (e.currentTarget.name === 1)
         {
-            this.manager.nextScene();
+            this.sce_manager.nextScene();
         }
         else if (e.currentTarget.name === 0)
         {
-            this.manager.previousScene();
+            this.sce_manager.previousScene();
         }
     }
     //console.log(e.currentTarget.name, e.nativeEvent.button);
@@ -89,7 +96,7 @@ function createTestScenes ()
     qa2.setQuestion("Ram goes...?");
 
     var m_scene = new QAScene();
-    this.manager.addScenes(m_scene);
+    this.sce_manager.addScenes(m_scene);
     m_scene.updateQA(qa2);
     m_scene.showDisplay();
 

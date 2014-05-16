@@ -1,28 +1,20 @@
-DataLoader.prototype.xmlData   = undefined;
 DataLoader.prototype.loader    = undefined;
 DataLoader.prototype.xmlSource = undefined;
 DataLoader.prototype.mf_main   = undefined;
-DataLoader.prototype.mf_onComplete = undefined;
 
-function DataLoader(mmmain, urrele, oncompleto)
+function DataLoader(mainobj, xmlurl)
 {
-    mf_main = mmmain;
-    this.xmlSource = urrele;
-    DataLoader.mf_onComplete = oncompleto;
+    this.mf_main = mainobj;
+    this.xmlSource = xmlurl;
 }
-DataLoader.prototype.setXMLAdress = function (xmlSrc)
-{
-    this.xmlSource = xmlSrc;
-};
 DataLoader.prototype.init = function ()
 {
     this.loader = new createjs.LoadQueue(true);
     this.loader.on("fileload", this.handleFileLoad);
-    this.loader.on("complete", DataLoader.handleComplete);
+    this.loader.on("complete", this.handleComplete.context(this));
     if (this.xmlSource !== undefined)
     {
         this.loader.loadFile(this.xmlSource);
-        console.log(this.xmlSource,"AQUI");
     }
     else
     {
@@ -31,13 +23,12 @@ DataLoader.prototype.init = function ()
 };
 DataLoader.prototype.handleComplete = function (e)
 {
-    this.xmlData = e.currentTarget._loadedRawResults;
-    //this.mf_onComplete();
-    this.mf_onComplete();
-    //mf_main.onXMLComplete();
-    console.log("agora foi");
-}
+    console.log("DataLoader: XML handleComplete" , e.currentTarget._loadedResults.getElementsByTagName(this.xmlSource));
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(e.rawResult,"text/xml")
+    this.mf_main.onXMLComplete(xmlDoc);
+};
 DataLoader.prototype.handleFileLoad = function (e)
 {
-    console.log("XML FILE LOAD START!");
-}
+    console.log("DataLoader: XML handleFileLoad");
+};
