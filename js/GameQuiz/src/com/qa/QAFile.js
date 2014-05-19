@@ -16,10 +16,17 @@ QAFile.prototype.setQuestion = function (question)
 {
     this.m_question = question;
 };
-QAFile.prototype.setAnswers = function ()
+QAFile.prototype.setAnswers = function (answerArray)
 {
-    for (var i = 0; i < arguments.length; i++)
+    this.m_answers = answerArray;
+};
+QAFile.prototype.traceItself = function ()
+{
+    console.log("ID", this.m_id);
+    console.log("Question", this.m_question);
+    for (var i = 0; i < this.m_answers.length; i++)
     {
-        this.m_answers.push(arguments[i]);
+        console.log("Answer", i,this.m_answers[i]);
     }
+    console.log("Correct", this.m_index);
 };

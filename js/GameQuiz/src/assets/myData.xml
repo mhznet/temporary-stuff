@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data>
-    <qa_file id="1" question="bla bla bla" a0="ble" a1="bli" a2="bla" a3="blu" correct="2"/>
-    <qa_file id="2" question="bli bli bli" a0="ble" a1="bli" a2="bla" a3="blu" correct="1"/>
-    <qa_file id="3" question="blu blu blu" a0="ble" a1="bli" a2="bla" a3="blu" correct="3"/>
-    <qa_file id="4" question="bla bla bla" a0="ble" a1="bli" a2="bla" a3="blu" correct="2"/>
-    <qa_file id="5" question="ble ble ble" a0="ble" a1="bli" a2="bla" a3="blu" correct="0"/>
-</data>

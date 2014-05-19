@@ -1,40 +1,31 @@
-QAManager.prototype.xmlObj = undefined;
+QAManager.prototype.jsonObj = undefined;
 QAManager.prototype.qaArray = [];
 function QAManager(){}
-QAManager.prototype.init = function (xmlref)
+QAManager.prototype.init = function (jsonref)
 {
-    this.xmlObj = xmlref;
+    this.jsonObj = jsonref;
     this.createQAs();
 }
 QAManager.prototype.createQAs = function ()
 {
-    if (this.xmlObj !== undefined)
+    if (this.jsonObj !== undefined)
     {
-        this.scanIt(this.xmlObj);
-        console.log("Oe", this.xmlObj.length);
-        console.log("Node",this.xmlObj.childNodes.length);
-        console.log("Oe Hah:", this.xmlObj.children[0].children.length);
-        console.log("Oe Results:", this.xmlObj.getResult("qa_file", true));
-
-        console.log("Oe Results:", this.xmlObj._loadedResults.length);
-        //console.log("Ae", this.xmlObj.children[0].getElementsByTagName("id"));
-        for (var i = 0; i < this.xmlObj.length; i++)
+        var keys = Object.keys(this.jsonObj);
+        for (var j = 0; j < keys.length ; j++)
         {
-            var m_qa = new QAFile();
-            m_qa.setId(this.xmlObj.children[i].getElementsByTagName("id") );
-            m_qa.setIndex(0);
-            m_qa.setQuestion("0");
-            m_qa.setAnswers("0");
-            this.qaArray.push(m_qa);
+            //console.log(this.jsonObj.hasOwnProperty("qa_file"+j),"tnc", keys.length);
+            if (this.jsonObj.hasOwnProperty("qa_file"+j))
+            {
+                var obj = this.jsonObj["qa_file"+j];
+                var m_qa = new QAFile();
+                m_qa.setId(j);
+                m_qa.setIndex(obj["correct"]);
+                m_qa.setQuestion(obj["question"]);
+                m_qa.setAnswers([obj["a0"], obj["a1"], obj["a2"], obj["a3"]]);
+                //m_qa.traceItself();
+                this.qaArray.push(m_qa);
+            }
         }
     }
-};
-QAManager.prototype.scanIt = function (xml)
-{
-    console.log("Scan IT", xml.children.length);
-    for (var i = 0; i < xml.children.length ; i++)
-    {
-       console.log("Scan IT VAI", i,"de", xml.children.length);
-       this.scanIt(xml.children[i]);
-    }
+    //console.log(this.qaArray.length, "é o numero de perguntas que tenho");
 };

@@ -23,14 +23,13 @@ function Main ()
 }
 function beginDataLoader ()
 {
-    mahLoader = new DataLoader(this,"assets/myData.xml");
+    mahLoader = new DataLoader(this,"assets/myData.json");
     mahLoader.init();
 };
-function onXMLComplete (xmlObj)
+function onJSONComplete (jsonObj)
 {
     dta_manager = new QAManager();
-    dta_manager.init(xmlObj);
-    console.log("TUDO CERTO CHAMPS", xmlObj);
+    dta_manager.init(jsonObj);
 };
 function createBtns  ()
 {

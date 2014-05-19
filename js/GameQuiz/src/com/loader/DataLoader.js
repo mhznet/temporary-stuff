@@ -1,34 +1,32 @@
 DataLoader.prototype.loader    = undefined;
-DataLoader.prototype.xmlSource = undefined;
+DataLoader.prototype.jsonSource = undefined;
 DataLoader.prototype.mf_main   = undefined;
 
-function DataLoader(mainobj, xmlurl)
+function DataLoader(mainobj, jsonurl)
 {
     this.mf_main = mainobj;
-    this.xmlSource = xmlurl;
+    this.jsonSource = jsonurl;
 }
 DataLoader.prototype.init = function ()
 {
-    this.loader = new createjs.LoadQueue(true);
+    this.loader = new createjs.LoadQueue();
     this.loader.on("fileload", this.handleFileLoad);
     this.loader.on("complete", this.handleComplete.context(this));
-    if (this.xmlSource !== undefined)
+    if (this.jsonSource !== undefined)
     {
-        this.loader.loadFile(this.xmlSource);
+        this.loader.loadFile(this.jsonSource);
     }
     else
     {
-        alert("XML Address not filled in DataLoader.js");
+        alert("JSON Address not filled in DataLoader.js");
     }
 };
 DataLoader.prototype.handleComplete = function (e)
 {
-    console.log("DataLoader: XML handleComplete" , e.currentTarget._loadedResults.getElementsByTagName(this.xmlSource));
-    var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(e.rawResult,"text/xml")
-    this.mf_main.onXMLComplete(xmlDoc);
+    console.log("DataLoader: JSON handleComplete");
+    this.mf_main.onJSONComplete(e.currentTarget._loadedResults[this.jsonSource].data[0]);
 };
 DataLoader.prototype.handleFileLoad = function (e)
 {
-    console.log("DataLoader: XML handleFileLoad");
+    console.log("DataLoader: JSON handleFileLoad");
 };
