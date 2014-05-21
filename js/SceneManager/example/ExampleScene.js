@@ -1,8 +1,8 @@
 ExtendedScene.prototype = Object.create(Scene.prototype);
 ExtendedScene.prototype.constructor = ExtendedScene;
-function ExtendedScene()
+function ExtendedScene(p_sce_manager)
 {
-    Scene.call(this);
+    Scene.call(this, p_sce_manager);
 }
 ExtendedScene.prototype.showDisplay = function ()
 {

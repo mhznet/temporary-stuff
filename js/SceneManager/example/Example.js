@@ -63,7 +63,7 @@ function createScenes()
 {
     for (var i = 0; i < 5; i++)
     {
-        var m_scene = new ExtendedScene();
+        var m_scene = new ExtendedScene(manager);
         manager.addScenes(m_scene);
         m_scene.showDisplay();
     }

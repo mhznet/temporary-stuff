@@ -1,8 +1,11 @@
 Scene.prototype.m_index = undefined;
 Scene.prototype.isRunning = false;
 Scene.prototype.m_container = undefined;
-function Scene()
+Scene.prototype.m_manager = undefined;
+
+function Scene(p_scene_manager)
 {
+    this.m_manager = p_scene_manager;
     this.m_container = new createjs.Container();
 }
 Scene.prototype.doRun = function ()
