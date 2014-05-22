@@ -1,9 +1,9 @@
 SceneManager.prototype.m_stage = undefined;
 SceneManager.prototype.m_cont = undefined;
-SceneManager.prototype.actualscene = undefined;
+SceneManager.prototype.actualscene = 0;
 SceneManager.prototype.scenes = [];
 SceneManager.prototype.scenes_total = 0;
-SceneManager.prototype.traceEnable = false;
+SceneManager.prototype.traceEnable = true;
 function SceneManager(stag)
 {
     this.m_stage = stag;
@@ -19,7 +19,7 @@ SceneManager.prototype.showSceneByIndex = function(index)
             if (this.traceEnable) console.log("ShowSceneByIndex:",index, "ADDED!");
             this.m_cont.addChild(this.scenes[index].m_container);
             this.scenes[index].doRun();
-            this.m_stage.update();
+            this.updateStage();
         }
     }
 };
@@ -54,11 +54,6 @@ SceneManager.prototype.addScenes = function (e)
         {
             console.log("ERROR: Arg n é instanceof scene");
         }
-    }
-    if (this.actualscene === undefined)
-    {
-        this.actualscene = 0;
-        this.showSceneByIndex(this.actualscene);
     }
     this.scenes_total = this.scenes.length-1;
     if (this.traceEnable)console.log("addScenes Indexes:", this.scenes_total);
@@ -134,4 +129,17 @@ SceneManager.prototype.destroy = function ()
         this.removeSceneByIndex(i);
     }
     this.scenes = [];
+};
+SceneManager.prototype.updateStage = function ()
+{
+    console.log("SceneManager.prototype.updateStage()");
+    if (this.m_stage !== undefined)
+    {
+        this.m_stage.update();
+        console.log("Passei aqui, sucesso do update!");
+    }
+    else
+    {
+        console.log("Não tenho ideia de quem é esse tal de stage.");
+    }
 };

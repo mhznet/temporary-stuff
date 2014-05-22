@@ -1,6 +1,10 @@
 QAManager.prototype.jsonObj = undefined;
 QAManager.prototype.qaArray = [];
-function QAManager(){}
+QAManager.prototype.m_main = undefined;
+function QAManager(mastermain)
+{
+    this.m_main = mastermain;
+}
 QAManager.prototype.init = function (jsonref)
 {
     this.jsonObj = jsonref;
@@ -13,7 +17,6 @@ QAManager.prototype.createQAs = function ()
         var keys = Object.keys(this.jsonObj);
         for (var j = 0; j < keys.length ; j++)
         {
-            //console.log(this.jsonObj.hasOwnProperty("qa_file"+j),"tnc", keys.length);
             if (this.jsonObj.hasOwnProperty("qa_file"+j))
             {
                 var obj = this.jsonObj["qa_file"+j];
@@ -27,5 +30,6 @@ QAManager.prototype.createQAs = function ()
             }
         }
     }
-    //console.log(this.qaArray.length, "é o numero de perguntas que tenho");
+    console.log("QA's number:",this.qaArray.length);
+    this.m_main.onQAReady();
 };

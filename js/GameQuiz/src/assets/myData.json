@@ -1,7 +1,8 @@
 {
     "data":
-    [
-        {"qa_file0":
+    {"QA":
+        {
+            "qa_file0":
             {
                 "question": "bla bla bla",
                 "a0": "bla",
@@ -37,5 +38,6 @@
                 "a3": "blu",
                 "correct": "2"
             }
-    }]
+        }
+    }
 }

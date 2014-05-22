@@ -1,0 +1,60 @@
+{
+    "assets":
+    {
+        "img0":
+        {
+            "id": "0",
+            "src" : "assets/telas/inicial/tela-inicial.jpg"
+        },
+        "img1":
+        {
+            "id": "1",
+            "src" : "assets/telas/inicial/botao-inicial.jpg"
+        },
+        "img2":
+        {
+            "id": "2",
+            "src" : "assets/telas/perguntas/tela-perguntas.jpg"
+        },
+        "img3":
+        {
+            "id": "3",
+            "src" : "assets/telas/perguntas/botao-perguntas-proxima.jpg"
+        },
+        "img4":
+        {
+            "id": "4",
+            "src" : "assets/telas/perguntas/botao-perguntas-normal.jpg"
+        },
+        "img5":
+        {
+            "id": "5",
+            "src" : "assets/telas/perguntas/botao-perguntas-correto.jpg"
+        },
+        "img6":
+        {
+            "id": "6",
+            "src" : "assets/telas/final/tela-final.jpg"
+        },
+        "img7":
+        {
+            "id": "7",
+            "src" : "assets/telas/final/tela-final-jogar-novamente.jpg"
+        },
+        "img8":
+        {
+            "id": "8",
+            "src" : "assets/telas/final/tela-final-bronze.jpg"
+        },
+        "img9":
+        {
+            "id": "9",
+            "src" : "assets/telas/final/tela-final-prata.jpg"
+        },
+        "img10":
+        {
+            "id": "10",
+            "src" : "assets/telas/final/tela-final-ouro.jpg"
+        }
+    }
+}
