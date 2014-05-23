@@ -112,6 +112,9 @@ LoaderManager.prototype.getBMPById = function (p_id)
     for (var i = 0; i < this.m_assetArray.length; i++)
     {
         var img = this.m_assetArray[i];
-        //if (img.)
+        if (img.image.id === p_id)
+        {
+            return img;
+        }
     }
 }

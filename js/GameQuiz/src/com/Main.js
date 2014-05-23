@@ -19,7 +19,7 @@ function Main ()
 }
 function createScenes ()
 {
-    var img = new createjs.Bitmap(loader_manager.m_assetArray[0]);
+    var img = loader_manager.getBMPById("img0");
     stag.addChild(img);
     stag.update();
     //sce_manager = new SceneManager(stag);
