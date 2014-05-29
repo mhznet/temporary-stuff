@@ -67,7 +67,12 @@ package com
 					this.removeChild(this.input);
 				}
 			}
-			if (this.result == null) this.result = new ResultScene(this);
+			if (this.result == null) 
+			{
+				trace ("estoy aqui!");
+				this.result = new ResultScene(this);
+			}
+			//trace ("in:",inputobj.sucesso);
 			this.result.update(inputobj);
 			this.addChild(this.result);
 		}

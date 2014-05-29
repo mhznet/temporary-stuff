@@ -8,13 +8,13 @@ package com.scenes
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	import flash.text.TextFieldType;
 
 	public class InputScene extends AbstractScene
 	{
 		public var inputObj:InputObject;
 		public var nextSceneBtn:Sprite;
-		public var names:Array = ["NOME","EMAIL", "DATA", "HORA", "TIPO"];
+		public var textCont:Sprite;
+		public var names:Array = ["nome", "telefone","email", "servico", "dataa", "hora"];
 		public var statuses:Array = [];
 		public var m_texts:Array = [];
 		public var sprite:Array = [];
@@ -33,11 +33,19 @@ package com.scenes
 				m_texts[i].text = "";
 				statuses[i] = false;
 			}
+			m_texts = [];
+			statuses = [];
+			getTextFields();
 		}
 		private function begin():void
 		{
-			this.inputObj = new InputObject();
-			for (var i:int = 0; i < names.length; i++) 
+			textCont = new TextBoxInput();
+			this.textCont.x = main.getWidth()*0.5;
+			this.addChild(textCont);
+			
+			getTextFields();
+			
+			/*for (var i:int = 0; i < names.length; i++) 
 			{
 				var spri:Sprite = new Sprite();
 				var txtField:TextField = new TextField();
@@ -66,7 +74,26 @@ package com.scenes
 				spri.addChild(txt);
 				this.addChild(spri);
 				sprite.push(spri);
+			}*/
+		}
+		
+		private function getTextFields():void
+		{
+			for (var i:int = 0; i < names.length; i++)
+			{
+				var textField:TextField = this.textCont.getChildByName(names[i]) as TextField;
+				textField.addEventListener(Event.CHANGE, onActivate);
+				//textField.addEventListener(Event.ACTIVATE, onReallyActivate);
+				statuses.push(false);
+				m_texts.push(textField);
 			}
+			trace (m_texts.length, "ahe");
+		}
+		
+		protected function onReallyActivate(event:Event):void
+		{
+			event.currentTarget.removeEventListener(Event.ACTIVATE, onReallyActivate);
+			(event.currentTarget as TextField).text = "";
 		}
 		
 		private function verify():Boolean
@@ -125,13 +152,13 @@ package com.scenes
 		
 		private function createNextSceneBtn():void
 		{
-			this.nextSceneBtn = new Sprite();
-			this.nextSceneBtn.graphics.beginFill(0x99FF00, 1);
+			this.nextSceneBtn = new BtNextAgendar();
+			/*this.nextSceneBtn.graphics.beginFill(0x99FF00, 1);
 			this.nextSceneBtn.graphics.drawCircle(30,30,50);
-			this.nextSceneBtn.graphics.endFill();
+			this.nextSceneBtn.graphics.endFill();*/
 			this.nextSceneBtn.mouseChildren = false;
-			this.nextSceneBtn.x = main.getWidth()*0.5 - this.nextSceneBtn.width*0.5;
-			this.nextSceneBtn.y = main.getHeight()*0.7 - this.nextSceneBtn.height*0.5;
+			this.nextSceneBtn.x = main.getWidth()*0.5;
+			this.nextSceneBtn.y = main.getHeight()*0.91;
 			this.nextSceneBtn.visible = false;
 			this.addChild(this.nextSceneBtn);
 			this.nextSceneBtn.addEventListener(MouseEvent.CLICK, onClick);
@@ -142,8 +169,13 @@ package com.scenes
 			this.removeEventListener(MouseEvent.CLICK, onClick);
 			if (verify())
 			{
-				inputObj = new InputObject(m_texts[0].text,m_texts[1].text,m_texts[2].text,m_texts[3].text,m_texts[4].text);
-				inputObj.traceIt();
+				// 0,1,2,3,4,5
+				// "nome", "telefone","email", "servico", "dataa", "hora"
+				// inputObj = new InputObject(m_texts[0].text,m_texts[1].text,m_texts[2].text,m_texts[3].text,m_texts[4].text);
+				var bool:Boolean = m_texts[5].text != "13:00";
+				trace ("boool do success", bool, m_texts[0].text, m_texts[5].text);
+				inputObj = new InputObject(bool, m_texts[5].text, m_texts[0].text);
+				//inputObj.traceIt();
 				this.main.goToResult(inputObj);
 			}
 		}
