@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2project>
+    <name>ShootUp</name>
+    <description></description>
+    <version>1.0.0.0</version>
+    <author></author>
+    <author-email></author-email>
+    <author-website>http://</author-website>
+    <app-id>com.mycompany.myapp</app-id>
+    <unique-id>3jkdih5c2sbfd</unique-id>
+    <saved-with-version>13900</saved-with-version>
+    <used-plugins>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
+        <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="Text" version="1">Text</plugin>
+        <plugin author="Scirra" id="TiledBg" version="1">Tiled Background</plugin>
+        <plugin author="Scirra" id="Touch" version="1">Touch</plugin>
+    </used-plugins>
+    <used-behaviors>
+        <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
+        <behavior author="Scirra" id="Fade" version="1">Fade</behavior>
+        <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
+        <behavior author="Scirra" id="bound" version="1">Bound to layout</behavior>
+        <behavior author="Scirra" id="destroy" version="1">Destroy outside layout</behavior>
+        <behavior author="Scirra" id="scrollto" version="1">Scroll To</behavior>
+    </used-behaviors>
+    <used-effects />
+    <configurations>
+        <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
+    </configurations>
+    <window-size>
+        <width>640</width>
+        <height>480</height>
+    </window-size>
+    <pixel-rounding>0</pixel-rounding>
+    <use-loader-layout>0</use-loader-layout>
+    <configuration-settings>
+        <prop name="Clear background">Yes</prop>
+        <prop name="Enable WebGL">On</prop>
+        <prop name="Fullscreen in browser">Letterbox scale</prop>
+        <prop name="Hide address bar">No</prop>
+        <prop name="Loader style">Progress bar &amp; logo</prop>
+        <prop name="Pause on unfocus">No</prop>
+        <prop name="Preview browser">(default)</prop>
+        <prop name="Sampling">Linear</prop>
+        <prop name="Use iOS retina display">All devices</prop>
+    </configuration-settings>
+    <object-folder expanded="0">
+        <object-type name="BackGround" sid="7508207877342405">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+        <object-type name="Mouse" sid="5633773571925513">
+            <plugin id="Mouse" />
+        </object-type>
+        <object-type name="Keyboard" sid="6562168494782396">
+            <plugin id="Keyboard" />
+        </object-type>
+        <object-type name="Mario" sid="5614301931429371">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="8Direction" sid="858853488584167">
+                    <behavior id="EightDir" />
+                </behavior-type>
+                <behavior-type name="ScrollTo" sid="3426969407987928">
+                    <behavior id="scrollto" />
+                </behavior-type>
+                <behavior-type name="BoundToLayout" sid="2364206110704349">
+                    <behavior id="bound" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4843610395699151" speed="5">
+                    <frame duration="1" hotspotX="0.983871" hotspotY="0.755102">
+                        <collision-poly>
+                            <point x="0.806452" y="0.244898" />
+                            <point x="0.903226" y="0.489796" />
+                            <point x="0.854839" y="0.816327" />
+                            <point x="0.225806" y="0.714286" />
+                            <point x="0.129032" y="0.489796" />
+                            <point x="0.241935" y="0.306122" />
+                            <point x="0.5" y="0.244898" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Explosion" sid="3299721066008952">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Fade" sid="9352951238018807">
+                    <behavior id="Fade" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="5497127204453584" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.3875" y="0.3875" />
+                            <point x="0.5" y="0" />
+                            <point x="0.8625" y="0.1375" />
+                            <point x="1" y="0.5" />
+                            <point x="0.875" y="0.875" />
+                            <point x="0.5" y="1" />
+                            <point x="0.1375" y="0.8625" />
+                            <point x="0.1375" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Enemy" sid="3800315999450317">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable comment="Vida da bagaça" name="Health" sid="2187699684818837" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="Bullet" sid="92794180675966">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4486906226084336" speed="5">
+                    <frame duration="1" hotspotX="0.904762" hotspotY="-0.0720721" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Bullet" sid="734338329998401">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Bullet" sid="1941972412497465">
+                    <behavior id="Bullet" />
+                </behavior-type>
+                <behavior-type name="DestroyOutsideLayout" sid="3409342529207222">
+                    <behavior id="destroy" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="9638097461150202" speed="5">
+                    <frame duration="1" hotspotX="0.277778" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.222222" y="0.285714" />
+                            <point x="0.5" y="0.214286" />
+                            <point x="0.722222" y="0.357143" />
+                            <point x="0.888889" y="0.5" />
+                            <point x="0.666667" y="0.571429" />
+                            <point x="0.5" y="0.785714" />
+                            <point x="0.166667" y="0.785714" />
+                            <point x="0.111111" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="HUDText" sid="9720528253898013">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="Touch" sid="7397902134261396">
+            <plugin id="Touch" />
+        </object-type>
+    </object-folder>
+    <families />
+    <layout-folder expanded="1">
+        <layout>Layout 1.xml</layout>
+    </layout-folder>
+    <event-folder expanded="1">
+        <event-sheet>Event sheet 1.xml</event-sheet>
+    </event-folder>
+    <global-instances>
+        <global-instance type="Mouse" uid="1" />
+        <global-instance type="Keyboard" uid="2" />
+        <global-instance type="Touch" uid="12">
+            <properties>
+                <use-mouse-input>Yes</use-mouse-input>
+            </properties>
+        </global-instance>
+    </global-instances>
+    <sounds-folder expanded="1" />
+    <music-folder expanded="1" />
+    <files-folder expanded="1">
+        <file-folder expanded="1" name="Icons">
+            <file name="icon-16.png" />
+            <file name="icon-32.png" />
+            <file name="icon-114.png" />
+            <file name="icon-128.png" />
+            <file name="loading-logo.png" />
+        </file-folder>
+    </files-folder>
+</c2project>
