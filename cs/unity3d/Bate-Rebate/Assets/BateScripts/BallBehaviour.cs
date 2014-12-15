@@ -105,13 +105,13 @@ public class BallBehaviour : MonoBehaviour {
                 Vector2 dir = new Vector2(-1, y).normalized;
                 rigidbody2D.velocity = dir * speed;
             }
-            if (col.gameObject.name == "wallRight")
+            if (col.gameObject.name == "wallR")
             {
                 InvokeResetBall();
                 ScorePoint(1);
                 //P1 Scores!
             }
-            if (col.gameObject.name == "wallLeft")
+            if (col.gameObject.name == "wallL")
             {
                 InvokeResetBall();
                 ScorePoint(2);
