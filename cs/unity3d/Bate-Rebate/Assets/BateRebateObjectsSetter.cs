@@ -20,11 +20,12 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     private GameObject pauseScene;
 
     private string pauseScenePreFabUrl = "preFabs/batePauseScenePreFab";
-    private string paddleRightAssetUrl = "gameAssets/paddle2";
-    private string paddleLeftAssetUrl = "gameAssets/paddle";
-    private string bgAsset = "gameAssets/bg";
-    private string ballAsset = "gameAssets/ball";
-    private string hitBoxAsset = "gameAssets/HitOk";
+    private string pauseBtnAssetUrl = "Scenes/Game/pausebt";
+    private string paddleRightAssetUrl = "Scenes/Game/gamePaddle2";
+    private string paddleLeftAssetUrl = "Scenes/Game/gamePaddle";
+    private string bgAsset = "Scenes/Game/gameBg";
+    private string ballAsset = "Scenes/Game/gameBall";
+    private string hitBoxAsset = "Scenes/Game/gameHitOk";
     
     private GameObject wallNorth;
     private GameObject wallSouth;
@@ -32,6 +33,7 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     private GameObject wallLeft;
     void Start()
     {
+        VerifyScreenRes();
         CreateBackGround();
         CreateWalls();
         CreateUI();
@@ -45,6 +47,24 @@ public class BateRebateObjectsSetter : MonoBehaviour {
         //wallRight = GameObject.Find("wallRight");
 
         Resources.UnloadUnusedAssets();
+    }
+    private void VerifyScreenRes()
+    {
+        string quality = "High";
+        string platform = "IOS";
+        bgAsset = addPlatformAndQualityToUrl(platform, quality, bgAsset);
+        pauseBtnAssetUrl = addPlatformAndQualityToUrl(platform, quality, pauseBtnAssetUrl);
+        ballAsset = addPlatformAndQualityToUrl(platform, quality, ballAsset);
+        hitBoxAsset = addPlatformAndQualityToUrl(platform, quality, hitBoxAsset, true);
+        paddleRightAssetUrl = addPlatformAndQualityToUrl(platform, quality, paddleRightAssetUrl);
+        paddleLeftAssetUrl = addPlatformAndQualityToUrl(platform, quality, paddleLeftAssetUrl);
+    }
+    private string addPlatformAndQualityToUrl(string platform, string quality, string url, bool debug = false)
+    {
+        char delim = '/';
+        url = platform + delim + quality + delim + url;
+        if (debug)Debug.Log(url);
+        return url;
     }
     private void CreateWalls()
     {
@@ -74,9 +94,11 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     }
     private void CreateBackGround()
     {
-        bg = GameObject.Find("background");
-        bg.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(bgAsset);
+        bg = new GameObject();
+        bg.name = "background";
+        bg.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(bgAsset);
         bg.transform.position = new Vector3(2.5f, 0f, 10);
+
     }
     private void CreateUI()
     {
@@ -85,12 +107,18 @@ public class BateRebateObjectsSetter : MonoBehaviour {
         scoreRightShadow = GameObject.Find("scoreRightShadow");
         scoreLeftShadow = GameObject.Find("scoreLeftShadow");
         pauseBtn = GameObject.Find("pausebtn");
+        pauseBtn.GetComponent<Image>().sprite = Resources.Load<Sprite>(pauseBtnAssetUrl);
         pauseBtn.GetComponent<Button>().onClick.AddListener(OnClickPause);
     }
     private void CreateBall()
     {
-        ball = GameObject.Find("ball");
-        ball.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(ballAsset);
+        ball = new GameObject();
+        ball.name = "ball";
+        ball.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(ballAsset);
+        ball.AddComponent<CircleCollider2D>();
+        ball.AddComponent<Rigidbody2D>().mass = 0.00001f;
+        ball.GetComponent<Rigidbody2D>().gravityScale = 0f;
+        ball.collider2D.sharedMaterial = Resources.Load<PhysicsMaterial2D>("Materials/ballMaterial");
         ball.transform.position = new Vector3(2.5f, 0f, 0);
         ball.AddComponent<BallBehaviour>();
         ball.GetComponent<BallBehaviour>().scoreLeftShadow = scoreLeftShadow;
@@ -100,10 +128,14 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     }
     private void CreateTouches()
     {
-        touchRight = GameObject.Find("touchBoxRight");
-        touchLeft = GameObject.Find("touchBoxLeft");
-        touchRight.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(hitBoxAsset);
-        touchLeft.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(hitBoxAsset);
+        touchLeft = new GameObject();
+        touchRight = new GameObject();
+        touchLeft.name = "touchBoxLeft";
+        touchRight.name = "touchBoxRight";
+        touchLeft.AddComponent<BoxCollider2D>().isTrigger = true;
+        touchRight.AddComponent<BoxCollider2D>().isTrigger = true;
+        touchRight.transform.localScale = new Vector3(7f, 15f, 1f);
+        touchLeft.transform.localScale = new Vector3(7f, 15f, 1f);
         touchRight.transform.position   = new Vector3(9.18f, 0f, -9f);
         touchLeft.transform.position    = new Vector3(-4.25f, 0f, -9f);
         touchRight.AddComponent<PaddleBehaviour>();
@@ -117,12 +149,29 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     }
     private void CreatePaddles()
     {
-        paddleRight = GameObject.Find("paddleRightAsset");
-        paddleRight.name = "paddleRight";
-        paddleLeft = GameObject.Find("paddleLeftAsset");
-        paddleLeft.name = "paddleLeft";
-        paddleRight.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleRightAssetUrl);
-        paddleLeft.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleLeftAssetUrl);
+        //paddleRight = GameObject.Find("paddleRightAsset");
+        paddleRight = new GameObject();
+        paddleLeft = new GameObject();
+        paddleRight.name = "paddleRightAsset";
+        
+        paddleLeft.name = "paddleLeftAsset";
+
+        paddleRight.AddComponent<BoxCollider2D>();
+        paddleLeft.AddComponent<BoxCollider2D>();
+
+        paddleRight.AddComponent<Rigidbody2D>().mass = 100000f;
+        paddleRight.GetComponent<Rigidbody2D>().fixedAngle = true;
+        paddleRight.GetComponent<Rigidbody2D>().gravityScale = 0f;
+
+        paddleLeft.AddComponent<Rigidbody2D>().mass = 100000f;
+        paddleLeft.GetComponent<Rigidbody2D>().fixedAngle = true;
+        paddleLeft.GetComponent<Rigidbody2D>().gravityScale = 0f;
+
+        
+
+        paddleRight.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleRightAssetUrl);
+        paddleLeft.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleLeftAssetUrl);
+
         paddleRight.transform.position = new Vector3(11.18f, 0f, 9f);
         paddleLeft.transform.position = new Vector3(-6.25f, 0f, 9f);
     }
