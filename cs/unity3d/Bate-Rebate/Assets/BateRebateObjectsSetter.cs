@@ -98,7 +98,6 @@ public class BateRebateObjectsSetter : MonoBehaviour {
         bg.name = "background";
         bg.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(bgAsset);
         bg.transform.position = new Vector3(2.5f, 0f, 10);
-
     }
     private void CreateUI()
     {
@@ -134,10 +133,12 @@ public class BateRebateObjectsSetter : MonoBehaviour {
         touchRight.name = "touchBoxRight";
         touchLeft.AddComponent<BoxCollider2D>().isTrigger = true;
         touchRight.AddComponent<BoxCollider2D>().isTrigger = true;
+
         touchRight.transform.localScale = new Vector3(7f, 15f, 1f);
         touchLeft.transform.localScale = new Vector3(7f, 15f, 1f);
         touchRight.transform.position   = new Vector3(9.18f, 0f, -9f);
         touchLeft.transform.position    = new Vector3(-4.25f, 0f, -9f);
+
         touchRight.AddComponent<PaddleBehaviour>();
         touchRight.GetComponent<PaddleBehaviour>().enableTouch = true;
         touchRight.GetComponent<PaddleBehaviour>().paddleAsset = paddleRight;
@@ -149,29 +150,20 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     }
     private void CreatePaddles()
     {
-        //paddleRight = GameObject.Find("paddleRightAsset");
         paddleRight = new GameObject();
         paddleLeft = new GameObject();
         paddleRight.name = "paddleRightAsset";
-        
         paddleLeft.name = "paddleLeftAsset";
-
+        paddleRight.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleRightAssetUrl);
+        paddleLeft.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleLeftAssetUrl);
         paddleRight.AddComponent<BoxCollider2D>();
         paddleLeft.AddComponent<BoxCollider2D>();
-
         paddleRight.AddComponent<Rigidbody2D>().mass = 100000f;
         paddleRight.GetComponent<Rigidbody2D>().fixedAngle = true;
         paddleRight.GetComponent<Rigidbody2D>().gravityScale = 0f;
-
         paddleLeft.AddComponent<Rigidbody2D>().mass = 100000f;
         paddleLeft.GetComponent<Rigidbody2D>().fixedAngle = true;
         paddleLeft.GetComponent<Rigidbody2D>().gravityScale = 0f;
-
-        
-
-        paddleRight.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleRightAssetUrl);
-        paddleLeft.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(paddleLeftAssetUrl);
-
         paddleRight.transform.position = new Vector3(11.18f, 0f, 9f);
         paddleLeft.transform.position = new Vector3(-6.25f, 0f, 9f);
     }
