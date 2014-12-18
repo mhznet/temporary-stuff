@@ -16,7 +16,7 @@ public class BallBehaviour : MonoBehaviour {
     public GameObject scoreRightOver;
     public GameObject scoreRightShadow;
 
-    private bool paused = false;
+    public bool paused = false;
     private Vector2 lastVelocity;
 
     void Start()
@@ -48,7 +48,7 @@ public class BallBehaviour : MonoBehaviour {
             this.scoreRightShadow.GetComponent<Text>().text = pointsRight.ToString();
         }
     }
-    public void PauseBall()
+    public void Pause()
     {
         if (!paused)
         {

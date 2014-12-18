@@ -170,6 +170,11 @@ public class BateRebateObjectsSetter : MonoBehaviour {
     public void OnClickPause()
     {
         Debug.Log("OnClickPause");
+
+        ball.GetComponent<BallBehaviour>().Pause();
+        paddleLeft.GetComponent<PaddleBehaviour>().Pause();
+        paddleRight.GetComponent<PaddleBehaviour>().Pause();
+
         /*Application.LoadLevel("sceneName");*/
         if (pauseScene == null)
         {
@@ -177,6 +182,13 @@ public class BateRebateObjectsSetter : MonoBehaviour {
             Instantiate(pauseScene);
         }
         pauseScene.transform.position = new Vector3(0f, 0f, 1f);
-        Debug.Log(pauseScene);
+    }
+    public void OnClickUnPause()
+    {
+        ball.GetComponent<BallBehaviour>().Pause();
+        paddleLeft.GetComponent<PaddleBehaviour>().Pause();
+        paddleRight.GetComponent<PaddleBehaviour>().Pause();
+
+        pauseScene.SetActive(false);
     }
 }
