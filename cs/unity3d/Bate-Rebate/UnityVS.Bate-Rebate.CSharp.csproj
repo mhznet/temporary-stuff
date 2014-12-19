@@ -15,9 +15,6 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
-    <UnityVersion>4.6.0f3</UnityVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,10 +54,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BateRebateObjectsSetter.cs" />
-    <Compile Include="Assets\BateScripts\BallBehaviour.cs" />
-    <Compile Include="Assets\BateScripts\PaddleBehaviour.cs" />
-    <Compile Include="Assets\batePauseManager.cs" />
+    <Compile Include="Assets\BateScripts\BateGame\BallBehaviour.cs" />
+    <Compile Include="Assets\BateScripts\BateGame\PaddleBehaviour.cs" />
+    <Compile Include="Assets\BateScripts\BateMain.cs" />
+    <Compile Include="Assets\BateScripts\SceneManagers\BateGameManager.cs" />
+    <Compile Include="Assets\BateScripts\SceneManagers\BateMenuManager.cs" />
+    <Compile Include="Assets\BateScripts\SceneManagers\BateSelectionManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
